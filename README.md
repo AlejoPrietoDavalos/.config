@@ -1,4 +1,3 @@
-
 ### Como formatear
 ##### Reconocer la unidad del pendrive.
 ```bash
@@ -20,4 +19,7 @@ sudo umount /dev/MY_PEN2
 sudo dd if=/dev/zero of=/dev/MY_PEN bs=4M status=progress
 ```
 
-##### 
+##### Escribir el Pendrive.
+```bash
+sudo dd bs=4M if=/path/to/archlinux.xxxxxxx.iso of=/dev/MY_PEN status=progress oflag=sync
+```
