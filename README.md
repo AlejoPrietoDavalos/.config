@@ -23,3 +23,30 @@ sudo dd if=/dev/zero of=/dev/MY_PEN bs=4M status=progress
 ```bash
 sudo dd bs=4M if=/path/to/archlinux.xxxxxxx.iso of=/dev/MY_PEN status=progress oflag=sync
 ```
+
+### Basic Install Arch
+- Para cambiar a teclado latin.
+~~~bash
+sudo nano /etc/vconsole.conf
+# cambiar:
+#KEYMAP=la-latin1
+~~~
+
+~~~bash
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
+rm -rf yay
+yay --version
+~~~
+
+- Install Brave.
+```bash
+yay -S brave-bin
+```
+
+- Si querés bindear alguna tecla.
+```bash
+sudo evtest
+# Seleccionás el teclado, y te dice todas las teclas.
+```
