@@ -40,6 +40,14 @@ rm -rf yay
 yay --version
 ~~~
 
+- Para instalar snap.
+~~~bash
+git clone https://aur.archlinux.org/snapd.git
+cd snapd
+makepkg -si
+sudo systemctl enable --now snapd.socket
+~~~
+
 - Install Brave.
 ```bash
 yay -S brave-bin
