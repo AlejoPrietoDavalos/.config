@@ -1,0 +1,45 @@
+#!/bin/bash
+# Comprueba si sxhkd está abierto como proceso,
+# en caso de no estarlo lo inicia.
+pgrep -x sxhkd > /dev/null || sxhkd &
+
+python3 $HOME/.config/bspwm/bspc_set_monitor.py
+
+
+####################################################
+#                   Config BSPWM                   #
+####################################################
+#---------------------------------------------------
+#  - color window
+#---------------------------------------------------
+bspc config focused_border_color \#3F87A7
+bspc config active_border_color   \#1F4D62
+
+#---------------------------------------------------
+#  - window propertys
+#---------------------------------------------------
+bspc config border_width         2
+bspc config window_gap           0
+
+bspc config split_ratio          0.5
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+
+# Wallpapers (Elige el primero aleatoriamente).
+#####---> wm_wallpaper -r
+
+# Launch polybar
+$HOME/.config/polybar/launch.sh
+
+
+setxkbmap -layout latam
+
+# PICOM
+picom --config $HOME/.config/picom/picom.conf &
+#picom -b
+
+
+
+
+# Ver q hace esto.
+#xsetroot -cursor_name left_ptr &
