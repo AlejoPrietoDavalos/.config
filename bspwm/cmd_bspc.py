@@ -4,8 +4,16 @@ import subprocess
 def desktops_from_ints(desktops: List[int]) -> List[str]:
     return [str(d) for d in desktops]
 
+def get_12345() -> List[int]:
+    return list(range(1, 5+1))
 
-class CommandsBSPWM:
+def get_67890() -> List[int]:
+    return list(range(6, 9+1)) + [0]
+
+def get_1234567890() -> List[int]:
+    return get_12345() + get_67890()
+
+class CmdBSPWM:
     @staticmethod
     def set_monitor_primary(monitor: str, pos: str, resolution: str) -> None:
         subprocess.run([
@@ -37,7 +45,7 @@ class CommandsBSPWM:
     @staticmethod
     def set_desktops_from_monitors(monitors: List[str]) -> None:
         if len(monitors) == 1:
-            CommandsBSPWM.set_desktops(monitors[0], list(range(1, 10)) + [0])
+            CmdBSPWM.set_desktops(monitors[0], get_1234567890())
         if len(monitors) == 2:
-            CommandsBSPWM.set_desktops(monitors[0], list(range(1, 5+1)))
-            CommandsBSPWM.set_desktops(monitors[1], list(range(6, 9+1)) + [0])
+            CmdBSPWM.set_desktops(monitors[0], get_12345())
+            CmdBSPWM.set_desktops(monitors[1], get_67890())
