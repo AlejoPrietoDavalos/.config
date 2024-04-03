@@ -2,11 +2,24 @@
 !_refactor/
 !_refactor/**
 
+#----------extra----------
+!env_vars
+!install.sh
+!tmp/
+!tmp/README.md
+
+#----------commands----------
+!commands
+!commands/**
+
+#----------signals----------
+!signals
+!signals/**
+
 #----------bspwm----------
 !bspwm/
 !bspwm/**
 bspwm/monitors.json
-bspwm/_bspwm.log
 
 #----------polybar----------
 !polybar/
