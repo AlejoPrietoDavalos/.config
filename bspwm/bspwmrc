@@ -1,10 +1,12 @@
 #!/bin/bash
+mkdir -p $HOME/.config/tmp
+
 # Comprueba si sxhkd está abierto como proceso,
 # en caso de no estarlo lo inicia.
 pgrep -x sxhkd > /dev/null || sxhkd &
 
-python3 $HOME/.config/bspwm/bspc_set_monitor.py
-
+python3 $HOME/.config/bspwm/set_monitors.py
+$HOME/.config/signals/start_signals.sh >> $HOME/.config/tmp/signals.log
 
 ####################################################
 #                   Config BSPWM                   #
@@ -29,17 +31,17 @@ bspc config gapless_monocle      true
 #####---> wm_wallpaper -r
 
 # Launch polybar
-$HOME/.config/polybar/launch.sh
+$HOME/.config/polybar/launch.sh >> $HOME/.config/tmp/polybar.log
 
-
+#----------layout----------
 setxkbmap -layout latam
 
-# PICOM
-picom --config $HOME/.config/picom/picom.conf &
-#picom -b
+#----------picom----------
+picom --config $HOME/.config/picom/picom.conf & >> $HOME/.config/tmp/picom.log
 
 
-
+#----------Wallpaper Aleatorio----------
+$HOME/.config/commands/feh_random
 
 # Ver q hace esto.
 #xsetroot -cursor_name left_ptr &
