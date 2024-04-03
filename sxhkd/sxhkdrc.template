@@ -182,23 +182,6 @@ super + ctrl + {Left,Down,Up,Right}
 #	probar purgearlas, moverlas etc...
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #----------REVISAR ESTO----------
 #super + shift + {i,o,p}
 #    rofi -show {run,drun,window} -theme $HOME/rofi-collection/nord/nord.rasi
@@ -242,8 +225,6 @@ super + ctrl + {Left,Down,Up,Right}
 # state/flags
 #
 
-#super + F11
-#    bspc node -t fullscreen tiled
 
 # set the window state
 #super + {t,shift + t,s,f}
