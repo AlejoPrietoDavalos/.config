@@ -1,0 +1,14 @@
+export PATH_CONFIG=$HOME/.config
+
+export PATH_BSPWM=$PATH_CONFIG/bspwm
+export PATH_SXHKD=$PATH_CONFIG/sxhkd
+export PATH_POLYBAR=$PATH_CONFIG/polybar
+
+#----------Commands----------
+export PATH_COMMANDS=$PATH_CONFIG/commands
+export PATH_CMD_BSPWM=$PATH_BSPWM/cmd_bspwm
+export PATH_CMD_SXHKD=$PATH_SXHKD/cmd_sxhkd
+
+export PATH=$PATH_COMMANDS:$PATH
+export PATH=$PATH_CMD_BSPWM:$PATH
+export PATH=$PATH_CMD_SXHKD:$PATH
