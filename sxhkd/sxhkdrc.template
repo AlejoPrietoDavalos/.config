@@ -90,8 +90,8 @@ Print + {_,super,super+shift} + {_,ctrl}
 #--------------------------------------
 #  - brave
 #--------------------------------------
-super + ctrl + {_,shift} + {Return,KP_Enter}
-    brave {_,--incognito}{_,_}
+super + ctrl + {_,shift,shift+alt} + {Return,KP_Enter}
+    brave {_,--incognito,--incognito https://translate.google.com/?hl=es&sl=en&tl=es&op=translate}{_,_}
 
 #--------------------------------------
 #  - vscode
