@@ -1,0 +1,2 @@
+#!/bin/bash
+kill -SIGUSR1 $(cat $HOME/.config/tmp/signal_set_wallpaper.pid)

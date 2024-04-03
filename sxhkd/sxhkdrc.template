@@ -70,21 +70,19 @@ super + {d,Tab}
 #  - mute_unmute/audio--/audio++/
 #---------------------------------------
 XF86Audio{Mute,Lower,Raise}{_,Volume,Volume}
-    {{path_scripts}}/volume.sh {mute,decrease,increase} {_,_,_}
+    {{commands}}/volume.sh {mute,decrease,increase} {_,_,_}
 
 #---------------------------------------
 #  - play_pause/next_sound>>/previous_sound<<
 #---------------------------------------
 XF86Audio{Prev,Next,Play,Stop}
-    {{path_scripts}}/music.sh {previous,next,play_pause,stop}
+    {{commands}}/music.sh {previous,next,play_pause,stop}
 
 #--------------------------------------
 #  - screenshot
-# Nota: No me deja bindear super + shift + alt + Print.
-# Parece que sxhkd flashea cuando bindeas Print, ver...
 #--------------------------------------
 Print + {_,super,super+shift} + {_,ctrl}
-    python3 {{path_scripts}}/screenshot.py {bbox,focused,full_screen} {0,1}
+    python3 {{commands}}/screenshot.py {bbox,focused,full_screen} {0,1}
 
 #######################################
 #            Shortcuts Apps           #
