@@ -3,30 +3,45 @@
 
 - Nota: Esto debe hacerse por que sxhkd no acepta bash en su archivo de configuración.
 """
+from typing import List
 from pathlib import Path
 import subprocess
+import re
 
-def main(tag_to_replace: str) -> None:
-    path_sxhkd_folder = Path.home() / ".config" / "sxhkd"
-    path_sxhkd_scripts = path_sxhkd_folder / "scripts"
-    path_sxhkd_template = path_sxhkd_folder / "sxhkdrc.template"
+def format_tag(tag: str) -> str:
+    return "{{" + f"{tag}" + "}}"
 
+def format_tag_commands(folder_cmd: str = "commands") -> str:
+    return format_tag(folder_cmd)
+
+def main() -> None:
+    path_config = Path.home() / ".config"
+    path_sxhkd = path_config / "sxhkd"
+    path_sxhkd_template = path_sxhkd / "sxhkdrc.template"
     with open(path_sxhkd_template, "r") as f:
-        lines = f.readlines()
+        text_template = f.read()
+    
+    # Se reemplazan los tags de commands.
+    path_commands = path_config / "commands"
+    text_template = text_template.replace(format_tag_commands(path_commands.stem), str(path_commands))
 
-    # Se reemplazan los tags.
-    lines = [line.replace(tag_to_replace, str(path_sxhkd_scripts)) for line in lines]
+    # Se buscan todos los tags que tengan la forma {{cmd_xxxxx}}.
+    pattern = r"\{\{([^\s{}]+)\}\}"
+    tags: List[str] = list(set(re.findall(pattern, text_template)))
+    for tag in tags:
+        pkg_name = tag.split("cmd_")[-1]    # Nombre del paquete (sxhkd, bspwm, ...)
+        tag = f"cmd_{pkg_name}"
+        path_cmd_pkg = str(path_config / pkg_name / tag)
+        text_template = text_template.replace(format_tag(tag), path_cmd_pkg)
 
     # Se guarda el sxhkdrc modificado del template.
-    path_sxhkdrc = path_sxhkd_folder / "sxhkdrc"
+    path_sxhkdrc = path_sxhkd / "sxhkdrc"
     with open(path_sxhkdrc, "w") as f:
-        f.write("".join(lines))
+        f.write(text_template)
     
     # Se le da permisos de ejecución y reinicia sxhkd.
     subprocess.run(["chmod", "+x", str(path_sxhkdrc)])
     subprocess.run(["pkill", "-USR1", "sxhkd"])
 
 if __name__ == "__main__":
-    # Este es el tag que reemplazará con el path real de los scripts.
-    TAG_TO_REPLACE = "{{path_scripts}}"
-    main(TAG_TO_REPLACE)
+    main()
