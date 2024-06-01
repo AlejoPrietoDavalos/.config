@@ -1,4 +1,8 @@
 {
+	"files.exclude": {
+        "**/__pycache__": true,
+		"env": true
+    },
     "workbench.colorTheme": "Dark+ Python",
     "editor.fontFamily": "Hack Nerd Font",
     "editor.fontSize": 14,
@@ -199,4 +203,10 @@
 		"terminal.ansiBrightWhite": "#fdf6e3"
 	},
 	"workbench.startupEditor": "none",
+	"notebook.lineNumbers": "on",
+	"jupyter.askForKernelRestart": false,
+	"security.workspace.trust.untrustedFiles": "open",
+	"workbench.editorAssociations": {
+		"{git,gitlens}:/**/*.{md,csv}": "default"
+	}
 }

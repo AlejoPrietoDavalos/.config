@@ -8,6 +8,10 @@
 !tmp/
 !tmp/README.md
 
+#----------vscode----------
+!vscode
+!vscode/**
+
 #----------commands----------
 !commands
 !commands/**
