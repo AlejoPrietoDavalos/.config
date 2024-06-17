@@ -1,8 +1,9 @@
 {
 	"files.exclude": {
-        "**/__pycache__": true,
+		"**/__pycache__": true,
 		"env": true
     },
+	"explorer.autoReveal": false,
     "workbench.colorTheme": "Dark+ Python",
     "editor.fontFamily": "Hack Nerd Font",
     "editor.fontSize": 14,
@@ -208,5 +209,6 @@
 	"security.workspace.trust.untrustedFiles": "open",
 	"workbench.editorAssociations": {
 		"{git,gitlens}:/**/*.{md,csv}": "default"
-	}
+	},
+	"python.defaultInterpreterPath": "/home/pepocho/documentos/python/geodata/env",
 }
