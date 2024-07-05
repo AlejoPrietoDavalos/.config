@@ -134,6 +134,5 @@
 	"security.workspace.trust.untrustedFiles": "open",
 	"workbench.editorAssociations": {
 		"{git,gitlens}:/**/*.{md,csv}": "default"
-	},
-	"python.defaultInterpreterPath": "/home/pepocho/documentos/python/geodata/env"
+	}
 }
