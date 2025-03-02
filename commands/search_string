@@ -1,0 +1,11 @@
+#!/bin/bash
+
+SEARCH_PATH="$1"
+SEARCH_STRING="$2"
+
+if [[ -z "$SEARCH_PATH" || -z "$SEARCH_STRING" ]]; then
+    echo "Debe proporcionar tanto el path como el string para buscar."
+    exit 1
+fi
+
+find "$SEARCH_PATH" -type f -exec grep -I -Hn "$SEARCH_STRING" {} \;
