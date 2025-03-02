@@ -1,4 +1,5 @@
 #!/bin/bash
+# `search_string /path/to/find "string to find here"`
 
 SEARCH_PATH="$1"
 SEARCH_STRING="$2"
