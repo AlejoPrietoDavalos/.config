@@ -4,9 +4,17 @@
 
 #----------extra----------
 !env_vars
-!install.sh
+!install_fonts.py
+!install_packages.sh
+!packages_pacman.txt
+!packages_yay.txt
+!update_packages.sh
 !tmp/
 !tmp/README.md
+
+#----------resources----------
+!resources
+!resources/**
 
 #----------vscode----------
 !vscode
