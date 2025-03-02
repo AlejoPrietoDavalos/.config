@@ -5,9 +5,14 @@ from pathlib import Path
 from typing import List
 
 path_home = Path.home()
+path_config = path_home / ".config"
+path_resources = path_config / "resources"
+
 path_images = path_home / "images"
 path_screenshots = path_images / "screenshots"
-path_wallpapers = path_images / "wallpapers"
+
+path_wallpapers = path_resources / "wallpapers"
+
 path_images.mkdir(exist_ok=True)
 path_screenshots.mkdir(exist_ok=True)
 path_wallpapers.mkdir(exist_ok=True)
