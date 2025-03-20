@@ -8,6 +8,7 @@
 !install_packages.sh
 !packages_pacman.txt
 !packages_yay.txt
+!packages_snap.txt
 !update_packages.sh
 !tmp/
 !tmp/README.md
