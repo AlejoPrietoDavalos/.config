@@ -14,6 +14,10 @@ echo "--> Limpiando cache de yay."
 yay -Scc --noconfirm
 
 
+echo "--> Actualizando paquetes de snap"
+sudo snap refresh
+
+
 echo "--> Verificando sistema de archivos."
 sudo fsck -Af -M
 
