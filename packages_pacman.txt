@@ -1,4 +1,5 @@
 keepassxc
+syncthing
 git
 nano
 sxhkd
