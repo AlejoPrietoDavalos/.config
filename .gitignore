@@ -3,15 +3,21 @@
 !_refactor/**
 
 #----------extra----------
+!0_install_ui_env.sh
 !env_vars
 !install_fonts.py
 !install_packages.sh
 !packages_pacman.txt
-!packages_yay.txt
 !packages_snap.txt
+!packages_yay.txt
+!requirements_wm.txt
 !update_packages.sh
 !tmp/
 !tmp/README.md
+
+#----------wm----------
+!wm
+!wm/**
 
 #----------resources----------
 !resources
