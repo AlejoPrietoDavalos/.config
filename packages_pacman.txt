@@ -38,3 +38,9 @@ figlet
 tree
 vlc
 lightdm
+zip
+pulseaudio
+pulseaudio-alsa
+pulseaudio-bluetooth
+pavucontrol
+blueman
