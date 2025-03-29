@@ -1,3 +1,4 @@
+keepassxc
 git
 nano
 sxhkd
