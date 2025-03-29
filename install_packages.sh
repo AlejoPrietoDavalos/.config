@@ -72,5 +72,8 @@ else
     sudo snap install $PACKAGES_SNAP
 fi
 
+#----> Activo cosas.
+pulseaudio --start
+
 
 echo "--> Instalación completada."
