@@ -66,5 +66,5 @@ env/
 .env
 
 #----------keepass----------
-!keepass
-!keepass/README.md
+!keepassxc
+!keepassxc/README.md
