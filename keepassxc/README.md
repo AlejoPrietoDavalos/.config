@@ -1,1 +1,0 @@
-# Guardar archivo .kdbx en esta ruta.
