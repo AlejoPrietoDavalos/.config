@@ -1,4 +1,0 @@
-#!/bin/bash
-#MY_DIR=`path_abs`
-PATH_BSPWM=$HOME/.config/bspwm
-python3 $PATH_BSPWM/bspc_set_monitor.py
