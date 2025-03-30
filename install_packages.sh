@@ -55,6 +55,12 @@ else
 fi
 
 
+# Instalo con pip algunas cosas que necesito para paquetes de pypi.
+pip install --upgrade pip --break-system-packages
+pip install --user twine build
+
+
+
 # Instalar paquetes de yay si hay paquetes listados
 if [[ -z "$PACKAGES_YAY" ]]; then
     echo "--> No hay paquetes en $YAY_FILE."

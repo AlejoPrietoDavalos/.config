@@ -1,5 +1,6 @@
 keepassxc
 syncthing
+python-pip
 git
 nano
 sxhkd
