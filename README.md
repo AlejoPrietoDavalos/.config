@@ -1,4 +1,12 @@
 
+# Lightdm
+- Activa y arranca accounts-daemon
+```bash
+sudo systemctl enable accounts-daemon
+sudo systemctl start accounts-daemon
+```
+
+
 # Keepass + Syncthing
 ### Instalar Keepass
 - `Arch:` sudo pacman -S keepassxc
