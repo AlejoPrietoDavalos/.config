@@ -41,6 +41,8 @@ figlet
 tree
 vlc
 lightdm
+lightdm-gtk-greeter
+accountsservice
 zip
 pulseaudio
 pulseaudio-alsa
