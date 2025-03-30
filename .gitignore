@@ -7,6 +7,7 @@
 !env_vars
 !install_fonts.py
 !install_packages.sh
+!install_walls_lightdm.py
 !packages_pacman.txt
 !packages_snap.txt
 !packages_yay.txt
@@ -16,6 +17,7 @@
 !tmp/README.md
 
 #----------wm----------
+!wm.py
 !wm
 !wm/**
 
