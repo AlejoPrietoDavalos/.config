@@ -35,6 +35,7 @@ $HOME/.config/polybar/launch.sh >> $HOME/.config/tmp/polybar.log
 setxkbmap -layout latam
 
 #----------picom----------
+pkill picom
 picom --config $HOME/.config/picom/picom.conf & >> $HOME/.config/tmp/picom.log
 
 
