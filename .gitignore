@@ -5,6 +5,7 @@
 #----------extra----------
 !0_install_ui_env.sh
 !env_vars
+!set_clock.sh
 !install_fonts.py
 !install_packages.sh
 !install_walls_lightdm.py
@@ -17,13 +18,18 @@
 !tmp/README.md
 
 #----------wm----------
-!wm.py
-!wm
-!wm/**
+!main.py
+!linux_setup
+!linux_setup/**
 
 #----------resources----------
 !resources
 !resources/**
+
+#----------assets----------
+!assets
+!assets/**
+
 
 #----------vscode----------
 !vscode
