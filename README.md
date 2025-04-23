@@ -1,9 +1,8 @@
 
-# Lightdm
-- Activa y arranca accounts-daemon
+# SDDM (Simple Desktop Display Manager)
+- Habilida SDDM para que inicie automáticamente con el sistema.
 ```bash
-sudo systemctl enable accounts-daemon
-sudo systemctl start accounts-daemon
+sudo systemctl enable sddm.service --force
 ```
 
 
@@ -22,3 +21,7 @@ sudo systemctl start accounts-daemon
 # Bluetooth (blueman)
 sudo systemctl enable bluetooth.service
 sudo systemctl start bluetooth.service
+
+
+### Etc...
+- Search Google Hack: `gatitos filetype:png`
