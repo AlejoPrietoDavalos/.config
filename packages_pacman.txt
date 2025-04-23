@@ -1,3 +1,5 @@
+qt6-base
+qt6-webengine
 keepassxc
 syncthing
 python-pip
@@ -40,8 +42,7 @@ cmatrix
 figlet
 tree
 vlc
-lightdm
-lightdm-gtk-greeter
+sddm
 accountsservice
 zip
 pulseaudio
@@ -49,3 +50,7 @@ pulseaudio-alsa
 pulseaudio-bluetooth
 pavucontrol
 blueman
+gdal
+python-gdal
+qgis
+unzip
