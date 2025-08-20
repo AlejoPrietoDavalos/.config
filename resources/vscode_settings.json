@@ -141,5 +141,8 @@
 		"terminal.ansiBrightMagenta": "#6c71c4",
 		"terminal.ansiBrightCyan": "#93a1a1",
 		"terminal.ansiBrightWhite": "#fdf6e3"
-	}
+	},
+	"git.confirmSync": false,
+	"workbench.editor.empty.hint": "hidden",
+	"workbench.tree.indent": 20,
 }
