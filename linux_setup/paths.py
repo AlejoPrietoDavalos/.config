@@ -1,0 +1,18 @@
+from typing import List
+from pathlib import Path
+
+path_home = Path.home()
+path_config = path_home / ".config"
+
+path_resources = path_config / "resources"
+path_assets = path_config / "assets"
+path_wallpapers = path_assets / "wallpapers"
+
+path_resources.mkdir(exist_ok=True)
+path_assets.mkdir(exist_ok=True)
+path_wallpapers.mkdir(exist_ok=True)
+
+
+def get_paths_wallpaper() -> List[Path]:
+    """Return available wallpaper files sorted by name."""
+    return sorted([p for p in path_wallpapers.iterdir() if p.is_file()])

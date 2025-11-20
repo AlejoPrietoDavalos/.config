@@ -1,12 +1,11 @@
 #!/bin/bash
-mkdir -p $HOME/.config/tmp
+mkdir -p "$HOME/.config/tmp"
 
-# Comprueba si sxhkd está abierto como proceso,
-# en caso de no estarlo lo inicia.
+# Inicia sxhkd si no está corriendo
 pgrep -x sxhkd > /dev/null || sxhkd &
 
-python3 $HOME/.config/bspwm/set_monitors.py
-$HOME/.config/signals/start_signals.sh >> $HOME/.config/tmp/signals.log
+python3 "$HOME/.config/bspwm/set_monitors.py"
+"$HOME/.config/signals/start_signals.sh" >> "$HOME/.config/tmp/signals.log"
 
 ####################################################
 #                   Config BSPWM                   #
@@ -22,25 +21,23 @@ bspc config active_border_color   \#1F4D62
 #---------------------------------------------------
 bspc config border_width         2
 bspc config window_gap           0
-
 bspc config split_ratio          0.5
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 
 
 # Launch polybar
-$HOME/.config/polybar/launch.sh >> $HOME/.config/tmp/polybar.log
+$HOME/.config/polybar/launch.sh" >> "$HOME/.config/tmp/polybar.log"
 
-#----------layout----------
 setxkbmap -layout latam
 
 #----------picom----------
 pkill picom
-picom --config $HOME/.config/picom/picom.conf & >> $HOME/.config/tmp/picom.log
-
+picom --config "$HOME/.config/picom/picom.conf" >> "$HOME/.config/tmp/picom.log" &
 
 #----------Wallpaper Aleatorio----------
-$HOME/.config/commands/feh_random
+"$HOME/.config/commands/feh_random"
+
 
 # Ver q hace esto.
 #xsetroot -cursor_name left_ptr &

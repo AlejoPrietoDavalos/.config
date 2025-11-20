@@ -4,13 +4,12 @@ keepassxc
 syncthing
 python-pip
 git
-nano
+nvim
 sxhkd
 bspwm
 polybar
 picom
 kitty
-ranger
 rofi
 scrot
 xclip
