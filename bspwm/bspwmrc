@@ -27,7 +27,7 @@ bspc config gapless_monocle      true
 
 
 # Launch polybar
-$HOME/.config/polybar/launch.sh" >> "$HOME/.config/tmp/polybar.log"
+$HOME/.config/polybar/launch.sh >> "$HOME/.config/tmp/polybar.log" &
 
 setxkbmap -layout latam
 
