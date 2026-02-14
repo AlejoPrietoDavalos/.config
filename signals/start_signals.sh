@@ -8,7 +8,7 @@ function start_signal {
     # Si no existe el proceso, ejecuta.
     if ! pgrep -f $signal_name_py > /dev/null; then
         echo "Start signal: $signal_name_py"
-        python3 $HOME/.config/signals/$signal_name_py & >> $HOME/.config/tmp/signals.log
+        python3 $HOME/.config/signals/$signal_name_py >> $HOME/.config/tmp/signals.log &
     else
         execution_signal_pid=$(pgrep -f $signal_name_py)
         stored_signal_pid=$(cat $signal_name_pid)
@@ -16,7 +16,7 @@ function start_signal {
             echo "Kill signal: $signal_name_py"
             kill $execution_signal_pid
             echo "Start signal: $signal_name_py"
-            python3 $HOME/.config/signals/$signal_name_py & >> $HOME/.config/tmp/signals.log
+            python3 $HOME/.config/signals/$signal_name_py >> $HOME/.config/tmp/signals.log &
         fi
     fi
 }
