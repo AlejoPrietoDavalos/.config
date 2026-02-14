@@ -47,6 +47,15 @@ safe_link() {
     echo "Linked: $dst -> $src"
 }
 
+ensure_cmd_executables() {
+    local program="$1"
+    local cmd_dir="$PROGRAMS_DIR/$program/files/cmd"
+    if [ ! -d "$cmd_dir" ]; then
+        return 0
+    fi
+    find "$cmd_dir" -maxdepth 1 -type f -exec chmod +x {} +
+}
+
 packages_file_for_program() {
     local program="$1"
     echo "$PACKAGES_DIR/$program.txt"

@@ -21,13 +21,13 @@ def main() -> None:
     path_commands = path_config / "_infra" / "commands"
     text_template = text_template.replace(format_tag("commands"), str(path_commands))
 
-    # Replace tags in the form {{cmd_<program>}} -> ~/.config/<program>/cmd_<program>
+    # Replace tags in the form {{cmd_<program>}} -> ~/.config/<program>/cmd
     tags = set(re.findall(r"\{\{([^\s{}]+)\}\}", text_template))
     for tag in tags:
         if not tag.startswith("cmd_"):
             continue
         pkg_name = tag.removeprefix("cmd_")
-        path_cmd_pkg = path_config / pkg_name / tag
+        path_cmd_pkg = path_config / pkg_name / "cmd"
         text_template = text_template.replace(format_tag(tag), str(path_cmd_pkg))
 
     path_output.write_text(text_template)

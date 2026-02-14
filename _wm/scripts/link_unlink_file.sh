@@ -41,6 +41,7 @@ set_program_context() {
 
 install_program() {
     ensure_program_packages "$program"
+    ensure_cmd_executables "$program"
     mkdir -p "$target_dir"
 
     for src in "$files_dir"/*; do
