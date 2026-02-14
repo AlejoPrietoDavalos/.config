@@ -1,0 +1,5 @@
+[Desktop Entry]
+Name=bspwm
+Comment=Minimal bspwm session
+Exec=bspwm
+Type=Application
