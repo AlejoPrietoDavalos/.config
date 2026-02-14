@@ -12,6 +12,7 @@ if [ -z "$program" ]; then
 fi
 
 ensure_program "$program"
+ensure_program_packages "$program"
 
 files_dir="$PROGRAMS_DIR/$program/files"
 case "$program" in

@@ -4,6 +4,7 @@ set -euo pipefail
 WM_ROOT="$HOME/.config/_wm"
 PROGRAMS_DIR="$WM_ROOT/programs"
 BACKUP_ROOT="$WM_ROOT/backups"
+PACKAGES_DIR="$WM_ROOT/packages"
 
 ensure_program() {
     local program="$1"
@@ -44,4 +45,83 @@ safe_link() {
 
     ln -s "$src" "$dst"
     echo "Linked: $dst -> $src"
+}
+
+packages_file_for_program() {
+    local program="$1"
+    echo "$PACKAGES_DIR/$program.txt"
+}
+
+read_program_packages() {
+    local program="$1"
+    local packages_file
+    packages_file="$(packages_file_for_program "$program")"
+
+    if [ ! -f "$packages_file" ]; then
+        return 0
+    fi
+
+    # shellcheck disable=SC2016
+    awk '!/^[[:space:]]*#/ && NF {print $1}' "$packages_file"
+}
+
+ensure_program_packages() {
+    local program="$1"
+
+    if ! command -v pacman >/dev/null 2>&1; then
+        echo "Skip deps for '$program': pacman not found."
+        return 0
+    fi
+
+    mapfile -t packages < <(read_program_packages "$program")
+    if [ "${#packages[@]}" -eq 0 ]; then
+        return 0
+    fi
+
+    local missing=()
+    local pkg
+    for pkg in "${packages[@]}"; do
+        if ! pacman -Q "$pkg" >/dev/null 2>&1; then
+            missing+=("$pkg")
+        fi
+    done
+
+    if [ "${#missing[@]}" -eq 0 ]; then
+        return 0
+    fi
+
+    echo "Installing deps for '$program': ${missing[*]}"
+    sudo pacman -S --needed --noconfirm "${missing[@]}"
+}
+
+remove_program_packages() {
+    local program="$1"
+
+    if [ "${WM_REMOVE_PACKAGES:-0}" != "1" ]; then
+        return 0
+    fi
+
+    if ! command -v pacman >/dev/null 2>&1; then
+        return 0
+    fi
+
+    mapfile -t packages < <(read_program_packages "$program")
+    if [ "${#packages[@]}" -eq 0 ]; then
+        return 0
+    fi
+
+    local installed=()
+    local pkg
+    for pkg in "${packages[@]}"; do
+        if pacman -Q "$pkg" >/dev/null 2>&1; then
+            installed+=("$pkg")
+        fi
+    done
+
+    if [ "${#installed[@]}" -eq 0 ]; then
+        return 0
+    fi
+
+    echo "Removing deps for '$program': ${installed[*]}"
+    sudo pacman -Rns --noconfirm "${installed[@]}"
 }

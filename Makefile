@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 
-.PHONY: help install-core remove-core \
+.PHONY: help install-core remove-core remove-core-purge \
 	install-bspwm remove-bspwm install-session-bspwm \
 	install-sxhkd remove-sxhkd generate-sxhkd \
 	install-polybar remove-polybar \
@@ -20,10 +20,15 @@ help:
 	@echo "  make install-picom | remove-picom"
 	@echo "  make install-rofi | remove-rofi"
 	@echo "  make install-thunar | remove-thunar"
+	@echo "  make remove-core-purge   # also removes pacman packages"
+	@echo "  WM_REMOVE_PACKAGES=1 make remove-<program>"
 
 install-core: install-bspwm install-sxhkd install-polybar
 
 remove-core: remove-polybar remove-sxhkd remove-bspwm
+
+remove-core-purge:
+	@WM_REMOVE_PACKAGES=1 $(MAKE) remove-core
 
 install-bspwm:
 	@./_wm/scripts/link_program.sh bspwm

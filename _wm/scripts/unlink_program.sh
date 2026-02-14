@@ -32,3 +32,5 @@ for src in "$files_dir"/*; do
         fi
     fi
 done
+
+remove_program_packages "$program"
