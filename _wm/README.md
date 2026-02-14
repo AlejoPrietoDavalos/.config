@@ -29,6 +29,12 @@ Si editas `~/.config/bspwm/bspwmrc` y es symlink, se refleja en Git automaticame
 - `remove-<program>` solo deslinkea configs por defecto.
 - Para desinstalar paquetes al remover: `WM_REMOVE_PACKAGES=1 make remove-<program>`.
 
+## Script operativo
+- Script unico: `_wm/scripts/link_unlink_file.sh`
+- Parametros:
+- `install <program> [target_dir]`: instala dependencias y crea symlinks.
+- `remove <program> [target_dir]`: quita symlinks; con `WM_REMOVE_PACKAGES=1` tambien desinstala paquetes.
+
 ## Nota sobre archivos generados
 - `sxhkdrc` no se trackea.
 - Se trackea solo `sxhkdrc.template` + generador.
