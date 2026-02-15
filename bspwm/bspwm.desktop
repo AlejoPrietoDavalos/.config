@@ -1,5 +1,0 @@
-[Desktop Entry]
-Name=bspwm
-Comment=Enviar este archivo dentro de /usr/share/bspwm/xsessions.
-Exec={{PATH_BSPWM}}/start_bspwm.sh
-Type=Application
