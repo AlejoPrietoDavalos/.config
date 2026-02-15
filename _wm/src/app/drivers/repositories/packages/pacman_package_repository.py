@@ -4,29 +4,24 @@ import os
 import shutil
 import subprocess
 
-from src.core.entities.packages import Packages
 from src.core.entities.program import ProgramName
-from src.core.entities.program_config import PackageManager
-from src.core.repositories.package_manager_repository import PackageManagerRepository
 
 
-class PacmanPackageRepository(PackageManagerRepository):
+class PacmanPackageRepository:
     def _exists(self) -> bool:
         return shutil.which("pacman") is not None
 
-    def install(
-        self, program: ProgramName, packages: Packages, manager: PackageManager = "pacman"
-    ) -> None:
+    def install(self, program: ProgramName, package_names: list[str]) -> None:
         if not self._exists():
             print(f"Skip deps for '{program}': pacman not found")
             return
 
-        if not packages.packages:
+        if not package_names:
             return
 
         missing = [
             pkg
-            for pkg in packages.packages
+            for pkg in package_names
             if subprocess.run(
                 ["pacman", "-Q", pkg],
                 stdout=subprocess.DEVNULL,
@@ -42,20 +37,18 @@ class PacmanPackageRepository(PackageManagerRepository):
             ["sudo", "pacman", "-S", "--needed", "--noconfirm", *missing], check=True
         )
 
-    def uninstall(
-        self, program: ProgramName, packages: Packages, manager: PackageManager = "pacman"
-    ) -> None:
+    def uninstall(self, program: ProgramName, package_names: list[str]) -> None:
         if os.getenv("WM_REMOVE_PACKAGES") != "1":
             return
         if not self._exists():
             return
 
-        if not packages.packages:
+        if not package_names:
             return
 
         installed = [
             pkg
-            for pkg in packages.packages
+            for pkg in package_names
             if subprocess.run(
                 ["pacman", "-Q", pkg],
                 stdout=subprocess.DEVNULL,
