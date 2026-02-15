@@ -2,8 +2,9 @@ SHELL := /bin/bash
 RUN := cd ./_wm && PYTHONPATH=. python3 ./main.py
 
 .PHONY: install-core remove-core remove-core-purge \
+	wm-requirements-install \
 	sddm-install sddm-enable sddm-start bspwm-bootstrap \
-	bspwm-install bspwm-uninstall bspwm-install-requirement bspwm-uninstall-requirement bspwm-install-files bspwm-uninstall-files bspwm-install-session \
+	bspwm-install bspwm-uninstall bspwm-install-requirement bspwm-uninstall-requirement bspwm-install-files bspwm-uninstall-files bspwm-install-session bspwm-check-display bspwm-restart \
 	sxhkd-install sxhkd-uninstall sxhkd-install-requirement sxhkd-uninstall-requirement sxhkd-install-files sxhkd-uninstall-files sxhkd-generate \
 	polybar-install polybar-uninstall polybar-install-requirement polybar-uninstall-requirement polybar-install-files polybar-uninstall-files \
 	kitty-install kitty-uninstall kitty-install-requirement kitty-uninstall-requirement kitty-install-files kitty-uninstall-files \
@@ -11,9 +12,16 @@ RUN := cd ./_wm && PYTHONPATH=. python3 ./main.py
 	picom-install picom-uninstall picom-install-requirement picom-uninstall-requirement picom-install-files picom-uninstall-files \
 	rofi-install rofi-uninstall rofi-install-requirement rofi-uninstall-requirement rofi-install-files rofi-uninstall-files \
 	thunar-install thunar-uninstall thunar-install-requirement thunar-uninstall-requirement thunar-install-files thunar-uninstall-files \
-	vscode-install vscode-uninstall vscode-install-requirement vscode-uninstall-requirement vscode-install-files vscode-uninstall-files
+	vscode-install vscode-uninstall vscode-install-requirement vscode-uninstall-requirement vscode-install-files vscode-uninstall-files \
+	wm-base-install wm-base-uninstall wm-base-install-requirement wm-base-uninstall-requirement wm-base-install-files wm-base-uninstall-files \
+	pulseaudio-install pulseaudio-uninstall pulseaudio-install-requirement pulseaudio-uninstall-requirement pulseaudio-install-files pulseaudio-uninstall-files \
+	display-tools-install display-tools-uninstall display-tools-install-requirement display-tools-uninstall-requirement display-tools-install-files display-tools-uninstall-files \
+	clock-set keyboard-set-latam \
+	nvidia-install nvidia-uninstall nvidia-install-requirement nvidia-uninstall-requirement nvidia-install-files nvidia-uninstall-files
 
 install-core: bspwm-install sxhkd-install polybar-install picom-install
+
+wm-requirements-install: wm-base-install-requirement pulseaudio-install-requirement display-tools-install-requirement nvidia-install-requirement
 
 remove-core: picom-uninstall polybar-uninstall sxhkd-uninstall bspwm-uninstall
 
@@ -44,6 +52,18 @@ bspwm-uninstall-files:
 
 bspwm-install-session:
 	@./_wm/scripts/install_bspwm_session.sh
+
+bspwm-check-display:
+	@./_wm/scripts/check_display_stack.sh
+
+bspwm-restart:
+	@./_wm/scripts/check_display_stack.sh --quiet
+	@if command -v bspc >/dev/null 2>&1; then \
+		bspc wm -r; \
+	else \
+		echo "bspc no encontrado en PATH"; \
+		exit 1; \
+	fi
 
 sxhkd-install: sxhkd-install-requirement sxhkd-install-files
 sxhkd-uninstall: sxhkd-uninstall-files sxhkd-uninstall-requirement
@@ -136,3 +156,53 @@ vscode-install-files:
 	@$(RUN) --action install-files --program vscode
 vscode-uninstall-files:
 	@$(RUN) --action uninstall-files --program vscode
+
+wm-base-install: wm-base-install-requirement wm-base-install-files
+wm-base-uninstall: wm-base-uninstall-files wm-base-uninstall-requirement
+wm-base-install-requirement:
+	@$(RUN) --action install-requirement --program wm-base
+wm-base-uninstall-requirement:
+	@$(RUN) --action uninstall-requirement --program wm-base
+wm-base-install-files:
+	@$(RUN) --action install-files --program wm-base
+wm-base-uninstall-files:
+	@$(RUN) --action uninstall-files --program wm-base
+
+pulseaudio-install: pulseaudio-install-requirement pulseaudio-install-files
+pulseaudio-uninstall: pulseaudio-uninstall-files pulseaudio-uninstall-requirement
+pulseaudio-install-requirement:
+	@$(RUN) --action install-requirement --program pulseaudio
+pulseaudio-uninstall-requirement:
+	@$(RUN) --action uninstall-requirement --program pulseaudio
+pulseaudio-install-files:
+	@$(RUN) --action install-files --program pulseaudio
+pulseaudio-uninstall-files:
+	@$(RUN) --action uninstall-files --program pulseaudio
+
+display-tools-install: display-tools-install-requirement display-tools-install-files
+display-tools-uninstall: display-tools-uninstall-files display-tools-uninstall-requirement
+display-tools-install-requirement:
+	@$(RUN) --action install-requirement --program display-tools
+display-tools-uninstall-requirement:
+	@$(RUN) --action uninstall-requirement --program display-tools
+display-tools-install-files:
+	@$(RUN) --action install-files --program display-tools
+display-tools-uninstall-files:
+	@$(RUN) --action uninstall-files --program display-tools
+
+clock-set:
+	@cd ./_wm && PYTHONPATH=. python3 ./scripts/set_clock.py
+
+keyboard-set-latam:
+	@cd ./_wm && PYTHONPATH=. python3 ./scripts/set_keyboard_layout.py --layout latam
+
+nvidia-install: nvidia-install-requirement nvidia-install-files
+nvidia-uninstall: nvidia-uninstall-files nvidia-uninstall-requirement
+nvidia-install-requirement:
+	@$(RUN) --action install-requirement --program nvidia
+nvidia-uninstall-requirement:
+	@$(RUN) --action uninstall-requirement --program nvidia
+nvidia-install-files:
+	@$(RUN) --action install-files --program nvidia
+nvidia-uninstall-files:
+	@$(RUN) --action uninstall-files --program nvidia

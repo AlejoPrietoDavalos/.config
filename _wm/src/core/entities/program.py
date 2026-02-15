@@ -10,6 +10,10 @@ ProgramName = Literal[
     "rofi",
     "thunar",
     "vscode",
+    "wm-base",
+    "pulseaudio",
+    "display-tools",
+    "nvidia",
 ]
 
 PROGRAM_NAMES: tuple[ProgramName, ...] = get_args(ProgramName)

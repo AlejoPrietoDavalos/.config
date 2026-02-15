@@ -49,7 +49,10 @@ Atajos por `make`:
 - `make <program>-install-files`
 - `make <program>-uninstall-files`
 - `make install-core`
+- `make wm-requirements-install`
 - `make bspwm-install-session`
+- `make bspwm-check-display`
+- `make bspwm-restart`
 - `make sddm-install`
 - `make sddm-enable`
 - `make sddm-start`
@@ -75,6 +78,8 @@ make bspwm-install-requirement
 make bspwm-install-files
 make bspwm-install-session
 make bspwm-bootstrap
+make bspwm-check-display
+make bspwm-restart
 ```
 
 ### sxhkd
@@ -140,6 +145,49 @@ make vscode-install
 make vscode-uninstall
 make vscode-install-requirement
 make vscode-install-files
+```
+
+### nvidia
+```bash
+make nvidia-install
+make nvidia-uninstall
+make nvidia-install-requirement
+make nvidia-install-files
+```
+
+### wm-base
+```bash
+make wm-base-install
+make wm-base-uninstall
+make wm-base-install-requirement
+make wm-base-install-files
+```
+
+### pulseaudio
+```bash
+make pulseaudio-install
+make pulseaudio-uninstall
+make pulseaudio-install-requirement
+make pulseaudio-install-files
+```
+
+### display-tools
+```bash
+make display-tools-install
+make display-tools-uninstall
+make display-tools-install-requirement
+make display-tools-install-files
+```
+
+### clock / keyboard commands
+```bash
+make clock-set
+make keyboard-set-latam
+```
+
+Instalar dependencias modulares del stack WM (incluyendo NVIDIA):
+```bash
+make wm-requirements-install
 ```
 
 Notas:
