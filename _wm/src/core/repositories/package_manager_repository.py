@@ -1,12 +1,25 @@
 from abc import ABC, abstractmethod
-from pathlib import Path
+
+from src.core.entities.packages import Packages
+from src.core.entities.program import ProgramName
+from src.core.entities.program_config import PackageManager
 
 
 class PackageManagerRepository(ABC):
     @abstractmethod
-    def install(self, program: str, packages_file: Path) -> None:
+    def install(
+        self,
+        program: ProgramName,
+        packages: Packages,
+        manager: PackageManager = "pacman",
+    ) -> None:
         ...
 
     @abstractmethod
-    def uninstall(self, program: str, packages_file: Path) -> None:
+    def uninstall(
+        self,
+        program: ProgramName,
+        packages: Packages,
+        manager: PackageManager = "pacman",
+    ) -> None:
         ...

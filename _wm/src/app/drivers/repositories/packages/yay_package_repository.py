@@ -10,17 +10,16 @@ from src.core.entities.program_config import PackageManager
 from src.core.repositories.package_manager_repository import PackageManagerRepository
 
 
-class PacmanPackageRepository(PackageManagerRepository):
+class YayPackageRepository(PackageManagerRepository):
     def _exists(self) -> bool:
-        return shutil.which("pacman") is not None
+        return shutil.which("yay") is not None
 
     def install(
-        self, program: ProgramName, packages: Packages, manager: PackageManager = "pacman"
+        self, program: ProgramName, packages: Packages, manager: PackageManager = "yay"
     ) -> None:
         if not self._exists():
-            print(f"Skip deps for '{program}': pacman not found")
+            print(f"Skip deps for '{program}': yay not found")
             return
-
         if not packages.packages:
             return
 
@@ -28,7 +27,7 @@ class PacmanPackageRepository(PackageManagerRepository):
             pkg
             for pkg in packages.packages
             if subprocess.run(
-                ["pacman", "-Q", pkg],
+                ["yay", "-Q", pkg],
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.DEVNULL,
             ).returncode
@@ -37,19 +36,16 @@ class PacmanPackageRepository(PackageManagerRepository):
         if not missing:
             return
 
-        print(f"Installing deps for '{program}': {' '.join(missing)}")
-        subprocess.run(
-            ["sudo", "pacman", "-S", "--needed", "--noconfirm", *missing], check=True
-        )
+        print(f"Installing deps for '{program}' (yay): {' '.join(missing)}")
+        subprocess.run(["yay", "-S", "--needed", "--noconfirm", *missing], check=True)
 
     def uninstall(
-        self, program: ProgramName, packages: Packages, manager: PackageManager = "pacman"
+        self, program: ProgramName, packages: Packages, manager: PackageManager = "yay"
     ) -> None:
         if os.getenv("WM_REMOVE_PACKAGES") != "1":
             return
         if not self._exists():
             return
-
         if not packages.packages:
             return
 
@@ -57,7 +53,7 @@ class PacmanPackageRepository(PackageManagerRepository):
             pkg
             for pkg in packages.packages
             if subprocess.run(
-                ["pacman", "-Q", pkg],
+                ["yay", "-Q", pkg],
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.DEVNULL,
             ).returncode
@@ -66,7 +62,5 @@ class PacmanPackageRepository(PackageManagerRepository):
         if not installed:
             return
 
-        print(f"Removing deps for '{program}': {' '.join(installed)}")
-        subprocess.run(
-            ["sudo", "pacman", "-Rns", "--noconfirm", *installed], check=True
-        )
+        print(f"Removing deps for '{program}' (yay): {' '.join(installed)}")
+        subprocess.run(["yay", "-Rns", "--noconfirm", *installed], check=True)

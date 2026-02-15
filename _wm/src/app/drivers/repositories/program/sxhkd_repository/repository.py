@@ -4,13 +4,15 @@ from src.app.drivers.repositories.program.base_program_repository import BasePro
 from src.core.entities.program_config import ProgramConfig
 
 
-class VscodeRepository(BaseProgramRepository):
+class SxhkdRepository(BaseProgramRepository):
     def build(self, config_root: Path) -> ProgramConfig:
-        program_root = config_root / "_wm" / "programs" / "vscode"
+        program_root = config_root / "_wm" / "programs" / "sxhkd"
         return ProgramConfig(
-            name="vscode",
+            name="sxhkd",
             files_dir=program_root / "files",
-            target_dir=config_root / "Code" / "User",
+            target_dir=config_root / "sxhkd",
             packages_file=program_root / "packages.txt",
-            files_mode="copy",
+
+            # FIXME: Ver como poner esto en un repo y ejecutarlo simplemente. No hay falta pasar por bash.
+            post_install_commands=(f"{config_root}/_wm/scripts/generate_sxhkd.sh",),
         )
