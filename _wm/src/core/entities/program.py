@@ -4,6 +4,7 @@ ProgramName = Literal[
     "bspwm",
     "sxhkd",
     "polybar",
+    "kitty",
     "ranger",
     "picom",
     "rofi",

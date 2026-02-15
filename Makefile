@@ -2,21 +2,34 @@ SHELL := /bin/bash
 RUN := cd ./_wm && PYTHONPATH=. python3 ./main.py
 
 .PHONY: install-core remove-core remove-core-purge \
+	sddm-install sddm-enable sddm-start bspwm-bootstrap \
 	bspwm-install bspwm-uninstall bspwm-install-requirement bspwm-uninstall-requirement bspwm-install-files bspwm-uninstall-files bspwm-install-session \
 	sxhkd-install sxhkd-uninstall sxhkd-install-requirement sxhkd-uninstall-requirement sxhkd-install-files sxhkd-uninstall-files sxhkd-generate \
 	polybar-install polybar-uninstall polybar-install-requirement polybar-uninstall-requirement polybar-install-files polybar-uninstall-files \
+	kitty-install kitty-uninstall kitty-install-requirement kitty-uninstall-requirement kitty-install-files kitty-uninstall-files \
 	ranger-install ranger-uninstall ranger-install-requirement ranger-uninstall-requirement ranger-install-files ranger-uninstall-files \
 	picom-install picom-uninstall picom-install-requirement picom-uninstall-requirement picom-install-files picom-uninstall-files \
 	rofi-install rofi-uninstall rofi-install-requirement rofi-uninstall-requirement rofi-install-files rofi-uninstall-files \
 	thunar-install thunar-uninstall thunar-install-requirement thunar-uninstall-requirement thunar-install-files thunar-uninstall-files \
 	vscode-install vscode-uninstall vscode-install-requirement vscode-uninstall-requirement vscode-install-files vscode-uninstall-files
 
-install-core: bspwm-install sxhkd-install polybar-install
+install-core: bspwm-install sxhkd-install polybar-install picom-install
 
-remove-core: polybar-uninstall sxhkd-uninstall bspwm-uninstall
+remove-core: picom-uninstall polybar-uninstall sxhkd-uninstall bspwm-uninstall
 
 remove-core-purge:
 	@WM_REMOVE_PACKAGES=1 $(MAKE) remove-core
+
+sddm-install:
+	@sudo pacman -S --needed --noconfirm sddm
+
+sddm-enable:
+	@sudo systemctl enable sddm.service --force
+
+sddm-start:
+	@sudo systemctl start sddm.service
+
+bspwm-bootstrap: install-core bspwm-install-session
 
 bspwm-install: bspwm-install-requirement bspwm-install-files
 bspwm-uninstall: bspwm-uninstall-files bspwm-uninstall-requirement
@@ -57,6 +70,17 @@ polybar-install-files:
 	@$(RUN) --action install-files --program polybar
 polybar-uninstall-files:
 	@$(RUN) --action uninstall-files --program polybar
+
+kitty-install: kitty-install-requirement kitty-install-files
+kitty-uninstall: kitty-uninstall-files kitty-uninstall-requirement
+kitty-install-requirement:
+	@$(RUN) --action install-requirement --program kitty
+kitty-uninstall-requirement:
+	@$(RUN) --action uninstall-requirement --program kitty
+kitty-install-files:
+	@$(RUN) --action install-files --program kitty
+kitty-uninstall-files:
+	@$(RUN) --action uninstall-files --program kitty
 
 ranger-install: ranger-install-requirement ranger-install-files
 ranger-uninstall: ranger-uninstall-files ranger-uninstall-requirement

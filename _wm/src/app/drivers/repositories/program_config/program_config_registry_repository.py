@@ -1,5 +1,6 @@
 from src.core.repositories.program_config.program_build_config_repository import ProgramBuildConfigRepository
 from src.app.drivers.repositories.program_config.bspwm_config_repository.repository import BspwmConfigRepository
+from src.app.drivers.repositories.program_config.kitty_config_repository.repository import KittyConfigRepository
 from src.app.drivers.repositories.program_config.picom_config_repository.repository import PicomConfigRepository
 from src.app.drivers.repositories.program_config.polybar_config_repository.repository import PolybarConfigRepository
 from src.app.drivers.repositories.program_config.ranger_config_repository.repository import RangerConfigRepository
@@ -18,6 +19,7 @@ class ProgramConfigRegistryRepository(ProgramConfigRepository):
             "bspwm": BspwmConfigRepository(),
             "sxhkd": SxhkdConfigRepository(),
             "polybar": PolybarConfigRepository(),
+            "kitty": KittyConfigRepository(),
             "ranger": RangerConfigRepository(),
             "picom": PicomConfigRepository(),
             "rofi": RofiConfigRepository(),

@@ -48,6 +48,24 @@ Atajos por `make`:
 - `make <program>-uninstall-requirement`
 - `make <program>-install-files`
 - `make <program>-uninstall-files`
+- `make install-core`
+- `make bspwm-install-session`
+- `make sddm-install`
+- `make sddm-enable`
+- `make sddm-start`
+- `make bspwm-bootstrap`
+
+Primera configuracion para probar `bspwm`:
+```bash
+make bspwm-bootstrap
+```
+Opcional si usas SDDM:
+```bash
+make sddm-install
+make sddm-enable
+make sddm-start
+```
+Luego cerrar sesion y elegir `bspwm` en SDDM (o iniciar con tu metodo de sesion X preferido).
 
 ### bspwm
 ```bash
@@ -56,6 +74,7 @@ make bspwm-uninstall
 make bspwm-install-requirement
 make bspwm-install-files
 make bspwm-install-session
+make bspwm-bootstrap
 ```
 
 ### sxhkd
@@ -73,6 +92,14 @@ make polybar-install
 make polybar-uninstall
 make polybar-install-requirement
 make polybar-install-files
+```
+
+### kitty
+```bash
+make kitty-install
+make kitty-uninstall
+make kitty-install-requirement
+make kitty-install-files
 ```
 
 ### ranger
