@@ -1,4 +1,4 @@
-from src.core.entities.program import ProgramName
+from src.core.entities.program_config import ProgramName
 from src.core.repositories.command_repository import CommandRepository
 from src.core.repositories.file_operations_repository import FileOperationsRepository
 from src.core.repositories.package_manager_repository import PackageManagerRepository
@@ -33,18 +33,18 @@ class ProgramActions:
             return
 
         if action == "install-files":
-            if cfg.files_dir is not None and cfg.target_dir is not None:
+            if cfg.files is not None:
                 self._file_repo.install(
-                    cfg.files_dir, cfg.target_dir, cfg.files_mode, backup=use_backup
+                    cfg.files.source_dir, cfg.files.target_dir, cfg.files.mode, backup=use_backup
                 )
             for cmd in cfg.post_install_commands:
                 self._command_repo.run(cmd)
             return
 
         if action == "uninstall-files":
-            if cfg.files_dir is not None and cfg.target_dir is not None:
+            if cfg.files is not None:
                 self._file_repo.uninstall(
-                    cfg.files_dir, cfg.target_dir, cfg.files_mode, backup=use_backup
+                    cfg.files.source_dir, cfg.files.target_dir, cfg.files.mode, backup=use_backup
                 )
             return
 
@@ -52,18 +52,18 @@ class ProgramActions:
             for dep in self._resolve_dependency_order(program):
                 dep_cfg = self._config_repo.get_config(dep)
                 self._package_repo.install(dep, dep_cfg.packages)
-            if cfg.files_dir is not None and cfg.target_dir is not None:
+            if cfg.files is not None:
                 self._file_repo.install(
-                    cfg.files_dir, cfg.target_dir, cfg.files_mode, backup=use_backup
+                    cfg.files.source_dir, cfg.files.target_dir, cfg.files.mode, backup=use_backup
                 )
             for cmd in cfg.post_install_commands:
                 self._command_repo.run(cmd)
             return
 
         if action == "uninstall":
-            if cfg.files_dir is not None and cfg.target_dir is not None:
+            if cfg.files is not None:
                 self._file_repo.uninstall(
-                    cfg.files_dir, cfg.target_dir, cfg.files_mode, backup=use_backup
+                    cfg.files.source_dir, cfg.files.target_dir, cfg.files.mode, backup=use_backup
                 )
             self._package_repo.uninstall(program, cfg.packages)
             return

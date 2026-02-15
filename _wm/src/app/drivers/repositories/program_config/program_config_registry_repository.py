@@ -16,7 +16,7 @@ from src.app.drivers.repositories.program_config.sxhkd_config_repository.reposit
 from src.app.drivers.repositories.program_config.thunar_config_repository.repository import ThunarConfigRepository
 from src.app.drivers.repositories.program_config.vscode_config_repository.repository import VscodeConfigRepository
 from src.app.drivers.repositories.program_config.wm_base_config_repository.repository import WmBaseConfigRepository
-from src.core.entities.program import ProgramName
+from src.core.entities.program_config import ProgramName
 from src.core.entities.program_config import ProgramConfig
 from src.core.repositories.program_config.program_config_repository import ProgramConfigRepository
 
@@ -44,6 +44,6 @@ class ProgramConfigRegistryRepository(ProgramConfigRepository):
         if repo is None:
             raise ValueError(f"Program not found: {program}")
         cfg = repo.build_config()
-        if cfg.files_dir is not None and not cfg.files_dir.is_dir():
-            raise ValueError(f"Missing files dir: {cfg.files_dir}")
+        if cfg.files is not None and not cfg.files.source_dir.is_dir():
+            raise ValueError(f"Missing files dir: {cfg.files.source_dir}")
         return cfg

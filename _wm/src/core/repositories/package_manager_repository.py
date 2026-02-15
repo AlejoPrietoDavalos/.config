@@ -1,7 +1,6 @@
 from abc import ABC, abstractmethod
 
-from src.core.entities.packages import Packages
-from src.core.entities.program import ProgramName
+from src.core.entities.program_config import Packages, ProgramName
 
 
 class PackageManagerRepository(ABC):

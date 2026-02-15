@@ -4,7 +4,7 @@ import os
 import shutil
 import subprocess
 
-from src.core.entities.program import ProgramName
+from src.core.entities.program_config import ProgramName
 
 
 class PacmanPackageRepository:

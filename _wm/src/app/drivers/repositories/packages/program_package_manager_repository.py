@@ -1,7 +1,6 @@
 from src.app.drivers.repositories.packages.pacman_package_repository import PacmanPackageRepository
 from src.app.drivers.repositories.packages.yay_package_repository import YayPackageRepository
-from src.core.entities.packages import PackageManager, Packages
-from src.core.entities.program import ProgramName
+from src.core.entities.program_config import PackageManager, Packages, ProgramName
 from src.core.repositories.package_manager_repository import PackageManagerRepository
 
 

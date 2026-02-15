@@ -1,7 +1,7 @@
 from src.core.repositories.program_config.program_build_config_repository import ProgramBuildConfigRepository
 from src.core.constants import path_dotfiles, path_wm_programs
-from src.core.entities.packages import PackageSpec, Packages
-from src.core.entities.program_config import ProgramConfig
+from src.core.entities.program_config import PackageSpec, Packages
+from src.core.entities.program_config import ProgramConfig, ProgramFiles
 
 
 class VscodeConfigRepository(ProgramBuildConfigRepository):
@@ -9,8 +9,7 @@ class VscodeConfigRepository(ProgramBuildConfigRepository):
         program_root = path_wm_programs / "vscode"
         return ProgramConfig(
             name="vscode",
-            files_dir=program_root / "files",
-            target_dir=path_dotfiles / "Code" / "User",
+            files=ProgramFiles(source_dir=program_root / "files", target_dir=path_dotfiles / "Code" / "User"),
             packages=Packages(packages=[PackageSpec(manager="yay", names=["code"])]),
-            files_mode="copy",
+            backup_files=False,
         )
