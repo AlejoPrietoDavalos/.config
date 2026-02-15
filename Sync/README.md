@@ -1,1 +1,0 @@
-# Crear archivo keepass `credentials.kdbx` y guardar en esta ruta.
