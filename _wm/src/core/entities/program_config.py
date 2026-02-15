@@ -2,6 +2,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Literal
 
+from src.core.entities.packages import Packages
 from src.core.entities.program import ProgramName
 
 FileMode = Literal["link", "copy"]
@@ -13,7 +14,7 @@ class ProgramConfig:
     name: ProgramName
     files_dir: Path
     target_dir: Path
-    packages_file: Path
+    packages: Packages
     package_manager: PackageManager = "pacman"
     files_mode: FileMode = "link"
     backup_files: bool = False

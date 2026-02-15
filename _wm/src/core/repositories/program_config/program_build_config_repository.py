@@ -1,10 +1,9 @@
 from abc import ABC, abstractmethod
 
-from src.core.entities.packages import Packages
 from src.core.entities.program_config import ProgramConfig
 
 
-class PackagesRepository(ABC):
+class ProgramBuildConfigRepository(ABC):
     @abstractmethod
-    def get(self, cfg: ProgramConfig) -> Packages:
+    def build_config(self) -> ProgramConfig:
         ...

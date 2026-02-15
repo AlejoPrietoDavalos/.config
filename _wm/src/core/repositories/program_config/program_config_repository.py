@@ -6,5 +6,5 @@ from src.core.entities.program_config import ProgramConfig
 
 class ProgramConfigRepository(ABC):
     @abstractmethod
-    def get(self, program: ProgramName) -> ProgramConfig:
+    def get_config(self, program: ProgramName) -> ProgramConfig:
         ...
