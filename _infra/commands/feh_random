@@ -1,2 +1,23 @@
 #!/bin/bash
-kill -SIGUSR1 $(cat $HOME/.config/_infra/tmp/signal_set_wallpaper.pid)
+set -euo pipefail
+
+wall_dir="$HOME/.config/_infra/resources/wallpapers"
+
+if ! command -v feh >/dev/null 2>&1; then
+    echo "feh no esta instalado" >&2
+    exit 1
+fi
+
+if [ ! -d "$wall_dir" ]; then
+    echo "No existe la carpeta de wallpapers: $wall_dir" >&2
+    exit 1
+fi
+
+mapfile -t walls < <(find "$wall_dir" -maxdepth 1 -type f)
+if [ "${#walls[@]}" -eq 0 ]; then
+    echo "No hay wallpapers en: $wall_dir" >&2
+    exit 1
+fi
+
+random_wall="${walls[RANDOM % ${#walls[@]}]}"
+feh --bg-fill "$random_wall"
