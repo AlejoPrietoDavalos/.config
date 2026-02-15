@@ -44,6 +44,6 @@ class ProgramConfigRegistryRepository(ProgramConfigRepository):
         if repo is None:
             raise ValueError(f"Program not found: {program}")
         cfg = repo.build_config()
-        if not cfg.files_dir.is_dir():
+        if cfg.files_dir is not None and not cfg.files_dir.is_dir():
             raise ValueError(f"Missing files dir: {cfg.files_dir}")
         return cfg
