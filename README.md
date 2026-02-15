@@ -42,79 +42,79 @@ Acciones soportadas:
 - `uninstall-files`
 
 Atajos por `make`:
-- `make install-<program>`
-- `make uninstall-<program>`
-- `make install-requirement-<program>`
-- `make uninstall-requirement-<program>`
-- `make install-files-<program>`
-- `make uninstall-files-<program>`
+- `make <program>-install`
+- `make <program>-uninstall`
+- `make <program>-install-requirement`
+- `make <program>-uninstall-requirement`
+- `make <program>-install-files`
+- `make <program>-uninstall-files`
 
 ### bspwm
 ```bash
-make install-bspwm
-make uninstall-bspwm
-make install-requirement-bspwm
-make install-files-bspwm
-make install-session-bspwm
+make bspwm-install
+make bspwm-uninstall
+make bspwm-install-requirement
+make bspwm-install-files
+make bspwm-install-session
 ```
 
 ### sxhkd
 ```bash
-make install-sxhkd
-make uninstall-sxhkd
-make install-requirement-sxhkd
-make install-files-sxhkd
-make generate-sxhkd
+make sxhkd-install
+make sxhkd-uninstall
+make sxhkd-install-requirement
+make sxhkd-install-files
+make sxhkd-generate
 ```
 
 ### polybar
 ```bash
-make install-polybar
-make uninstall-polybar
-make install-requirement-polybar
-make install-files-polybar
+make polybar-install
+make polybar-uninstall
+make polybar-install-requirement
+make polybar-install-files
 ```
 
 ### ranger
 ```bash
-make install-ranger
-make uninstall-ranger
-make install-requirement-ranger
-make install-files-ranger
+make ranger-install
+make ranger-uninstall
+make ranger-install-requirement
+make ranger-install-files
 ```
 
 ### picom
 ```bash
-make install-picom
-make uninstall-picom
-make install-requirement-picom
-make install-files-picom
+make picom-install
+make picom-uninstall
+make picom-install-requirement
+make picom-install-files
 ```
 
 ### rofi
 ```bash
-make install-rofi
-make uninstall-rofi
-make install-requirement-rofi
-make install-files-rofi
+make rofi-install
+make rofi-uninstall
+make rofi-install-requirement
+make rofi-install-files
 ```
 
 ### thunar
 ```bash
-make install-thunar
-make uninstall-thunar
-make install-requirement-thunar
-make install-files-thunar
+make thunar-install
+make thunar-uninstall
+make thunar-install-requirement
+make thunar-install-files
 ```
 
 ### vscode
 ```bash
-make install-vscode
-make uninstall-vscode
-make install-requirement-vscode
-make install-files-vscode
+make vscode-install
+make vscode-uninstall
+make vscode-install-requirement
+make vscode-install-files
 ```
 
 Notas:
 - `vscode` usa copia de `settings.json` (no symlink).
-- `sxhkd` regenera `~/.config/sxhkd/sxhkdrc` en `install-files-sxhkd`.
+- `sxhkd` regenera `~/.config/sxhkd/sxhkdrc` en `sxhkd-install-files`.

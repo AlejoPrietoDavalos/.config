@@ -2,113 +2,113 @@ SHELL := /bin/bash
 RUN := cd ./_wm && PYTHONPATH=./src python3 ./main.py
 
 .PHONY: install-core remove-core remove-core-purge \
-	install-bspwm uninstall-bspwm install-requirement-bspwm uninstall-requirement-bspwm install-files-bspwm uninstall-files-bspwm install-session-bspwm \
-	install-sxhkd uninstall-sxhkd install-requirement-sxhkd uninstall-requirement-sxhkd install-files-sxhkd uninstall-files-sxhkd generate-sxhkd \
-	install-polybar uninstall-polybar install-requirement-polybar uninstall-requirement-polybar install-files-polybar uninstall-files-polybar \
-	install-ranger uninstall-ranger install-requirement-ranger uninstall-requirement-ranger install-files-ranger uninstall-files-ranger \
-	install-picom uninstall-picom install-requirement-picom uninstall-requirement-picom install-files-picom uninstall-files-picom \
-	install-rofi uninstall-rofi install-requirement-rofi uninstall-requirement-rofi install-files-rofi uninstall-files-rofi \
-	install-thunar uninstall-thunar install-requirement-thunar uninstall-requirement-thunar install-files-thunar uninstall-files-thunar \
-	install-vscode uninstall-vscode install-requirement-vscode uninstall-requirement-vscode install-files-vscode uninstall-files-vscode
+	bspwm-install bspwm-uninstall bspwm-install-requirement bspwm-uninstall-requirement bspwm-install-files bspwm-uninstall-files bspwm-install-session \
+	sxhkd-install sxhkd-uninstall sxhkd-install-requirement sxhkd-uninstall-requirement sxhkd-install-files sxhkd-uninstall-files sxhkd-generate \
+	polybar-install polybar-uninstall polybar-install-requirement polybar-uninstall-requirement polybar-install-files polybar-uninstall-files \
+	ranger-install ranger-uninstall ranger-install-requirement ranger-uninstall-requirement ranger-install-files ranger-uninstall-files \
+	picom-install picom-uninstall picom-install-requirement picom-uninstall-requirement picom-install-files picom-uninstall-files \
+	rofi-install rofi-uninstall rofi-install-requirement rofi-uninstall-requirement rofi-install-files rofi-uninstall-files \
+	thunar-install thunar-uninstall thunar-install-requirement thunar-uninstall-requirement thunar-install-files thunar-uninstall-files \
+	vscode-install vscode-uninstall vscode-install-requirement vscode-uninstall-requirement vscode-install-files vscode-uninstall-files
 
-install-core: install-bspwm install-sxhkd install-polybar
+install-core: bspwm-install sxhkd-install polybar-install
 
-remove-core: uninstall-polybar uninstall-sxhkd uninstall-bspwm
+remove-core: polybar-uninstall sxhkd-uninstall bspwm-uninstall
 
 remove-core-purge:
 	@WM_REMOVE_PACKAGES=1 $(MAKE) remove-core
 
-install-bspwm: install-requirement-bspwm install-files-bspwm
-uninstall-bspwm: uninstall-files-bspwm uninstall-requirement-bspwm
-install-requirement-bspwm:
+bspwm-install: bspwm-install-requirement bspwm-install-files
+bspwm-uninstall: bspwm-uninstall-files bspwm-uninstall-requirement
+bspwm-install-requirement:
 	@$(RUN) --action install-requirement --program bspwm
-uninstall-requirement-bspwm:
+bspwm-uninstall-requirement:
 	@$(RUN) --action uninstall-requirement --program bspwm
-install-files-bspwm:
+bspwm-install-files:
 	@$(RUN) --action install-files --program bspwm
-uninstall-files-bspwm:
+bspwm-uninstall-files:
 	@$(RUN) --action uninstall-files --program bspwm
 
-install-session-bspwm:
+bspwm-install-session:
 	@./_wm/scripts/install_bspwm_session.sh
 
-install-sxhkd: install-requirement-sxhkd install-files-sxhkd
-uninstall-sxhkd: uninstall-files-sxhkd uninstall-requirement-sxhkd
-install-requirement-sxhkd:
+sxhkd-install: sxhkd-install-requirement sxhkd-install-files
+sxhkd-uninstall: sxhkd-uninstall-files sxhkd-uninstall-requirement
+sxhkd-install-requirement:
 	@$(RUN) --action install-requirement --program sxhkd
-uninstall-requirement-sxhkd:
+sxhkd-uninstall-requirement:
 	@$(RUN) --action uninstall-requirement --program sxhkd
-install-files-sxhkd:
+sxhkd-install-files:
 	@$(RUN) --action install-files --program sxhkd
 	@./_wm/scripts/generate_sxhkd.sh
-uninstall-files-sxhkd:
+sxhkd-uninstall-files:
 	@$(RUN) --action uninstall-files --program sxhkd
 
-generate-sxhkd:
+sxhkd-generate:
 	@./_wm/scripts/generate_sxhkd.sh
 
-install-polybar: install-requirement-polybar install-files-polybar
-uninstall-polybar: uninstall-files-polybar uninstall-requirement-polybar
-install-requirement-polybar:
+polybar-install: polybar-install-requirement polybar-install-files
+polybar-uninstall: polybar-uninstall-files polybar-uninstall-requirement
+polybar-install-requirement:
 	@$(RUN) --action install-requirement --program polybar
-uninstall-requirement-polybar:
+polybar-uninstall-requirement:
 	@$(RUN) --action uninstall-requirement --program polybar
-install-files-polybar:
+polybar-install-files:
 	@$(RUN) --action install-files --program polybar
-uninstall-files-polybar:
+polybar-uninstall-files:
 	@$(RUN) --action uninstall-files --program polybar
 
-install-ranger: install-requirement-ranger install-files-ranger
-uninstall-ranger: uninstall-files-ranger uninstall-requirement-ranger
-install-requirement-ranger:
+ranger-install: ranger-install-requirement ranger-install-files
+ranger-uninstall: ranger-uninstall-files ranger-uninstall-requirement
+ranger-install-requirement:
 	@$(RUN) --action install-requirement --program ranger
-uninstall-requirement-ranger:
+ranger-uninstall-requirement:
 	@$(RUN) --action uninstall-requirement --program ranger
-install-files-ranger:
+ranger-install-files:
 	@$(RUN) --action install-files --program ranger
-uninstall-files-ranger:
+ranger-uninstall-files:
 	@$(RUN) --action uninstall-files --program ranger
 
-install-picom: install-requirement-picom install-files-picom
-uninstall-picom: uninstall-files-picom uninstall-requirement-picom
-install-requirement-picom:
+picom-install: picom-install-requirement picom-install-files
+picom-uninstall: picom-uninstall-files picom-uninstall-requirement
+picom-install-requirement:
 	@$(RUN) --action install-requirement --program picom
-uninstall-requirement-picom:
+picom-uninstall-requirement:
 	@$(RUN) --action uninstall-requirement --program picom
-install-files-picom:
+picom-install-files:
 	@$(RUN) --action install-files --program picom
-uninstall-files-picom:
+picom-uninstall-files:
 	@$(RUN) --action uninstall-files --program picom
 
-install-rofi: install-requirement-rofi install-files-rofi
-uninstall-rofi: uninstall-files-rofi uninstall-requirement-rofi
-install-requirement-rofi:
+rofi-install: rofi-install-requirement rofi-install-files
+rofi-uninstall: rofi-uninstall-files rofi-uninstall-requirement
+rofi-install-requirement:
 	@$(RUN) --action install-requirement --program rofi
-uninstall-requirement-rofi:
+rofi-uninstall-requirement:
 	@$(RUN) --action uninstall-requirement --program rofi
-install-files-rofi:
+rofi-install-files:
 	@$(RUN) --action install-files --program rofi
-uninstall-files-rofi:
+rofi-uninstall-files:
 	@$(RUN) --action uninstall-files --program rofi
 
-install-thunar: install-requirement-thunar install-files-thunar
-uninstall-thunar: uninstall-files-thunar uninstall-requirement-thunar
-install-requirement-thunar:
+thunar-install: thunar-install-requirement thunar-install-files
+thunar-uninstall: thunar-uninstall-files thunar-uninstall-requirement
+thunar-install-requirement:
 	@$(RUN) --action install-requirement --program thunar
-uninstall-requirement-thunar:
+thunar-uninstall-requirement:
 	@$(RUN) --action uninstall-requirement --program thunar
-install-files-thunar:
+thunar-install-files:
 	@$(RUN) --action install-files --program thunar
-uninstall-files-thunar:
+thunar-uninstall-files:
 	@$(RUN) --action uninstall-files --program thunar
 
-install-vscode: install-requirement-vscode install-files-vscode
-uninstall-vscode: uninstall-files-vscode uninstall-requirement-vscode
-install-requirement-vscode:
+vscode-install: vscode-install-requirement vscode-install-files
+vscode-uninstall: vscode-uninstall-files vscode-uninstall-requirement
+vscode-install-requirement:
 	@$(RUN) --action install-requirement --program vscode
-uninstall-requirement-vscode:
+vscode-uninstall-requirement:
 	@$(RUN) --action uninstall-requirement --program vscode
-install-files-vscode:
+vscode-install-files:
 	@$(RUN) --action install-files --program vscode
-uninstall-files-vscode:
+vscode-uninstall-files:
 	@$(RUN) --action uninstall-files --program vscode
