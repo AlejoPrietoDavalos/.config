@@ -19,11 +19,23 @@ bspc config split_ratio          0.5
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 
+# Monitor -> desktops mapping (auto from active monitors)
+if [ -f "$HOME/.config/_wm/scripts/apply_monitors.py" ]; then
+    (
+        cd "$HOME/.config/_wm" && \
+        PYTHONPATH=. python3 ./scripts/apply_monitors.py
+    )
+fi
 
 # Launch polybar
 "$HOME/.config/polybar/launch.sh" &
 
-setxkbmap -layout latam
+if [ -f "$HOME/.config/_wm/scripts/set_keyboard_layout.py" ]; then
+    (
+        cd "$HOME/.config/_wm" && \
+        PYTHONPATH=. python3 ./scripts/set_keyboard_layout.py --layout latam
+    )
+fi
 
 #----------picom----------
 if command -v picom >/dev/null 2>&1; then
