@@ -7,7 +7,7 @@ from src.app.drivers.repositories.files.local_file_operations_repository import 
 from src.app.drivers.repositories.files.local_filesystem_repository import LocalFilesystemRepository
 from src.app.drivers.repositories.packages.program_package_manager_repository import ProgramPackageManagerRepository
 from src.app.drivers.repositories.program_config.program_config_registry_repository import ProgramConfigRegistryRepository
-from src.core.entities.program import PROGRAM_NAMES, ProgramName
+from src.core.entities.program_config import PROGRAM_NAMES, ProgramName
 from src.core.use_cases.program_actions import ProgramActions
 
 
