@@ -1,14 +1,12 @@
 import argparse
-from pathlib import Path
 from typing import cast
 
 from src.app.drivers.repositories.commands.shell_command_repository import ShellCommandRepository
 from src.app.drivers.repositories.files.local_backup_repository import LocalBackupRepository
 from src.app.drivers.repositories.files.local_file_operations_repository import LocalFileOperationsRepository
 from src.app.drivers.repositories.files.local_filesystem_repository import LocalFilesystemRepository
-from src.app.drivers.repositories.packages.file_packages_repository import FilePackagesRepository
 from src.app.drivers.repositories.packages.program_package_manager_repository import ProgramPackageManagerRepository
-from src.app.drivers.repositories.program.program_registry_repository import ProgramRegistryRepository
+from src.app.drivers.repositories.program_config.program_config_registry_repository import ProgramConfigRegistryRepository
 from src.core.entities.program import PROGRAM_NAMES, ProgramName
 from src.core.use_cases.program_actions import ProgramActions
 
@@ -31,15 +29,13 @@ def main() -> None:
     parser.add_argument("--backup", action="store_true", help="Backup existing files before overwriting/removing")
     args = parser.parse_args()
 
-    config_root = Path.home() / ".config"
     fs_repo = LocalFilesystemRepository()
     actions = ProgramActions(
-        config_repo=ProgramRegistryRepository(config_root=config_root),
+        config_repo=ProgramConfigRegistryRepository(),
         package_repo=ProgramPackageManagerRepository(),
-        packages_repo=FilePackagesRepository(),
         file_repo=LocalFileOperationsRepository(
             fs_repo=fs_repo,
-            backup_repo=LocalBackupRepository(config_root=config_root),
+            backup_repo=LocalBackupRepository(),
         ),
         command_repo=ShellCommandRepository(),
     )

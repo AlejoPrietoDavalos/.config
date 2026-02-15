@@ -4,13 +4,14 @@ import shutil
 from datetime import datetime
 from pathlib import Path
 
+from src.core.constants import path_dotfiles, path_wm_backups
 from src.core.repositories.backup_repository import BackupRepository
 
 
 class LocalBackupRepository(BackupRepository):
-    def __init__(self, config_root: Path) -> None:
+    def __init__(self, config_root: Path = path_dotfiles) -> None:
         self._config_root = config_root
-        self._backup_root = config_root / "_wm" / "backups"
+        self._backup_root = path_wm_backups
 
     def _backup_path(self) -> Path:
         return self._backup_root / datetime.now().strftime("%Y%m%d-%H%M%S")
