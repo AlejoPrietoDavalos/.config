@@ -17,8 +17,8 @@ def main() -> None:
 
     text_template = path_template.read_text()
 
-    # Resolve commands location from the current repo layout.
-    path_commands = path_config / "_infra" / "commands"
+    # Resolve sxhkd command scripts installed with the sxhkd program.
+    path_commands = path_config / "sxhkd" / "cmd"
     text_template = text_template.replace(format_tag("commands"), str(path_commands))
 
     # Replace tags in the form {{cmd_<program>}} -> ~/.config/<program>/cmd

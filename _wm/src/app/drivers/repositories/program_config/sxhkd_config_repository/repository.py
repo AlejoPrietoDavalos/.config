@@ -11,6 +11,6 @@ class SxhkdConfigRepository(ProgramBuildConfigRepository):
             name="sxhkd",
             files_dir=program_root / "files",
             target_dir=path_dotfiles / "sxhkd",
-            packages=Packages(packages=["sxhkd"]),
+            packages=Packages(packages=["sxhkd", "playerctl", "scrot", "xclip"]),
             post_install_commands=(str(path_wm_scripts / "generate_sxhkd.sh"),),
         )
