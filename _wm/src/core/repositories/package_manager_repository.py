@@ -2,7 +2,6 @@ from abc import ABC, abstractmethod
 
 from src.core.entities.packages import Packages
 from src.core.entities.program import ProgramName
-from src.core.entities.program_config import PackageManager
 
 
 class PackageManagerRepository(ABC):
@@ -11,7 +10,6 @@ class PackageManagerRepository(ABC):
         self,
         program: ProgramName,
         packages: Packages,
-        manager: PackageManager = "pacman",
     ) -> None:
         ...
 
@@ -20,6 +18,5 @@ class PackageManagerRepository(ABC):
         self,
         program: ProgramName,
         packages: Packages,
-        manager: PackageManager = "pacman",
     ) -> None:
         ...
