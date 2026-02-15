@@ -1,7 +1,7 @@
-from core.repositories.command_repository import CommandRepository
-from core.repositories.file_operations_repository import FileOperationsRepository
-from core.repositories.package_manager_repository import PackageManagerRepository
-from core.repositories.program_config_repository import ProgramConfigRepository
+from src.core.repositories.command_repository import CommandRepository
+from src.core.repositories.file_operations_repository import FileOperationsRepository
+from src.core.repositories.package_manager_repository import PackageManagerRepository
+from src.core.repositories.program_config_repository import ProgramConfigRepository
 
 
 class ProgramActions:

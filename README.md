@@ -30,7 +30,7 @@ sudo systemctl start bluetooth.service
 La automatizacion vive en `_wm/main.py` y se ejecuta con:
 
 ```bash
-cd ./_wm && PYTHONPATH=./src python3 ./main.py --action <action> --program <program>
+cd ./_wm && PYTHONPATH=. python3 ./main.py --action <action> --program <program>
 ```
 
 Acciones soportadas:

@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from pathlib import Path
 
-from core.entities.program_config import FileMode
+from src.core.entities.program_config import FileMode
 
 
 class FileOperationsRepository(ABC):

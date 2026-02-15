@@ -4,7 +4,7 @@ import shutil
 from datetime import datetime
 from pathlib import Path
 
-from core.repositories.backup_repository import BackupRepository
+from src.core.repositories.backup_repository import BackupRepository
 
 
 class LocalBackupRepository(BackupRepository):

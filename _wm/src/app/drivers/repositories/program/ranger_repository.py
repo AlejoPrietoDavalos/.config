@@ -1,7 +1,7 @@
 from pathlib import Path
 
-from app.drivers.repositories.program.base_program_repository import BaseProgramRepository
-from core.entities.program_config import ProgramConfig
+from src.app.drivers.repositories.program.base_program_repository import BaseProgramRepository
+from src.core.entities.program_config import ProgramConfig
 
 
 class RangerRepository(BaseProgramRepository):

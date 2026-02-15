@@ -1,6 +1,6 @@
 import subprocess
 
-from core.repositories.command_repository import CommandRepository
+from src.core.repositories.command_repository import CommandRepository
 
 
 class ShellCommandRepository(CommandRepository):

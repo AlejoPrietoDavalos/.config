@@ -1,14 +1,13 @@
-#!/usr/bin/env python3
 import argparse
 from pathlib import Path
 
-from app.drivers.repositories.commands.shell_command_repository import ShellCommandRepository
-from app.drivers.repositories.files.local_backup_repository import LocalBackupRepository
-from app.drivers.repositories.files.local_file_operations_repository import LocalFileOperationsRepository
-from app.drivers.repositories.files.local_filesystem_repository import LocalFilesystemRepository
-from app.drivers.repositories.packages.pacman_package_repository import PacmanPackageRepository
-from app.drivers.repositories.program.program_registry_repository import ProgramRegistryRepository
-from core.use_cases.program_actions import ProgramActions
+from src.app.drivers.repositories.commands.shell_command_repository import ShellCommandRepository
+from src.app.drivers.repositories.files.local_backup_repository import LocalBackupRepository
+from src.app.drivers.repositories.files.local_file_operations_repository import LocalFileOperationsRepository
+from src.app.drivers.repositories.files.local_filesystem_repository import LocalFilesystemRepository
+from src.app.drivers.repositories.packages.pacman_package_repository import PacmanPackageRepository
+from src.app.drivers.repositories.program.program_registry_repository import ProgramRegistryRepository
+from src.core.use_cases.program_actions import ProgramActions
 
 
 def main() -> None:

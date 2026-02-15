@@ -2,10 +2,10 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from core.entities.program_config import FileMode
-from core.repositories.backup_repository import BackupRepository
-from core.repositories.file_operations_repository import FileOperationsRepository
-from core.repositories.filesystem_repository import FilesystemRepository
+from src.core.entities.program_config import FileMode
+from src.core.repositories.backup_repository import BackupRepository
+from src.core.repositories.file_operations_repository import FileOperationsRepository
+from src.core.repositories.filesystem_repository import FilesystemRepository
 
 
 class LocalFileOperationsRepository(FileOperationsRepository):

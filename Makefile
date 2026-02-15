@@ -1,5 +1,5 @@
 SHELL := /bin/bash
-RUN := cd ./_wm && PYTHONPATH=./src python3 ./main.py
+RUN := cd ./_wm && PYTHONPATH=. python3 ./main.py
 
 .PHONY: install-core remove-core remove-core-purge \
 	bspwm-install bspwm-uninstall bspwm-install-requirement bspwm-uninstall-requirement bspwm-install-files bspwm-uninstall-files bspwm-install-session \

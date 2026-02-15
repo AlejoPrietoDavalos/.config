@@ -5,7 +5,7 @@ import shutil
 import subprocess
 from pathlib import Path
 
-from core.repositories.package_manager_repository import PackageManagerRepository
+from src.core.repositories.package_manager_repository import PackageManagerRepository
 
 
 class PacmanPackageRepository(PackageManagerRepository):
