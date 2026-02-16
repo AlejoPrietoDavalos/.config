@@ -1,9 +1,11 @@
 from typing import Dict
 
+from src.app.drivers.repositories.programs._implementations import (
+    get_program_repositories,
+)
 from src.core.entities.program_config import ProgramName
 from src.core.repositories.programs.program_factory_repository import CoreProgramFactoryRepository
 from src.core.repositories.programs.program_repository import CoreProgramRepository
-from src.app.drivers.repositories.programs import get_program_repositories
 
 
 class ProgramRegistryRepository(CoreProgramFactoryRepository):

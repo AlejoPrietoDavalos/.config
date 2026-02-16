@@ -33,10 +33,10 @@ class ProgramInstallerRepository(CoreProgramInstallerRepository):
 
     def install_files(self, cfg: ProgramConfig) -> None:
         if cfg.files is not None:
-            self._file_repo.install(cfg.files.source_dir, cfg.files.target_dir, cfg.files.mode)
+            self._file_repo.install(cfg.files.source_dir, cfg.files.target_dir)
         for cmd in cfg.post_install_commands:
             self._command_repo.run(cmd)
 
     def uninstall_files(self, cfg: ProgramConfig) -> None:
         if cfg.files is not None:
-            self._file_repo.uninstall(cfg.files.source_dir, cfg.files.target_dir, cfg.files.mode)
+            self._file_repo.uninstall(cfg.files.source_dir, cfg.files.target_dir)

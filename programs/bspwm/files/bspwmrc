@@ -20,9 +20,9 @@ bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 
 # Monitor -> desktops mapping (auto from active monitors)
-if [ -f "$HOME/.config/_wm/scripts/apply_monitors.py" ]; then
+if [ -f "$HOME/.config/scripts/apply_monitors.py" ]; then
     (
-        cd "$HOME/.config/_wm" && \
+        cd "$HOME/.config" && \
         PYTHONPATH=. python3 ./scripts/apply_monitors.py
     )
 fi
@@ -30,9 +30,9 @@ fi
 # Launch polybar
 "$HOME/.config/polybar/launch.sh" &
 
-if [ -f "$HOME/.config/_wm/scripts/set_keyboard_layout.py" ]; then
+if [ -f "$HOME/.config/scripts/set_keyboard_layout.py" ]; then
     (
-        cd "$HOME/.config/_wm" && \
+        cd "$HOME/.config" && \
         PYTHONPATH=. python3 ./scripts/set_keyboard_layout.py --layout latam
     )
 fi

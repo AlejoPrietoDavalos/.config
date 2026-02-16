@@ -47,7 +47,7 @@ class Packages:
 class ProgramFiles:
     source_dir: Path
     target_dir: Path
-    mode: FileMode = "link"
+    mode: FileMode = "copy"
 
     def __post_init__(self) -> None:
         if self.mode not in FILE_MODES:
@@ -57,8 +57,8 @@ class ProgramFiles:
 @dataclass(frozen=True)
 class ProgramConfig:
     name: ProgramName
-    files: ProgramFiles | None = None
     packages: Packages
+    files: ProgramFiles | None = None
     dependencies: tuple[ProgramName, ...] = field(default_factory=tuple)
     post_install_commands: tuple[str, ...] = field(default_factory=tuple)
 
