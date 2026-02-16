@@ -22,25 +22,30 @@ class LocalFileOperationsRepository(CoreFileInstallerRepository):
 
     def install(self, files_dir: Path, target_dir: Path) -> None:
         self._fs_repo.ensure_dir(target_dir)
+        program_tag = files_dir.name
 
         for src in self._fs_repo.list_dir(files_dir):
             if self._should_skip(src):
+                logger.info("[%s] [files skip] ignored internal file: %s", program_tag, src)
                 continue
             self._fs_repo.ensure_cmd_exec(src)
             dst = target_dir / src.name
             self._prepare_destination(dst)
             self._fs_repo.copy_path(src, dst)
-            logger.info("Copied: %s -> %s", src, dst)
+            logger.info("[%s] [files copy] %s -> %s", program_tag, src, dst)
 
     def uninstall(self, files_dir: Path, target_dir: Path) -> None:
+        program_tag = files_dir.name
         for src in self._fs_repo.list_dir(files_dir):
             dst = target_dir / src.name
             if self._should_skip(src):
                 if self._fs_repo.exists_or_is_symlink(dst):
                     self._prepare_destination(dst)
+                    logger.info("[%s] [files delete] removed internal file: %s", program_tag, dst)
                 continue
 
             if not self._fs_repo.exists_or_is_symlink(dst):
+                logger.info("[%s] [files delete skip] not found: %s", program_tag, dst)
                 continue
             self._prepare_destination(dst)
-            logger.info("Removed file: %s", dst)
+            logger.info("[%s] [files delete] removed: %s", program_tag, dst)

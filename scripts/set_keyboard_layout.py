@@ -11,7 +11,7 @@ from src.app.drivers.repositories.programs._implementations.setxkbmap_repository
 
 def main() -> int:
     configure_logging_repo = ConfigureLoggingRepository()
-    configure_logging_repo.configure()
+    configure_logging_repo.configure(log_filename="set_keyboard_layout.log")
     parser = argparse.ArgumentParser()
     parser.add_argument("--layout", default="latam")
     args = parser.parse_args()

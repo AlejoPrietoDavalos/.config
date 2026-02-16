@@ -11,7 +11,7 @@ from src.app.drivers.repositories.programs._implementations.hwclock_repository i
 
 def main() -> int:
     configure_logging_repo = ConfigureLoggingRepository()
-    configure_logging_repo.configure()
+    configure_logging_repo.configure(log_filename="set_clock.log")
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--timezone",

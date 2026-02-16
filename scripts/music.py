@@ -19,7 +19,7 @@ from src.core.repositories.programs._implementations.playerctl_repository import
 
 def main(action: PlayerctlAction) -> int:
     configure_logging_repo = ConfigureLoggingRepository()
-    configure_logging_repo.configure()
+    configure_logging_repo.configure(log_filename=f"{Path(__file__).stem}.log")
     repo = PlayerctlRepository()
     repo.run(action)
     return 0

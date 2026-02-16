@@ -20,12 +20,12 @@ class PkgManagerFactoryRepository(CorePkgManagerFactoryRepository):
     def _manager2repo(self, manager: PkgManager) -> CoreBasePkgRepository:
         return self._pkg_repos[manager]
 
-    def install(self, pkgs: Packages) -> None:
+    def install(self, pkgs: Packages, program_name: str | None = None) -> None:
         for pkg_spec in pkgs.pkg_specs:
             repo = self._manager2repo(pkg_spec.manager)
-            repo.install(pkg_spec.names)
+            repo.install(pkg_spec.names, program_name=program_name)
 
-    def uninstall(self, pkgs: Packages) -> None:
+    def uninstall(self, pkgs: Packages, program_name: str | None = None) -> None:
         for pkg_spec in pkgs.pkg_specs:
             repo = self._manager2repo(pkg_spec.manager)
-            repo.uninstall(pkg_spec.names)
+            repo.uninstall(pkg_spec.names, program_name=program_name)

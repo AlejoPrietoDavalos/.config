@@ -13,7 +13,7 @@ from src.core.use_cases.apply_monitor_layout import ApplyMonitorLayoutService
 
 def main() -> int:
     configure_logging_repo = ConfigureLoggingRepository()
-    configure_logging_repo.configure()
+    configure_logging_repo.configure(log_filename="apply_monitors.log")
     use_case = ApplyMonitorLayoutService(
         xrandr_repo=XrandrRepository(),
         bspwm_repo=BspwmRepository(),

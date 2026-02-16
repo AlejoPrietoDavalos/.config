@@ -7,9 +7,9 @@ class CoreBasePkgRepository(ABC):
         ...
 
     @abstractmethod
-    def install(self, pkg_names: list[str]) -> None:
+    def install(self, pkg_names: list[str], program_name: str | None = None) -> None:
         ...
 
     @abstractmethod
-    def uninstall(self, pkg_names: list[str]) -> None:
+    def uninstall(self, pkg_names: list[str], program_name: str | None = None) -> None:
         ...

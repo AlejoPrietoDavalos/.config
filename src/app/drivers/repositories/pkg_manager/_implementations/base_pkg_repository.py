@@ -40,29 +40,66 @@ class BasePkgRepository(CoreBasePkgRepository, ABC):
     def _run_uninstall(self, pkg_names: list[str]) -> None:
         self._command_repo.run_argv([*self._uninstall_cmd_prefix, *pkg_names])
 
-    def install(self, pkg_names: list[str]) -> None:
+    def install(self, pkg_names: list[str], program_name: str | None = None) -> None:
+        program_tag = program_name or "unknown_program"
         if not self._exists():
-            logger.warning("Skip deps: %s not found", self._manager_name)
+            logger.warning("[%s] [requirements skip] manager '%s' not found", program_tag, self._manager_name)
             return
         if not pkg_names:
+            logger.info("[%s] [requirements skip] empty package list", program_tag)
             return
 
-        missing = [pkg for pkg in pkg_names if not self._is_installed(pkg)]
+        missing: list[str] = []
+        for pkg in pkg_names:
+            if self._is_installed(pkg):
+                logger.info(
+                    "[%s] [requirements skip] already installed: %s (%s)",
+                    program_tag,
+                    pkg,
+                    self._manager_name,
+                )
+            else:
+                missing.append(pkg)
+
         if not missing:
             return
 
-        logger.info("Installing deps: %s", " ".join(missing))
+        logger.info(
+            "[%s] [requirements install] manager=%s packages=%s",
+            program_tag,
+            self._manager_name,
+            ",".join(missing),
+        )
         self._run_install(missing)
 
-    def uninstall(self, pkg_names: list[str]) -> None:
+    def uninstall(self, pkg_names: list[str], program_name: str | None = None) -> None:
+        program_tag = program_name or "unknown_program"
         if not self._exists():
+            logger.warning("[%s] [requirements uninstall skip] manager '%s' not found", program_tag, self._manager_name)
             return
         if not pkg_names:
+            logger.info("[%s] [requirements uninstall skip] empty package list", program_tag)
             return
 
-        installed = [pkg for pkg in pkg_names if self._is_installed(pkg)]
+        installed: list[str] = []
+        for pkg in pkg_names:
+            if self._is_installed(pkg):
+                installed.append(pkg)
+            else:
+                logger.info(
+                    "[%s] [requirements uninstall skip] not installed: %s (%s)",
+                    program_tag,
+                    pkg,
+                    self._manager_name,
+                )
+
         if not installed:
             return
 
-        logger.info("Removing deps: %s", " ".join(installed))
+        logger.info(
+            "[%s] [requirements uninstall] manager=%s packages=%s",
+            program_tag,
+            self._manager_name,
+            ",".join(installed),
+        )
         self._run_uninstall(installed)

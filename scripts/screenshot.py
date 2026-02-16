@@ -14,16 +14,18 @@ from src.app.drivers.repositories.programs._implementations.scrot_repository imp
 from src.app.drivers.repositories.programs._implementations.xclip_repository import (
     XclipRepository,
 )
+from src.app.drivers.repositories.local_file import TmpRepository
 from src.app.drivers.repositories.logs import ConfigureLoggingRepository
 from src.core.use_cases.take_screenshot import TakeScreenshotService
 
 
 def main(mode: str, with_save: int) -> int:
     configure_logging_repo = ConfigureLoggingRepository()
-    configure_logging_repo.configure()
+    configure_logging_repo.configure(log_filename=f"{Path(__file__).stem}.log")
     use_case = TakeScreenshotService(
         scrot_repo=ScrotRepository(),
         xclip_repo=XclipRepository(),
+        tmp_repo=TmpRepository(),
     )
     use_case.run(mode=mode, with_save=with_save)
     return 0
