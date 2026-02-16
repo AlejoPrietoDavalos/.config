@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Apply monitor layout for bspwm using the core use case."""
 
+from src.app.drivers.repositories.logs import ConfigureLoggingRepository
 from src.app.drivers.repositories.programs._implementations.bspwm_repository import (
     BspwmRepository,
 )
@@ -11,6 +12,8 @@ from src.core.use_cases.apply_monitor_layout import ApplyMonitorLayoutService
 
 
 def main() -> int:
+    configure_logging_repo = ConfigureLoggingRepository()
+    configure_logging_repo.configure()
     use_case = ApplyMonitorLayoutService(
         xrandr_repo=XrandrRepository(),
         bspwm_repo=BspwmRepository(),

@@ -1,5 +1,9 @@
+import logging
+
 from src.core.entities.program_config import ProgramName
 from src.core.repositories.programs import CoreProgramFactoryRepository, CoreProgramInstallerRepository
+
+logger = logging.getLogger(__name__)
 
 
 class ProgramActions:
@@ -58,20 +62,20 @@ class ProgramActions:
     def _dirty_install_all_packages(self) -> None:
         failures: list[tuple[ProgramName, str]] = []
         for program in self._program_factory_repo.list_programs():
-            print(f"[dirty_install_all_packages] Installing: {program}")
+            logger.info("[dirty_install_all_packages] Installing: %s", program)
             try:
                 program_repo = self._program_factory_repo.get_program_repo(program)
                 program_cfg = program_repo.default_config()
                 self._program_installer_repo.install_requirement(program_cfg)
                 self._program_installer_repo.install_files(program_cfg)
             except Exception as exc:
-                print(f"[dirty_install_all_packages] FAILED: {program}: {exc}")
+                logger.error("[dirty_install_all_packages] FAILED: %s: %s", program, exc)
                 failures.append((program, str(exc)))
 
         if failures:
-            print("[dirty_install_all_packages] Completed with failures:")
+            logger.warning("[dirty_install_all_packages] Completed with failures:")
             for program, error in failures:
-                print(f"  - {program}: {error}")
+                logger.warning("  - %s: %s", program, error)
 
     def _resolve_dependency_order(self, program: ProgramName) -> list[ProgramName]:
         ordered: list[ProgramName] = []

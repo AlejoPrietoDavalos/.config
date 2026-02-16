@@ -3,12 +3,15 @@
 
 import argparse
 
+from src.app.drivers.repositories.logs import ConfigureLoggingRepository
 from src.app.drivers.repositories.programs._implementations.setxkbmap_repository import (
     SetxkbmapRepository,
 )
 
 
 def main() -> int:
+    configure_logging_repo = ConfigureLoggingRepository()
+    configure_logging_repo.configure()
     parser = argparse.ArgumentParser()
     parser.add_argument("--layout", default="latam")
     args = parser.parse_args()

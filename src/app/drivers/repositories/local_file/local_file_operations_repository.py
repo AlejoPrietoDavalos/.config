@@ -1,9 +1,12 @@
 from __future__ import annotations
 
+import logging
 from pathlib import Path
 
 from src.app.drivers.repositories.local_file.local_filesystem_repository import LocalFilesystemRepository
 from src.core.repositories.local_file import CoreFileInstallerRepository, CoreLocalFilesystemRepository
+
+logger = logging.getLogger(__name__)
 
 
 class LocalFileOperationsRepository(CoreFileInstallerRepository):
@@ -27,7 +30,7 @@ class LocalFileOperationsRepository(CoreFileInstallerRepository):
             dst = target_dir / src.name
             self._prepare_destination(dst)
             self._fs_repo.copy_path(src, dst)
-            print(f"Copied: {src} -> {dst}")
+            logger.info("Copied: %s -> %s", src, dst)
 
     def uninstall(self, files_dir: Path, target_dir: Path) -> None:
         for src in self._fs_repo.list_dir(files_dir):
@@ -40,4 +43,4 @@ class LocalFileOperationsRepository(CoreFileInstallerRepository):
             if not self._fs_repo.exists_or_is_symlink(dst):
                 continue
             self._prepare_destination(dst)
-            print(f"Removed file: {dst}")
+            logger.info("Removed file: %s", dst)

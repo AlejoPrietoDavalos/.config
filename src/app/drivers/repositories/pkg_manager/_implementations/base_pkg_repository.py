@@ -1,11 +1,14 @@
 from __future__ import annotations
 
+import logging
 from abc import ABC
 from typing import Sequence
 
 from src.app.drivers.repositories.shell.command_repository import CommandRepository
 from src.core.repositories.shell.command_repository import CoreCommandRepository
 from src.core.repositories.pkg_manager.pkg_repository import CoreBasePkgRepository
+
+logger = logging.getLogger(__name__)
 
 
 class BasePkgRepository(CoreBasePkgRepository, ABC):
@@ -39,7 +42,7 @@ class BasePkgRepository(CoreBasePkgRepository, ABC):
 
     def install(self, pkg_names: list[str]) -> None:
         if not self._exists():
-            print(f"Skip deps: {self._manager_name} not found")
+            logger.warning("Skip deps: %s not found", self._manager_name)
             return
         if not pkg_names:
             return
@@ -48,7 +51,7 @@ class BasePkgRepository(CoreBasePkgRepository, ABC):
         if not missing:
             return
 
-        print(f"Installing deps: {' '.join(missing)}")
+        logger.info("Installing deps: %s", " ".join(missing))
         self._run_install(missing)
 
     def uninstall(self, pkg_names: list[str]) -> None:
@@ -61,5 +64,5 @@ class BasePkgRepository(CoreBasePkgRepository, ABC):
         if not installed:
             return
 
-        print(f"Removing deps: {' '.join(installed)}")
+        logger.info("Removing deps: %s", " ".join(installed))
         self._run_uninstall(installed)

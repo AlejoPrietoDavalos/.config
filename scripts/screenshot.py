@@ -14,10 +14,13 @@ from src.app.drivers.repositories.programs._implementations.scrot_repository imp
 from src.app.drivers.repositories.programs._implementations.xclip_repository import (
     XclipRepository,
 )
+from src.app.drivers.repositories.logs import ConfigureLoggingRepository
 from src.core.use_cases.take_screenshot import TakeScreenshotService
 
 
 def main(mode: str, with_save: int) -> int:
+    configure_logging_repo = ConfigureLoggingRepository()
+    configure_logging_repo.configure()
     use_case = TakeScreenshotService(
         scrot_repo=ScrotRepository(),
         xclip_repo=XclipRepository(),

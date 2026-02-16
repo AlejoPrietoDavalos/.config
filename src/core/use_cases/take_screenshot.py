@@ -1,6 +1,7 @@
 import os
 import shutil
 import tempfile
+import logging
 from pathlib import Path
 from typing import Literal
 
@@ -11,6 +12,8 @@ from src.core.repositories.programs._implementations.xclip_repository import Cor
 
 CaptureMode = Literal["bbox", "focused", "full_screen"]
 SaveMode = Literal[0, 1]
+
+logger = logging.getLogger(__name__)
 
 
 class TakeScreenshotService:
@@ -28,15 +31,23 @@ class TakeScreenshotService:
         fd_tmp, path_tmp = tempfile.mkstemp(suffix=".png")
         os.close(fd_tmp)
         tmp_png = Path(path_tmp)
+        logger.info("Screenshot started | mode=%s | with_save=%s", mode, with_save)
         try:
             self._capture(mode, tmp_png)
+            logger.info("Capture done: %s", tmp_png)
             self._xclip_repo.copy_png_to_clipboard(tmp_png)
+            logger.info("Image copied to clipboard")
 
             if with_save == 1:
                 path_output = self._next_screenshot_path()
                 shutil.move(str(tmp_png), str(path_output))
+                logger.info("Screenshot saved: %s", path_output)
                 return path_output
+            logger.info("Screenshot completed without file save")
             return None
+        except Exception:
+            logger.exception("Screenshot flow failed")
+            raise
         finally:
             tmp_png.unlink(missing_ok=True)
 
@@ -58,4 +69,3 @@ class TakeScreenshotService:
         ]
         next_index = (max(current_indexes) + 1) if current_indexes else 1
         return self._path_output_folder / f"{next_index}.png"
-
