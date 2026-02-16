@@ -11,3 +11,4 @@ from src.app.drivers.repositories.programs._implementations.sxhkd_repository imp
 from src.app.drivers.repositories.programs._implementations.thunar_repository import ThunarRepository
 from src.app.drivers.repositories.programs._implementations.vscode_repository import VscodeRepository
 from src.app.drivers.repositories.programs._implementations.wm_base_repository import WmBaseRepository
+from src.app.drivers.repositories.programs.program_installer_repository import ProgramInstallerRepository
