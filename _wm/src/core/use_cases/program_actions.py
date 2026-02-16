@@ -1,71 +1,42 @@
 from src.core.entities.program_config import ProgramName
-from src.core.repositories.command_repository import CommandRepository
-from src.core.repositories.file_operations_repository import FileOperationsRepository
-from src.core.repositories.package_manager_repository import PackageManagerRepository
-from src.core.repositories.program_config.program_config_repository import ProgramConfigRepository
+from src.core.repositories.program_registry_repository import ProgramRegistryRepository
 
 
 class ProgramActions:
-    def __init__(
-        self,
-        config_repo: ProgramConfigRepository,
-        package_repo: PackageManagerRepository,
-        file_repo: FileOperationsRepository,
-        command_repo: CommandRepository,
-    ) -> None:
-        self._config_repo = config_repo
-        self._package_repo = package_repo
-        self._file_repo = file_repo
-        self._command_repo = command_repo
+    def __init__(self, program_registry_repo: ProgramRegistryRepository) -> None:
+        self._program_registry_repo = program_registry_repo
 
     def run(self, action: str, program: ProgramName, backup: bool = False) -> None:
-        cfg = self._config_repo.get_config(program)
+        program_repo = self._program_registry_repo.get_program(program)
+        cfg = program_repo.default_config()
         use_backup = backup or cfg.backup_files
 
         if action == "install-requirement":
             for dep in self._resolve_dependency_order(program):
-                dep_cfg = self._config_repo.get_config(dep)
-                self._package_repo.install(dep, dep_cfg.packages)
+                self._program_registry_repo.get_program(dep).install_requirement()
             return
 
         if action == "uninstall-requirement":
-            self._package_repo.uninstall(program, cfg.packages)
+            program_repo.uninstall_requirement()
             return
 
         if action == "install-files":
-            if cfg.files is not None:
-                self._file_repo.install(
-                    cfg.files.source_dir, cfg.files.target_dir, cfg.files.mode, backup=use_backup
-                )
-            for cmd in cfg.post_install_commands:
-                self._command_repo.run(cmd)
+            program_repo.install_files(backup=use_backup)
             return
 
         if action == "uninstall-files":
-            if cfg.files is not None:
-                self._file_repo.uninstall(
-                    cfg.files.source_dir, cfg.files.target_dir, cfg.files.mode, backup=use_backup
-                )
+            program_repo.uninstall_files(backup=use_backup)
             return
 
         if action == "install":
             for dep in self._resolve_dependency_order(program):
-                dep_cfg = self._config_repo.get_config(dep)
-                self._package_repo.install(dep, dep_cfg.packages)
-            if cfg.files is not None:
-                self._file_repo.install(
-                    cfg.files.source_dir, cfg.files.target_dir, cfg.files.mode, backup=use_backup
-                )
-            for cmd in cfg.post_install_commands:
-                self._command_repo.run(cmd)
+                self._program_registry_repo.get_program(dep).install_requirement()
+            program_repo.install_files(backup=use_backup)
             return
 
         if action == "uninstall":
-            if cfg.files is not None:
-                self._file_repo.uninstall(
-                    cfg.files.source_dir, cfg.files.target_dir, cfg.files.mode, backup=use_backup
-                )
-            self._package_repo.uninstall(program, cfg.packages)
+            program_repo.uninstall_files(backup=use_backup)
+            program_repo.uninstall_requirement()
             return
 
         raise ValueError(f"Unknown action: {action}")
@@ -81,7 +52,7 @@ class ProgramActions:
             if name in in_stack:
                 raise ValueError(f"Cyclic dependency detected at program: {name}")
             in_stack.add(name)
-            cfg = self._config_repo.get_config(name)
+            cfg = self._program_registry_repo.get_program(name).default_config()
             for dep in cfg.dependencies:
                 visit(dep)
             in_stack.remove(name)

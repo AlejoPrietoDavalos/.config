@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 
-class HwclockRepository(ABC):
+class CoreHwclockRepository(ABC):
     @abstractmethod
     def set_timezone(self, timezone: str) -> None:
         ...

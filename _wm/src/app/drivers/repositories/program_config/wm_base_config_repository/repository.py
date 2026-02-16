@@ -1,11 +1,11 @@
-from src.core.entities.program_config import PackageSpec, Packages
+from src.core.entities.program_config import PkgSpec, Packages
 from src.core.entities.program_config import ProgramConfig
-from src.core.repositories.program_config.program_build_config_repository import ProgramBuildConfigRepository
+from src.app.drivers.repositories.program_config.base_program_repository import BaseProgramRepository
 
 
-class WmBaseConfigRepository(ProgramBuildConfigRepository):
-    def build_config(self) -> ProgramConfig:
+class WmBaseRepository(BaseProgramRepository):
+    def default_config(self) -> ProgramConfig:
         return ProgramConfig(
             name="wm-base",
-            packages=Packages(packages=[PackageSpec(manager="pacman", names=["feh"])]),
+            packages=Packages(pkg_specs=[PkgSpec(manager="pacman", names=["feh"])]),
         )

@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 
-class BspcRepository(ABC):
+class CoreBspcRepository(ABC):
     @abstractmethod
     def list_monitors(self) -> list[str]:
         ...

@@ -1,6 +1,6 @@
-from src.core.repositories.program_config.program_build_config_repository import (
-    ProgramBuildConfigRepository,
-)
-from src.core.repositories.program_config.program_config_repository import (
-    ProgramConfigRepository,
-)
+from src.core.repositories.program_repository import ProgramRepository
+from src.core.repositories.program_registry_repository import ProgramRegistryRepository
+
+# Backward compatibility aliases.
+ProgramBuildConfigRepository = ProgramRepository
+ProgramConfigRepository = ProgramRegistryRepository

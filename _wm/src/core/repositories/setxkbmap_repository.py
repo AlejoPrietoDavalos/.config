@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 
-class SetxkbmapRepository(ABC):
+class CoreSetxkbmapRepository(ABC):
     @abstractmethod
     def set_layout(self, layout: str) -> None:
         ...

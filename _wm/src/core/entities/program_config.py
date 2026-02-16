@@ -4,7 +4,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Literal, get_args
 
-PackageManager = Literal["pacman", "yay"]
+PkgManager = Literal["pacman", "yay"]
 FileMode = Literal["link", "copy"]
 ProgramName = Literal[
     "bspwm",
@@ -22,25 +22,25 @@ ProgramName = Literal[
     "nvidia",
 ]
 PROGRAM_NAMES: tuple[ProgramName, ...] = get_args(ProgramName)
-PACKAGE_MANAGERS: tuple[PackageManager, ...] = get_args(PackageManager)
+PKG_MANAGERS: tuple[PkgManager, ...] = get_args(PkgManager)
 FILE_MODES: tuple[FileMode, ...] = get_args(FileMode)
 
 
 @dataclass(frozen=True)
-class PackageSpec:
-    manager: PackageManager
+class PkgSpec:
+    manager: PkgManager
     names: list[str]
 
     def __post_init__(self) -> None:
-        if self.manager not in PACKAGE_MANAGERS:
+        if self.manager not in PKG_MANAGERS:
             raise ValueError(
-                f"Invalid package manager '{self.manager}'. Available: {PACKAGE_MANAGERS}"
+                f"Invalid package manager '{self.manager}'. Available: {PKG_MANAGERS}"
             )
 
 
 @dataclass(frozen=True)
 class Packages:
-    packages: list[PackageSpec]
+    pkg_specs: list[PkgSpec]
 
 
 @dataclass(frozen=True)

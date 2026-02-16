@@ -1,16 +1,16 @@
 import re
 
-from src.app.drivers.repositories.commands.shell_command_repository import ShellCommandRepository
-from src.core.repositories.command_repository import CommandRepository
-from src.core.repositories.xrandr_repository import XrandrRepository
+from src.app.drivers.repositories.programs.command_repository import CommandRepository
+from src.core.repositories.command_repository import CoreCommandRepository
+from src.core.repositories.xrandr_repository import CoreXrandrRepository
 
 
 _ACTIVE_GEOMETRY = re.compile(r"\d+x\d+\+\d+\+\d+")
 
 
-class ShellXrandrRepository(XrandrRepository):
-    def __init__(self, command_repo: CommandRepository | None = None) -> None:
-        self._command_repo = command_repo or ShellCommandRepository()
+class XrandrRepository(CoreXrandrRepository):
+    def __init__(self, command_repo: CoreCommandRepository | None = None) -> None:
+        self._command_repo = command_repo or CommandRepository()
 
     def _query(self) -> str:
         try:
@@ -22,7 +22,6 @@ class ShellXrandrRepository(XrandrRepository):
         out = self._query()
         if not out:
             return []
-
         outputs: list[str] = []
         for line in out.splitlines():
             if " connected" not in line or " disconnected" in line:
@@ -36,7 +35,6 @@ class ShellXrandrRepository(XrandrRepository):
         out = self._query()
         if not out:
             return []
-
         outputs: list[str] = []
         for line in out.splitlines():
             if " connected" not in line or " disconnected" in line:

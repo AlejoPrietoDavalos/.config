@@ -1,21 +1,6 @@
-from abc import ABC, abstractmethod
+from src.core.repositories.pkg_manager.factory_repository import (
+    CorePkgManagerFactoryRepository,
+)
 
-from src.core.entities.program_config import Packages, ProgramName
-
-
-class PackageManagerRepository(ABC):
-    @abstractmethod
-    def install(
-        self,
-        program: ProgramName,
-        packages: Packages,
-    ) -> None:
-        ...
-
-    @abstractmethod
-    def uninstall(
-        self,
-        program: ProgramName,
-        packages: Packages,
-    ) -> None:
-        ...
+# Backward compatibility alias.
+PackageManagerRepository = CorePkgManagerFactoryRepository

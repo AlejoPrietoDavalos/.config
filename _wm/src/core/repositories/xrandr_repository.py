@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 
-class XrandrRepository(ABC):
+class CoreXrandrRepository(ABC):
     @abstractmethod
     def list_connected_outputs(self) -> list[str]:
         ...

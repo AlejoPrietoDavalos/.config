@@ -1,7 +1,7 @@
 import time
 
-from src.core.repositories.bspc_repository import BspcRepository
-from src.core.repositories.xrandr_repository import XrandrRepository
+from src.core.repositories.bspc_repository import CoreBspcRepository
+from src.core.repositories.xrandr_repository import CoreXrandrRepository
 
 
 DESKTOPS = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
@@ -21,7 +21,7 @@ def split_even(items: list[str], parts: int) -> list[list[str]]:
 
 
 class ApplyMonitorLayout:
-    def __init__(self, xrandr_repo: XrandrRepository, bspc_repo: BspcRepository) -> None:
+    def __init__(self, xrandr_repo: CoreXrandrRepository, bspc_repo: CoreBspcRepository) -> None:
         self._xrandr_repo = xrandr_repo
         self._bspc_repo = bspc_repo
 
