@@ -1,9 +1,9 @@
 from src.core.entities.program_config import PkgSpec, Packages
 from src.core.entities.program_config import ProgramConfig
-from src.app.drivers.repositories.programs._implementations.base_program_repository import BaseProgramRepository
+from src.core.repositories.programs.nvidia_repository import CoreNvidiaRepository
 
 
-class NvidiaRepository(BaseProgramRepository):
+class NvidiaRepository(CoreNvidiaRepository):
     """NVIDIA policy for this repo.
 
     We always prefer NVIDIA's proprietary stack installed from distro repos
@@ -15,7 +15,7 @@ class NvidiaRepository(BaseProgramRepository):
         return ProgramConfig(
             name="nvidia",
             packages=Packages(
-                packages=[
+                pkg_specs=[
                     PkgSpec(
                         manager="pacman",
                         names=["nvidia-open", "nvidia-utils", "nvidia-settings", "nvidia-prime"],

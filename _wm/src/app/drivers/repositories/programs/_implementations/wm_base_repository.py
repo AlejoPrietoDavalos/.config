@@ -1,9 +1,9 @@
 from src.core.entities.program_config import PkgSpec, Packages
 from src.core.entities.program_config import ProgramConfig
-from src.app.drivers.repositories.programs._implementations.base_program_repository import BaseProgramRepository
+from src.core.repositories.programs.wm_base_repository import CoreWmBaseRepository
 
 
-class WmBaseRepository(BaseProgramRepository):
+class WmBaseRepository(CoreWmBaseRepository):
     def default_config(self) -> ProgramConfig:
         return ProgramConfig(
             name="wm-base",

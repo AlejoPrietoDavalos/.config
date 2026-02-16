@@ -1,9 +1,9 @@
 from src.core.entities.program_config import PkgSpec, Packages
 from src.core.entities.program_config import ProgramConfig
-from src.app.drivers.repositories.programs._implementations.base_program_repository import BaseProgramRepository
+from src.core.repositories.programs.display_tools_repository import CoreDisplayToolsRepository
 
 
-class DisplayToolsRepository(BaseProgramRepository):
+class DisplayToolsRepository(CoreDisplayToolsRepository):
     def default_config(self) -> ProgramConfig:
         return ProgramConfig(
             name="display-tools",

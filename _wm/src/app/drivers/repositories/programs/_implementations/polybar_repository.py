@@ -1,10 +1,10 @@
-from src.app.drivers.repositories.programs._implementations.base_program_repository import BaseProgramRepository
 from src.core.constants import path_dotfiles, path_wm_programs
 from src.core.entities.program_config import PkgSpec, Packages
 from src.core.entities.program_config import ProgramConfig, ProgramFiles
+from src.core.repositories.programs.polybar_repository import CorePolybarRepository
 
 
-class PolybarRepository(BaseProgramRepository):
+class PolybarRepository(CorePolybarRepository):
     def default_config(self) -> ProgramConfig:
         program_root = path_wm_programs / "polybar"
         return ProgramConfig(

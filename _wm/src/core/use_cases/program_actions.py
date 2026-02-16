@@ -1,40 +1,51 @@
 from src.core.entities.program_config import ProgramName
+from src.core.repositories.pkg_manager.program_installer_repository import (
+    ProgramInstallerRepository,
+)
 from src.core.repositories.program_registry_repository import CoreProgramRegistryRepository
 
 
 class ProgramActions:
-    def __init__(self, program_registry_repo: CoreProgramRegistryRepository) -> None:
+    def __init__(
+        self,
+        program_registry_repo: CoreProgramRegistryRepository,
+        program_installer_repo: ProgramInstallerRepository,
+    ) -> None:
         self._program_registry_repo = program_registry_repo
+        self._program_installer_repo = program_installer_repo
 
     def run(self, action: str, program: ProgramName) -> None:
         program_repo = self._program_registry_repo.get_program_repo(program)
+        program_cfg = program_repo.default_config()
 
         if action == "install-requirement":
             for dep in self._resolve_dependency_order(program):
-                self._program_registry_repo.get_program_repo(dep).install_requirement()
+                dep_cfg = self._program_registry_repo.get_program_repo(dep).default_config()
+                self._program_installer_repo.install_requirement(dep_cfg)
             return
 
         if action == "uninstall-requirement":
-            program_repo.uninstall_requirement()
+            self._program_installer_repo.uninstall_requirement(program_cfg)
             return
 
         if action == "install-files":
-            program_repo.install_files()
+            self._program_installer_repo.install_files(program_cfg)
             return
 
         if action == "uninstall-files":
-            program_repo.uninstall_files()
+            self._program_installer_repo.uninstall_files(program_cfg)
             return
 
         if action == "install":
             for dep in self._resolve_dependency_order(program):
-                self._program_registry_repo.get_program_repo(dep).install_requirement()
-            program_repo.install_files()
+                dep_cfg = self._program_registry_repo.get_program_repo(dep).default_config()
+                self._program_installer_repo.install_requirement(dep_cfg)
+            self._program_installer_repo.install_files(program_cfg)
             return
 
         if action == "uninstall":
-            program_repo.uninstall_files()
-            program_repo.uninstall_requirement()
+            self._program_installer_repo.uninstall_files(program_cfg)
+            self._program_installer_repo.uninstall_requirement(program_cfg)
             return
 
         raise ValueError(f"Unknown action: {action}")

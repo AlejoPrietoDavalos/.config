@@ -2,7 +2,7 @@ import re
 
 from src.app.drivers.repositories.programs._implementations.command_repository import CommandRepository
 from src.core.repositories.command_repository import CoreCommandRepository
-from src.core.repositories.xrandr_repository import CoreXrandrRepository
+from src.core.repositories.programs.xrandr_repository import CoreXrandrRepository
 
 
 _ACTIVE_GEOMETRY = re.compile(r"\d+x\d+\+\d+\+\d+")

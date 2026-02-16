@@ -1,7 +1,7 @@
 import time
 
-from src.core.repositories.bspc_repository import CoreBspcRepository
-from src.core.repositories.xrandr_repository import CoreXrandrRepository
+from src.core.repositories.programs.bspc_repository import CoreBspcRepository
+from src.core.repositories.programs.xrandr_repository import CoreXrandrRepository
 
 
 DESKTOPS = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]

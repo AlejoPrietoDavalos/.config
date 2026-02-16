@@ -1,2 +1,1 @@
-from src.app.drivers.repositories.programs._implementations.base_program_repository import BaseProgramRepository
 from src.app.drivers.repositories.programs._implementations.command_repository import CommandRepository

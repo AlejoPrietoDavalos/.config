@@ -1,6 +1,6 @@
 from src.app.drivers.repositories.programs._implementations.command_repository import CommandRepository
 from src.core.repositories.command_repository import CoreCommandRepository
-from src.core.repositories.setxkbmap_repository import CoreSetxkbmapRepository
+from src.core.repositories.programs.setxkbmap_repository import CoreSetxkbmapRepository
 
 
 class SetxkbmapRepository(CoreSetxkbmapRepository):
