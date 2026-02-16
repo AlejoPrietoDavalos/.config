@@ -6,9 +6,6 @@ import argparse
 from src.app.drivers.repositories.commands.hwclock_repository.repository import (
     ShellHwclockRepository,
 )
-from src.app.drivers.repositories.commands.shell_command_repository import (
-    ShellCommandRepository,
-)
 
 
 def main() -> int:
@@ -20,7 +17,7 @@ def main() -> int:
     )
     args = parser.parse_args()
 
-    repo = ShellHwclockRepository(ShellCommandRepository())
+    repo = ShellHwclockRepository()
     repo.set_timezone(args.timezone)
     repo.sync_system_to_hardware()
     return 0

@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from src.app.drivers.repositories.files.local_backup_repository import LocalBackupRepository
+from src.app.drivers.repositories.files.local_filesystem_repository import LocalFilesystemRepository
 from src.core.entities.program_config import FileMode
 from src.core.repositories.backup_repository import BackupRepository
 from src.core.repositories.file_operations_repository import FileOperationsRepository
@@ -9,9 +11,13 @@ from src.core.repositories.filesystem_repository import FilesystemRepository
 
 
 class LocalFileOperationsRepository(FileOperationsRepository):
-    def __init__(self, fs_repo: FilesystemRepository, backup_repo: BackupRepository) -> None:
-        self._fs_repo = fs_repo
-        self._backup_repo = backup_repo
+    def __init__(
+        self,
+        fs_repo: FilesystemRepository | None = None,
+        backup_repo: BackupRepository | None = None,
+    ) -> None:
+        self._fs_repo = fs_repo or LocalFilesystemRepository()
+        self._backup_repo = backup_repo or LocalBackupRepository()
 
     def _prepare_destination(self, dst: Path, backup: bool) -> None:
         if not self._fs_repo.exists_or_is_symlink(dst):

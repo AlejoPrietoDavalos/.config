@@ -1,10 +1,11 @@
 from src.core.repositories.bspc_repository import BspcRepository
 from src.core.repositories.command_repository import CommandRepository
+from src.app.drivers.repositories.commands.shell_command_repository import ShellCommandRepository
 
 
 class ShellBspcRepository(BspcRepository):
-    def __init__(self, command_repo: CommandRepository) -> None:
-        self._command_repo = command_repo
+    def __init__(self, command_repo: CommandRepository | None = None) -> None:
+        self._command_repo = command_repo or ShellCommandRepository()
 
     def list_monitors(self) -> list[str]:
         try:
