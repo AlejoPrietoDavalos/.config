@@ -1,3 +1,0 @@
-from src.app.drivers.repositories.programs.program_registry_repository import ProgramRegistryRepository
-
-ProgramConfigRegistryRepository = ProgramRegistryRepository
