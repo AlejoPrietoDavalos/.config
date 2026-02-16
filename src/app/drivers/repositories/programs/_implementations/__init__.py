@@ -15,6 +15,9 @@ from src.app.drivers.repositories.programs._implementations.nvidia_repository im
 from src.app.drivers.repositories.programs._implementations.picom_repository import (
     PicomRepository,
 )
+from src.app.drivers.repositories.programs._implementations.playerctl_repository import (
+    PlayerctlRepository,
+)
 from src.app.drivers.repositories.programs._implementations.polybar_repository import (
     PolybarRepository,
 )
@@ -27,6 +30,9 @@ from src.app.drivers.repositories.programs._implementations.ranger_repository im
 from src.app.drivers.repositories.programs._implementations.rofi_repository import (
     RofiRepository,
 )
+from src.app.drivers.repositories.programs._implementations.scrot_repository import (
+    ScrotRepository,
+)
 from src.app.drivers.repositories.programs._implementations.sxhkd_repository import (
     SxhkdRepository,
 )
@@ -35,6 +41,9 @@ from src.app.drivers.repositories.programs._implementations.thunar_repository im
 )
 from src.app.drivers.repositories.programs._implementations.vscode_repository import (
     VscodeRepository,
+)
+from src.app.drivers.repositories.programs._implementations.xclip_repository import (
+    XclipRepository,
 )
 from src.app.drivers.repositories.programs._implementations.xorg_repository import (
     XorgRepository,
@@ -51,12 +60,15 @@ def get_program_repositories() -> Dict[ProgramName, CoreProgramRepository]:
         "kitty": KittyRepository(),
         "nvidia": NvidiaRepository(),
         "picom": PicomRepository(),
+        "playerctl": PlayerctlRepository(),
         "polybar": PolybarRepository(),
         "pulseaudio": PulseaudioRepository(),
         "ranger": RangerRepository(),
         "rofi": RofiRepository(),
+        "scrot": ScrotRepository(),
         "sxhkd": SxhkdRepository(),
         "thunar": ThunarRepository(),
         "vscode": VscodeRepository(),
+        "xclip": XclipRepository(),
         "xorg": XorgRepository(),
     }
