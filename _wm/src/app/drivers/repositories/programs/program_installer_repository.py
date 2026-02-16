@@ -8,24 +8,20 @@ from src.app.drivers.repositories.shell.command_repository import (
     CommandRepository,
 )
 from src.core.entities.program_config import ProgramConfig
-from src.core.repositories.shell.command_repository import CoreCommandRepository
-from src.core.repositories.local_file.file_operations_repository import FileOperationsRepository
-from src.core.repositories.pkg_manager.factory_repository import (
-    CorePkgManagerFactoryRepository,
-)
-from src.core.repositories.pkg_manager.program_installer_repository import (
-    ProgramInstallerRepository as CoreProgramInstallerRepository,
-)
+from src.core.repositories.shell import CoreCommandRepository
+from src.core.repositories.local_file import CoreFileInstallerRepository
+from src.core.repositories.pkg_manager import CorePkgManagerFactoryRepository
+from src.core.repositories.programs import CoreProgramInstallerRepository
 
 
 class ProgramInstallerRepository(CoreProgramInstallerRepository):
     def __init__(
         self,
-        package_repo: CorePkgManagerFactoryRepository | None = None,
-        file_repo: FileOperationsRepository | None = None,
+        pkg_manager_factory_repo: CorePkgManagerFactoryRepository | None = None,
+        file_repo: CoreFileInstallerRepository | None = None,
         command_repo: CoreCommandRepository | None = None,
     ) -> None:
-        self._package_repo = package_repo or PkgManagerFactoryRepository()
+        self._package_repo = pkg_manager_factory_repo or PkgManagerFactoryRepository()
         self._file_repo = file_repo or LocalFileOperationsRepository()
         self._command_repo = command_repo or CommandRepository()
 

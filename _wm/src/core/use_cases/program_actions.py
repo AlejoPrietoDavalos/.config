@@ -1,26 +1,24 @@
 from src.core.entities.program_config import ProgramName
-from src.core.repositories.pkg_manager.program_installer_repository import (
-    ProgramInstallerRepository,
-)
-from src.core.repositories.programs.program_factory_repository import CoreProgramFactoryRepository
+from src.core.repositories.programs import CoreProgramFactoryRepository, CoreProgramInstallerRepository
 
 
 class ProgramActions:
+    # TODO: Revisar esta clase, no me convence del todo como está implementada, pero por ahora funciona.
     def __init__(
         self,
-        program_registry_repo: CoreProgramFactoryRepository,
-        program_installer_repo: ProgramInstallerRepository,
+        program_factory_repo: CoreProgramFactoryRepository,
+        program_installer_repo: CoreProgramInstallerRepository,
     ) -> None:
-        self._program_registry_repo = program_registry_repo
+        self._program_factory_repo = program_factory_repo
         self._program_installer_repo = program_installer_repo
 
     def run(self, action: str, program: ProgramName) -> None:
-        program_repo = self._program_registry_repo.get_program_repo(program)
+        program_repo = self._program_factory_repo.get_program_repo(program)
         program_cfg = program_repo.default_config()
 
         if action == "install-requirement":
             for dep in self._resolve_dependency_order(program):
-                dep_cfg = self._program_registry_repo.get_program_repo(dep).default_config()
+                dep_cfg = self._program_factory_repo.get_program_repo(dep).default_config()
                 self._program_installer_repo.install_requirement(dep_cfg)
             return
 
@@ -38,7 +36,7 @@ class ProgramActions:
 
         if action == "install":
             for dep in self._resolve_dependency_order(program):
-                dep_cfg = self._program_registry_repo.get_program_repo(dep).default_config()
+                dep_cfg = self._program_factory_repo.get_program_repo(dep).default_config()
                 self._program_installer_repo.install_requirement(dep_cfg)
             self._program_installer_repo.install_files(program_cfg)
             return
@@ -61,7 +59,7 @@ class ProgramActions:
             if name in in_stack:
                 raise ValueError(f"Cyclic dependency detected at program: {name}")
             in_stack.add(name)
-            cfg = self._program_registry_repo.get_program_repo(name).default_config()
+            cfg = self._program_factory_repo.get_program_repo(name).default_config()
             for dep in cfg.dependencies:
                 visit(dep)
             in_stack.remove(name)

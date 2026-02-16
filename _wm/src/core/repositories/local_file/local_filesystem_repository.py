@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from pathlib import Path
 
 
-class FilesystemRepository(ABC):
+class CoreLocalFilesystemRepository(ABC):
     @abstractmethod
     def ensure_dir(self, path: Path) -> None:
         ...

@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 from src.core.entities.program_config import ProgramConfig
 
 
-class ProgramInstallerRepository(ABC):
+class CoreProgramInstallerRepository(ABC):
     @abstractmethod
     def install_requirement(self, cfg: ProgramConfig) -> None:
         ...

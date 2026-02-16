@@ -4,12 +4,11 @@ from pathlib import Path
 
 from src.app.drivers.repositories.local_file.local_filesystem_repository import LocalFilesystemRepository
 from src.core.entities.program_config import FileMode
-from src.core.repositories.local_file.file_operations_repository import FileOperationsRepository
-from src.core.repositories.local_file.filesystem_repository import FilesystemRepository
+from src.core.repositories.local_file import CoreFileInstallerRepository, CoreLocalFilesystemRepository
 
 
-class LocalFileOperationsRepository(FileOperationsRepository):
-    def __init__(self, fs_repo: FilesystemRepository | None = None) -> None:
+class LocalFileOperationsRepository(CoreFileInstallerRepository):
+    def __init__(self, fs_repo: CoreLocalFilesystemRepository | None = None) -> None:
         self._fs_repo = fs_repo or LocalFilesystemRepository()
 
     def _prepare_destination(self, dst: Path) -> None:

@@ -1,7 +1,7 @@
 import argparse
 from typing import cast
 
-from src.app.drivers.repositories.programs.program_registry_repository import ProgramRegistryRepository
+from src.app.drivers.repositories.programs import ProgramRegistryRepository
 from src.core.entities.program_config import PROGRAM_NAMES, ProgramName
 from src.core.use_cases.program_actions import ProgramActions
 
@@ -23,7 +23,7 @@ def main() -> None:
     parser.add_argument("--program", required=True, choices=PROGRAM_NAMES)
     args = parser.parse_args()
 
-    actions = ProgramActions(program_registry_repo=ProgramRegistryRepository())
+    actions = ProgramActions(program_factory_repo=ProgramRegistryRepository())
     actions.run(action=args.action, program=cast(ProgramName, args.program))
 
 

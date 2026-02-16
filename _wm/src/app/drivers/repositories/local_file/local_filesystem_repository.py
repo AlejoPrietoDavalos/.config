@@ -4,10 +4,10 @@ import shutil
 import stat
 from pathlib import Path
 
-from src.core.repositories.local_file.filesystem_repository import FilesystemRepository
+from src.core.repositories.local_file.local_filesystem_repository import CoreLocalFilesystemRepository
 
 
-class LocalFilesystemRepository(FilesystemRepository):
+class LocalFilesystemRepository(CoreLocalFilesystemRepository):
     def ensure_dir(self, path: Path) -> None:
         path.mkdir(parents=True, exist_ok=True)
 

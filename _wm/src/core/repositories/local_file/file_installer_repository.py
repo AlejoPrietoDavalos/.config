@@ -4,7 +4,7 @@ from pathlib import Path
 from src.core.entities.program_config import FileMode
 
 
-class FileOperationsRepository(ABC):
+class CoreFileInstallerRepository(ABC):
     @abstractmethod
     def install(self, files_dir: Path, target_dir: Path, mode: FileMode) -> None:
         ...

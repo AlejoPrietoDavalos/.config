@@ -1,4 +1,3 @@
-from src.core.repositories.programs._implementations.bspc_repository import CoreBspcRepository
 from src.core.repositories.programs._implementations.bspwm_repository import CoreBspwmRepository
 from src.core.repositories.programs._implementations.display_tools_repository import CoreDisplayToolsRepository
 from src.core.repositories.programs._implementations.hwclock_repository import CoreHwclockRepository
@@ -17,3 +16,4 @@ from src.core.repositories.programs._implementations.wm_base_repository import C
 from src.core.repositories.programs._implementations.xrandr_repository import CoreXrandrRepository
 from src.core.repositories.programs.program_repository import CoreProgramRepository
 from src.core.repositories.programs.program_factory_repository import CoreProgramFactoryRepository
+from src.core.repositories.programs.program_installer_repository import CoreProgramInstallerRepository
