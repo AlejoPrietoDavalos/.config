@@ -1,3 +1,5 @@
+from typing import cast
+
 from src.core.entities.program_config import ProgramName
 from src.core.repositories.programs import CoreProgramFactoryRepository, CoreProgramInstallerRepository
 
@@ -12,7 +14,14 @@ class ProgramActions:
         self._program_factory_repo = program_factory_repo
         self._program_installer_repo = program_installer_repo
 
-    def run(self, action: str, program: ProgramName) -> None:
+    def run(self, action: str, program: ProgramName | None = None) -> None:
+        if action == "dirty_install_all_packages":
+            self._dirty_install_all_packages()
+            return
+
+        if program is None:
+            raise ValueError(f"Action '{action}' requires --program")
+
         program_repo = self._program_factory_repo.get_program_repo(program)
         program_cfg = program_repo.default_config()
 
@@ -47,6 +56,14 @@ class ProgramActions:
             return
 
         raise ValueError(f"Unknown action: {action}")
+
+    def _dirty_install_all_packages(self) -> None:
+        for program in self._program_factory_repo.list_programs():
+            print(f"[dirty_install_all_packages] Installing: {program}")
+            program_repo = self._program_factory_repo.get_program_repo(cast(ProgramName, program))
+            program_cfg = program_repo.default_config()
+            self._program_installer_repo.install_requirement(program_cfg)
+            self._program_installer_repo.install_files(program_cfg)
 
     def _resolve_dependency_order(self, program: ProgramName) -> list[ProgramName]:
         ordered: list[ProgramName] = []

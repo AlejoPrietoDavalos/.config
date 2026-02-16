@@ -8,9 +8,9 @@ from src.core.repositories.programs.program_factory_repository import CoreProgra
 from src.core.repositories.programs.program_repository import CoreProgramRepository
 
 
-class ProgramRegistryRepository(CoreProgramFactoryRepository):
+class ProgramFactoryRepository(CoreProgramFactoryRepository):
     def __init__(self) -> None:
-        self._repos: Dict[ProgramName, CoreProgramRepository] = get_program_repositories()
+        self._repos: Dict[str, CoreProgramRepository] = get_program_repositories()
 
     def get_program_repo(self, program: ProgramName) -> CoreProgramRepository:
         repo = self._repos[program]
@@ -19,3 +19,10 @@ class ProgramRegistryRepository(CoreProgramFactoryRepository):
         if cfg.files is not None and not cfg.files.source_dir.is_dir():
             raise ValueError(f"Missing files dir: {cfg.files.source_dir}")
         return repo
+
+    def list_programs(self) -> list[str]:
+        programs: list[str] = []
+        for name, repo in self._repos.items():
+            if hasattr(repo, "default_config"):
+                programs.append(name)
+        return programs

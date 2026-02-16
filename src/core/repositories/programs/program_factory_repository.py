@@ -8,3 +8,7 @@ class CoreProgramFactoryRepository(ABC):
     @abstractmethod
     def get_program_repo(self, program: ProgramName) -> CoreProgramRepository:
         ...
+
+    @abstractmethod
+    def list_programs(self) -> list[str]:
+        ...
