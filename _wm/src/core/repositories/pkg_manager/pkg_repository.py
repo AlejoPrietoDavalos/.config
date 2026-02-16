@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-class CorePkgRepository(ABC):
+class CoreBasePkgRepository(ABC):
     @property
     @abstractmethod
     def manager_name(self) -> str:

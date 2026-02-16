@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 from src.core.entities.program_config import ProgramConfig
 
 
-class CoreProgramRepository(ABC):
+class CoreBaseProgramRepository(ABC):
     @abstractmethod
     def default_config(self) -> ProgramConfig:
         ...

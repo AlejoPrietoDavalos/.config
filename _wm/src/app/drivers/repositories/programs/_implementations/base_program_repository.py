@@ -6,10 +6,10 @@ from src.core.repositories.file_operations_repository import FileOperationsRepos
 from src.core.repositories.pkg_manager.factory_repository import (
     CorePkgManagerFactoryRepository,
 )
-from src.core.repositories.program_repository import CoreProgramRepository
+from src.core.repositories.program_repository import CoreBaseProgramRepository
 
 
-class BaseProgramRepository(CoreProgramRepository):
+class BaseProgramRepository(CoreBaseProgramRepository):
     def __init__(
         self,
         package_repo: CorePkgManagerFactoryRepository | None = None,
