@@ -1,7 +1,7 @@
 import subprocess
 import shutil
 
-from src.core.repositories.command_repository import CoreCommandRepository
+from _wm.src.core.repositories.shell.command_repository import CoreCommandRepository
 
 
 class CommandRepository(CoreCommandRepository):

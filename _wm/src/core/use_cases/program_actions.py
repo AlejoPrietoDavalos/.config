@@ -2,13 +2,13 @@ from src.core.entities.program_config import ProgramName
 from src.core.repositories.pkg_manager.program_installer_repository import (
     ProgramInstallerRepository,
 )
-from src.core.repositories.program_registry_repository import CoreProgramRegistryRepository
+from _wm.src.core.repositories.programs.program_factory_repository import CoreProgramFactoryRepository
 
 
 class ProgramActions:
     def __init__(
         self,
-        program_registry_repo: CoreProgramRegistryRepository,
+        program_registry_repo: CoreProgramFactoryRepository,
         program_installer_repo: ProgramInstallerRepository,
     ) -> None:
         self._program_registry_repo = program_registry_repo

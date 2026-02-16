@@ -1,4 +1,4 @@
-from src.app.drivers.repositories.files.local_file_operations_repository import (
+from src.app.drivers.repositories.local_file.local_file_operations_repository import (
     LocalFileOperationsRepository,
 )
 from src.app.drivers.repositories.pkg_manager.factory_repository import (
@@ -8,8 +8,8 @@ from src.app.drivers.repositories.programs._implementations.command_repository i
     CommandRepository,
 )
 from src.core.entities.program_config import ProgramConfig
-from src.core.repositories.command_repository import CoreCommandRepository
-from src.core.repositories.file_operations_repository import FileOperationsRepository
+from _wm.src.core.repositories.shell.command_repository import CoreCommandRepository
+from _wm.src.core.repositories.local_file.file_operations_repository import FileOperationsRepository
 from src.core.repositories.pkg_manager.factory_repository import (
     CorePkgManagerFactoryRepository,
 )

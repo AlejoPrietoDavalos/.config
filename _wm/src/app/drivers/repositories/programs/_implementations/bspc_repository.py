@@ -1,6 +1,6 @@
 from src.app.drivers.repositories.programs._implementations.command_repository import CommandRepository
-from src.core.repositories.command_repository import CoreCommandRepository
-from src.core.repositories.programs.bspc_repository import CoreBspcRepository
+from _wm.src.core.repositories.shell.command_repository import CoreCommandRepository
+from _wm.src.core.repositories.programs._implementations.bspc_repository import CoreBspcRepository
 
 
 class BspcRepository(CoreBspcRepository):

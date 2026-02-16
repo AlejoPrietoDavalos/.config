@@ -2,10 +2,10 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from src.app.drivers.repositories.files.local_filesystem_repository import LocalFilesystemRepository
+from src.app.drivers.repositories.local_file.local_filesystem_repository import LocalFilesystemRepository
 from src.core.entities.program_config import FileMode
-from src.core.repositories.file_operations_repository import FileOperationsRepository
-from src.core.repositories.filesystem_repository import FilesystemRepository
+from _wm.src.core.repositories.local_file.file_operations_repository import FileOperationsRepository
+from _wm.src.core.repositories.local_file.filesystem_repository import FilesystemRepository
 
 
 class LocalFileOperationsRepository(FileOperationsRepository):

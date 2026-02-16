@@ -1,7 +1,7 @@
 from typing import Dict
 
 from src.core.entities.program_config import ProgramName
-from src.core.repositories.program_registry_repository import CoreProgramRegistryRepository
+from _wm.src.core.repositories.programs.program_factory_repository import CoreProgramFactoryRepository
 from src.core.repositories.programs.program_repository import CoreProgramRepository
 from src.app.drivers.repositories.programs import (
     BspwmRepository,
@@ -38,7 +38,7 @@ def _get_program_repos() -> Dict[ProgramName, CoreProgramRepository]:
     }
 
 
-class ProgramRegistryRepository(CoreProgramRegistryRepository):
+class ProgramRegistryRepository(CoreProgramFactoryRepository):
     def __init__(self) -> None:
         self._repos: Dict[ProgramName, CoreProgramRepository] = _get_program_repos()
 

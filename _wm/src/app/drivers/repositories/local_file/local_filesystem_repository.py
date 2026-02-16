@@ -4,7 +4,7 @@ import shutil
 import stat
 from pathlib import Path
 
-from src.core.repositories.filesystem_repository import FilesystemRepository
+from _wm.src.core.repositories.local_file.filesystem_repository import FilesystemRepository
 
 
 class LocalFilesystemRepository(FilesystemRepository):

@@ -1,6 +1,6 @@
 import time
 
-from src.core.repositories.programs.bspc_repository import CoreBspcRepository
+from _wm.src.core.repositories.programs._implementations.bspc_repository import CoreBspcRepository
 from src.core.repositories.programs.xrandr_repository import CoreXrandrRepository
 
 
