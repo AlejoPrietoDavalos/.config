@@ -1,7 +1,7 @@
 from src.core.constants import path_dotfiles, path_wm_programs, path_wm_scripts
 from src.core.entities.program_config import PkgSpec, Packages
 from src.core.entities.program_config import ProgramConfig, ProgramFiles
-from src.core.repositories.programs.sxhkd_repository import CoreSxhkdRepository
+from src.core.repositories.programs._implementations.sxhkd_repository import CoreSxhkdRepository
 
 
 class SxhkdRepository(CoreSxhkdRepository):

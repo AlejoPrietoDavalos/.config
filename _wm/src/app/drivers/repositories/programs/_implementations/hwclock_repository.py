@@ -1,6 +1,6 @@
 from src.app.drivers.repositories.shell.command_repository import CommandRepository
 from src.core.repositories.shell.command_repository import CoreCommandRepository
-from src.core.repositories.programs.hwclock_repository import CoreHwclockRepository
+from src.core.repositories.programs._implementations.hwclock_repository import CoreHwclockRepository
 
 
 class HwclockRepository(CoreHwclockRepository):

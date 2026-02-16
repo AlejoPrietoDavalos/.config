@@ -1,10 +1,11 @@
 from src.core.constants import path_dotfiles, path_wm_programs
 from src.core.entities.program_config import PkgSpec, Packages
 from src.core.entities.program_config import ProgramConfig, ProgramFiles
-from src.core.repositories.programs.vscode_repository import CoreVscodeRepository
+from src.core.repositories.programs._implementations.vscode_repository import CoreVscodeRepository
 
 
 class VscodeRepository(CoreVscodeRepository):
+    # TODO: Renombrar a "code"
     def default_config(self) -> ProgramConfig:
         program_root = path_wm_programs / "vscode"
         return ProgramConfig(

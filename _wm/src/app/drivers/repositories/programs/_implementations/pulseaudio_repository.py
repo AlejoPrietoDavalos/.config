@@ -1,6 +1,6 @@
 from src.core.entities.program_config import PkgSpec, Packages
 from src.core.entities.program_config import ProgramConfig
-from src.core.repositories.programs.pulseaudio_repository import CorePulseaudioRepository
+from src.core.repositories.programs._implementations.pulseaudio_repository import CorePulseaudioRepository
 
 
 class PulseaudioRepository(CorePulseaudioRepository):

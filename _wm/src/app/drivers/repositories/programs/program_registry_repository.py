@@ -3,44 +3,12 @@ from typing import Dict
 from src.core.entities.program_config import ProgramName
 from src.core.repositories.programs.program_factory_repository import CoreProgramFactoryRepository
 from src.core.repositories.programs.program_repository import CoreProgramRepository
-from src.app.drivers.repositories.programs import (
-    BspwmRepository,
-    DisplayToolsRepository,
-    KittyRepository,
-    NvidiaRepository,
-    PicomRepository,
-    PolybarRepository,
-    PulseaudioRepository,
-    RangerRepository,
-    RofiRepository,
-    SxhkdRepository,
-    ThunarRepository,
-    VscodeRepository,
-    WmBaseRepository,
-)
-
-def _get_program_repos() -> Dict[ProgramName, CoreProgramRepository]:
-    # FIXME: Ponerle un name a cada repo y usar eso en vez de hardcodear el name acá.
-    return {
-        "bspwm": BspwmRepository(),
-        "sxhkd": SxhkdRepository(),
-        "polybar": PolybarRepository(),
-        "kitty": KittyRepository(),
-        "ranger": RangerRepository(),
-        "picom": PicomRepository(),
-        "rofi": RofiRepository(),
-        "thunar": ThunarRepository(),
-        "vscode": VscodeRepository(),
-        "wm-base": WmBaseRepository(),
-        "pulseaudio": PulseaudioRepository(),
-        "display-tools": DisplayToolsRepository(),
-        "nvidia": NvidiaRepository(),
-    }
+from src.app.drivers.repositories.programs import get_program_repositories
 
 
 class ProgramRegistryRepository(CoreProgramFactoryRepository):
     def __init__(self) -> None:
-        self._repos: Dict[ProgramName, CoreProgramRepository] = _get_program_repos()
+        self._repos: Dict[ProgramName, CoreProgramRepository] = get_program_repositories()
 
     def get_program_repo(self, program: ProgramName) -> CoreProgramRepository:
         repo = self._repos[program]

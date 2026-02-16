@@ -1,6 +1,6 @@
 from src.core.entities.program_config import PkgSpec, Packages
 from src.core.entities.program_config import ProgramConfig
-from src.core.repositories.programs.nvidia_repository import CoreNvidiaRepository
+from src.core.repositories.programs._implementations.nvidia_repository import CoreNvidiaRepository
 
 
 class NvidiaRepository(CoreNvidiaRepository):

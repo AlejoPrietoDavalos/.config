@@ -1,7 +1,7 @@
 from src.core.constants import path_dotfiles, path_wm_programs
 from src.core.entities.program_config import PkgSpec, Packages
 from src.core.entities.program_config import ProgramConfig, ProgramFiles
-from src.core.repositories.programs.polybar_repository import CorePolybarRepository
+from src.core.repositories.programs._implementations.polybar_repository import CorePolybarRepository
 
 
 class PolybarRepository(CorePolybarRepository):
