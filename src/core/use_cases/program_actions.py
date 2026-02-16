@@ -58,6 +58,7 @@ class ProgramActions:
         raise ValueError(f"Unknown action: {action}")
 
     def _dirty_install_all_packages(self) -> None:
+        # FIXME
         for program in self._program_factory_repo.list_programs():
             print(f"[dirty_install_all_packages] Installing: {program}")
             program_repo = self._program_factory_repo.get_program_repo(cast(ProgramName, program))
