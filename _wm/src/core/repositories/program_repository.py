@@ -16,8 +16,10 @@ class CoreProgramRepository(ABC):
     def uninstall_requirement(self) -> None:
         ...
 
+    @abstractmethod
     def install_files(self) -> None:
-        raise NotImplementedError("install_files is not implemented for this program")
+        ...
 
+    @abstractmethod
     def uninstall_files(self) -> None:
-        raise NotImplementedError("uninstall_files is not implemented for this program")
+        ...
