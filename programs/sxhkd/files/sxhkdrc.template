@@ -125,7 +125,7 @@ super + {_,ctrl + shift} + w
 #  - resize_window/move_floating_window
 #--------------------------------------
 super + alt + {Left,Right,Up,Down}
-    $HOME/.config/scripts/bspc_resize {left,right,up,down}
+    $HOME/.config/scripts/bspwm_resize.sh {left,right,up,down}
 
 #======================================
 #--------------------------------------
@@ -177,7 +177,7 @@ super + ctrl + {Left,Down,Up,Right}
 
 
 super + {_,shift} + F11
-    $HOME/.config/scripts/bspc_toggle {fullscreen_tiled,floating_tiled}
+    $HOME/.config/scripts/bspwm_toggle.sh {fullscreen_tiled,floating_tiled}
 
 
 
