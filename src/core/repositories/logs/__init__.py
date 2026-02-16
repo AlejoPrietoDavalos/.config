@@ -1,0 +1,1 @@
+from src.core.repositories.logs.configure_logging_repository import CoreConfigureLoggingRepository

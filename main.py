@@ -1,6 +1,7 @@
 import argparse
 from typing import cast
 
+from src.app.drivers.repositories.logs import ConfigureLoggingRepository
 from src.app.drivers.repositories.programs import (
     ProgramFactoryRepository,
     ProgramInstallerRepository,
@@ -10,6 +11,8 @@ from src.core.use_cases.program_actions import ProgramActions
 
 
 def main() -> None:
+    configure_logging_repo = ConfigureLoggingRepository()
+    configure_logging_repo.configure(log_filename="main.log")
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--action",

@@ -12,11 +12,14 @@ if str(PROJECT_ROOT) not in sys.path:
 from src.app.drivers.repositories.programs._implementations.playerctl_repository import (
     PlayerctlRepository,
 )
+from src.app.drivers.repositories.logs import ConfigureLoggingRepository
 from src.core.repositories.programs._implementations.playerctl_repository import (
     PlayerctlAction,
 )
 
 def main(action: PlayerctlAction) -> int:
+    configure_logging_repo = ConfigureLoggingRepository()
+    configure_logging_repo.configure(log_filename=f"{Path(__file__).stem}.log")
     repo = PlayerctlRepository()
     repo.run(action)
     return 0
