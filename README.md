@@ -27,10 +27,10 @@ sudo systemctl start bluetooth.service
 - Search Google Hack: `gatitos filetype:png`
 
 # WM Automation
-La automatizacion vive en `_wm/main.py` y se ejecuta con:
+La automatizacion vive en `main.py` y se ejecuta con:
 
 ```bash
-cd ./_wm && PYTHONPATH=. python3 ./main.py --action <action> --program <program>
+PYTHONPATH=. python3 ./main.py --action <action> --program <program>
 ```
 
 Acciones soportadas:

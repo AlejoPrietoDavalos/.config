@@ -1,5 +1,5 @@
 SHELL := /bin/bash
-RUN := cd ./_wm && PYTHONPATH=. python3 ./main.py
+RUN := PYTHONPATH=. python3 ./main.py
 
 .PHONY: install-core remove-core remove-core-purge \
 	wm-requirements-install \
@@ -51,13 +51,13 @@ bspwm-uninstall-files:
 	@$(RUN) --action uninstall-files --program bspwm
 
 bspwm-install-session:
-	@./_wm/scripts/install_bspwm_session.sh
+	@./scripts/install_bspwm_session.sh
 
 bspwm-check-display:
-	@./_wm/scripts/check_display_stack.sh
+	@./scripts/check_display_stack.sh
 
 bspwm-restart:
-	@./_wm/scripts/check_display_stack.sh --quiet
+	@./scripts/check_display_stack.sh --quiet
 	@if command -v bspc >/dev/null 2>&1; then \
 		bspc wm -r; \
 	else \
@@ -73,12 +73,12 @@ sxhkd-uninstall-requirement:
 	@$(RUN) --action uninstall-requirement --program sxhkd
 sxhkd-install-files:
 	@$(RUN) --action install-files --program sxhkd
-	@./_wm/scripts/generate_sxhkd.sh
+	@./scripts/generate_sxhkd.sh
 sxhkd-uninstall-files:
 	@$(RUN) --action uninstall-files --program sxhkd
 
 sxhkd-generate:
-	@./_wm/scripts/generate_sxhkd.sh
+	@./scripts/generate_sxhkd.sh
 
 polybar-install: polybar-install-requirement polybar-install-files
 polybar-uninstall: polybar-uninstall-files polybar-uninstall-requirement
@@ -191,10 +191,10 @@ display-tools-uninstall-files:
 	@$(RUN) --action uninstall-files --program display-tools
 
 clock-set:
-	@cd ./_wm && PYTHONPATH=. python3 ./scripts/set_clock.py
+	@PYTHONPATH=. python3 ./scripts/set_clock.py
 
 keyboard-set-latam:
-	@cd ./_wm && PYTHONPATH=. python3 ./scripts/set_keyboard_layout.py --layout latam
+	@PYTHONPATH=. python3 ./scripts/set_keyboard_layout.py --layout latam
 
 nvidia-install: nvidia-install-requirement nvidia-install-files
 nvidia-uninstall: nvidia-uninstall-files nvidia-uninstall-requirement
