@@ -3,7 +3,7 @@
 
 import argparse
 
-from src.app.drivers.repositories.programs.setxkbmap_repository import (
+from src.app.drivers.repositories.programs._implementations.setxkbmap_repository import (
     SetxkbmapRepository,
 )
 

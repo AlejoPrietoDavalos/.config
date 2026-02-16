@@ -1,4 +1,4 @@
-from src.core.repositories.program_repository import ProgramRepository
+from src.core.repositories.program_repository import CoreProgramRepository
 
 # Backward compatibility alias.
-ProgramBuildConfigRepository = ProgramRepository
+ProgramBuildConfigRepository = CoreProgramRepository

@@ -21,11 +21,10 @@ def main() -> None:
         ],
     )
     parser.add_argument("--program", required=True, choices=PROGRAM_NAMES)
-    parser.add_argument("--backup", action="store_true", help="Backup existing files before overwriting/removing")
     args = parser.parse_args()
 
     actions = ProgramActions(program_registry_repo=ProgramRegistryRepository())
-    actions.run(action=args.action, program=cast(ProgramName, args.program), backup=args.backup)
+    actions.run(action=args.action, program=cast(ProgramName, args.program))
 
 
 if __name__ == "__main__":

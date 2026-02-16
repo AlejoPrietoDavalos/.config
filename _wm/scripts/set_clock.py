@@ -3,7 +3,7 @@
 
 import argparse
 
-from src.app.drivers.repositories.programs.hwclock_repository import (
+from src.app.drivers.repositories.programs._implementations.hwclock_repository import (
     HwclockRepository,
 )
 

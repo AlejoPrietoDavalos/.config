@@ -1,6 +1,6 @@
 import re
 
-from src.app.drivers.repositories.programs.command_repository import CommandRepository
+from src.app.drivers.repositories.programs._implementations.command_repository import CommandRepository
 from src.core.repositories.command_repository import CoreCommandRepository
 from src.core.repositories.xrandr_repository import CoreXrandrRepository
 

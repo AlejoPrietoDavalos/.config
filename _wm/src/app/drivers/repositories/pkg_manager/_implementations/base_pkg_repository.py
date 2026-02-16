@@ -3,7 +3,7 @@ from __future__ import annotations
 from abc import ABC
 from typing import Sequence
 
-from src.app.drivers.repositories.programs.command_repository import CommandRepository
+from src.app.drivers.repositories.programs._implementations.command_repository import CommandRepository
 from src.core.repositories.command_repository import CoreCommandRepository
 from src.core.repositories.pkg_repository import CorePkgRepository
 

@@ -1,15 +1,15 @@
 from src.app.drivers.repositories.files.local_file_operations_repository import LocalFileOperationsRepository
 from src.app.drivers.repositories.pkg_manager.factory_repository import PkgManagerFactoryRepository
-from src.app.drivers.repositories.programs.command_repository import CommandRepository
+from src.app.drivers.repositories.programs._implementations.command_repository import CommandRepository
 from src.core.repositories.command_repository import CoreCommandRepository
 from src.core.repositories.file_operations_repository import FileOperationsRepository
 from src.core.repositories.pkg_manager.factory_repository import (
     CorePkgManagerFactoryRepository,
 )
-from src.core.repositories.program_repository import ProgramRepository
+from src.core.repositories.program_repository import CoreProgramRepository
 
 
-class BaseProgramRepository(ProgramRepository):
+class BaseProgramRepository(CoreProgramRepository):
     def __init__(
         self,
         package_repo: CorePkgManagerFactoryRepository | None = None,
@@ -28,16 +28,14 @@ class BaseProgramRepository(ProgramRepository):
         cfg = self.default_config()
         self._package_repo.uninstall(cfg.packages)
 
-    def install_files(self, backup: bool = False) -> None:
+    def install_files(self) -> None:
         cfg = self.default_config()
-        use_backup = backup or cfg.backup_files
         if cfg.files is not None:
-            self._file_repo.install(cfg.files.source_dir, cfg.files.target_dir, cfg.files.mode, backup=use_backup)
+            self._file_repo.install(cfg.files.source_dir, cfg.files.target_dir, cfg.files.mode)
         for cmd in cfg.post_install_commands:
             self._command_repo.run(cmd)
 
-    def uninstall_files(self, backup: bool = False) -> None:
+    def uninstall_files(self) -> None:
         cfg = self.default_config()
-        use_backup = backup or cfg.backup_files
         if cfg.files is not None:
-            self._file_repo.uninstall(cfg.files.source_dir, cfg.files.target_dir, cfg.files.mode, backup=use_backup)
+            self._file_repo.uninstall(cfg.files.source_dir, cfg.files.target_dir, cfg.files.mode)

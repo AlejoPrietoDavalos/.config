@@ -11,5 +11,4 @@ class VscodeRepository(BaseProgramRepository):
             name="vscode",
             files=ProgramFiles(source_dir=program_root / "files", target_dir=path_dotfiles / "Code" / "User"),
             packages=Packages(pkg_specs=[PkgSpec(manager="yay", names=["code"])]),
-            backup_files=False,
         )

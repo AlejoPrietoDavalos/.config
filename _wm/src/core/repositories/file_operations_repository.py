@@ -6,9 +6,9 @@ from src.core.entities.program_config import FileMode
 
 class FileOperationsRepository(ABC):
     @abstractmethod
-    def install(self, files_dir: Path, target_dir: Path, mode: FileMode, backup: bool = False) -> None:
+    def install(self, files_dir: Path, target_dir: Path, mode: FileMode) -> None:
         ...
 
     @abstractmethod
-    def uninstall(self, files_dir: Path, target_dir: Path, mode: FileMode, backup: bool = False) -> None:
+    def uninstall(self, files_dir: Path, target_dir: Path, mode: FileMode) -> None:
         ...

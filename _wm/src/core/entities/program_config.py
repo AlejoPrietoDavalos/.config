@@ -60,7 +60,6 @@ class ProgramConfig:
     files: ProgramFiles | None = None
     packages: Packages
     dependencies: tuple[ProgramName, ...] = field(default_factory=tuple)
-    backup_files: bool = False
     post_install_commands: tuple[str, ...] = field(default_factory=tuple)
 
     def __post_init__(self) -> None:

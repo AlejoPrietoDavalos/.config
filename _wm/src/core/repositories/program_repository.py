@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 from src.core.entities.program_config import ProgramConfig
 
 
-class ProgramRepository(ABC):
+class CoreProgramRepository(ABC):
     @abstractmethod
     def default_config(self) -> ProgramConfig:
         ...
@@ -16,8 +16,8 @@ class ProgramRepository(ABC):
     def uninstall_requirement(self) -> None:
         ...
 
-    def install_files(self, backup: bool = False) -> None:
+    def install_files(self) -> None:
         raise NotImplementedError("install_files is not implemented for this program")
 
-    def uninstall_files(self, backup: bool = False) -> None:
+    def uninstall_files(self) -> None:
         raise NotImplementedError("uninstall_files is not implemented for this program")

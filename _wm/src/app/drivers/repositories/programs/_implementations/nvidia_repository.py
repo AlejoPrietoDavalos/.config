@@ -1,6 +1,6 @@
 from src.core.entities.program_config import PkgSpec, Packages
 from src.core.entities.program_config import ProgramConfig
-from src.app.drivers.repositories.programs.base_program_repository import BaseProgramRepository
+from src.app.drivers.repositories.programs._implementations.base_program_repository import BaseProgramRepository
 
 
 class NvidiaRepository(BaseProgramRepository):

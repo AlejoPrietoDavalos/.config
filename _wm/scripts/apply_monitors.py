@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """Apply monitor layout for bspwm using the core use case."""
 
-from src.app.drivers.repositories.programs.bspc_repository import (
+from src.app.drivers.repositories.programs._implementations.bspc_repository import (
     BspcRepository,
 )
-from src.app.drivers.repositories.programs.command_repository import (
+from src.app.drivers.repositories.programs._implementations.command_repository import (
     CommandRepository,
 )
-from src.app.drivers.repositories.programs.xrandr_repository import (
+from src.app.drivers.repositories.programs._implementations.xrandr_repository import (
     XrandrRepository,
 )
 from src.core.use_cases.apply_monitor_layout import ApplyMonitorLayout
