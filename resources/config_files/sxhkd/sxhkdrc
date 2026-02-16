@@ -1,0 +1,266 @@
+#!/bin/bash
+#--------------------------------------
+#  - terminal
+#--------------------------------------
+super + {Return,KP_Enter}
+    kitty
+
+
+#====================================================================
+# Keys:
+# - super + shift + arrows -> lo manda a la ventana en esa direccion,
+#   y hago focus ahí. Y con ctrl lo mando y me quedo en la ventana.
+#
+#
+# Notas:
+# 1. Poner para que al cambiar de escritorio con super+{q,e} y
+#    pasarse del total de desktop que tiene esa ventana, trunque al
+#    desktop siguiente dentro de esa misma ventana.
+# 2. Revisar la tecla `grave`, es la que está a la izquierda del 1.
+# 3. Ver como navegar por el rofi con el `alt+tab` copadamente.
+# 4. Ver de hacer una variable tipo, `current_window`, y en función
+#    de esta se basen todas las funciones para operar.
+# 5. Checkear si el close windows con esteroides cierra todo, y como
+#    hacer uno que que cierre todo dentro del `curren_window`.
+#====================================================================
+
+
+########################################
+#                  UI                  #
+########################################
+#---------------------------------------
+#  - reboot
+#  - shutdown
+#---------------------------------------
+super + ctrl + alt + {_,shift} + Escape
+    shutdown {-r,_} now
+
+#  - lock_session
+#----> ver como usar betterlockscreen
+#super + Escape
+#	loginctl lock-session; \
+#	loginctl switch-to-greeter
+
+#---------------------------------------
+#  - kill_session
+#---------------------------------------
+super + ctrl + shift + Escape
+    bspc quit
+
+#---------------------------------------
+#  - bspwm restart
+#---------------------------------------
+super + alt + r
+    bspc wm -r
+
+#---------------------------------------
+#  - sxhkd restart
+#---------------------------------------
+super + alt + Escape
+    pkill -USR1 -x sxhkd
+
+#---------------------------------------
+#  - rofi - program launcher
+#  - rofi - window select
+#---------------------------------------
+super + {d,Tab}
+    rofi -show {run,_}
+
+#---------------------------------------
+#  - mute_unmute/audio--/audio++/
+#---------------------------------------
+XF86Audio{Mute,Lower,Raise}{_,Volume,Volume}
+    $HOME/.config/scripts/volume.sh {mute,decrease,increase} {_,_,_}
+
+#---------------------------------------
+#  - play_pause/next_sound>>/previous_sound<<
+#---------------------------------------
+XF86Audio{Prev,Next,Play,Stop}
+    $HOME/.config/scripts/music.py {previous,next,play_pause,stop}
+
+#--------------------------------------
+#  - screenshot
+#--------------------------------------
+Print + {_,super,super+shift} + {_,ctrl}
+    $HOME/.config/scripts/screenshot.py {bbox,focused,full_screen} {0,1}
+
+#######################################
+#            Shortcuts Apps           #
+#######################################
+#--------------------------------------
+#  - brave
+#--------------------------------------
+super + ctrl + {_,shift,shift+alt} + {Return,KP_Enter}
+    brave {_,--incognito,--incognito https://translate.google.com/?hl=es&sl=en&tl=es&op=translate}{_,_}
+
+#--------------------------------------
+#  - vscode
+#--------------------------------------
+super + F1
+    code
+
+#--------------------------------------
+#  - spotify
+#--------------------------------------
+super + F2
+    spotify
+
+#--------------------------------------
+#  - discord
+#--------------------------------------
+super + F3
+    discord
+
+#######################################
+#           Window Manager            #
+#######################################
+#--------------------------------------
+#  - close_window
+#  - close_all_window_focused_desktop
+#--------------------------------------
+super + {_,ctrl + shift} + w
+    bspc node {_,@/} -c
+
+#--------------------------------------
+#  - resize_window/move_floating_window
+#--------------------------------------
+super + alt + {Left,Right,Up,Down}
+    $HOME/.config/scripts/bspwm_resize.sh {left,right,up,down}
+
+#======================================
+#--------------------------------------
+#  - focus_desktop prev/next
+#--------------------------------------
+super + {q,e}
+    bspc desktop -f {prev,next}.local
+
+#--------------------------------------
+#  - send_window_focus prev/next
+#  - send_window prev/next
+#--------------------------------------
+super + shift + {q,e} + {_,ctrl}
+    bspc node -d {prev,next}.local {--follow,_}
+
+#--------------------------------------
+#  - focus_desktop by number
+#--------------------------------------
+super + {1-9,0,KP_End,KP_Down,KP_Next,KP_Left,KP_Begin,KP_Right,KP_Home,KP_Up,KP_Prior,KP_Insert}
+    bspc desktop -f '^{1-9,10,1-9,10}'
+
+#--------------------------------------
+#  - focus_window by arrows
+#--------------------------------------
+super + {Left,Down,Up,Right}
+    bspc node -f {west,south,north,east}
+
+#======================================
+#--------------------------------------
+#  - send_window && focus_desktop by number
+#  - send_window_to_desktop by number
+#--------------------------------------
+super + shift + {1-9,0,KP_End,KP_Down,KP_Next,KP_Left,KP_Begin,KP_Right,KP_Home,KP_Up,KP_Prior,KP_Insert} + {_,ctrl}
+    bspc node -d '^{1-9,10,1-9,10}' {--follow,_}
+
+#--------------------------------------
+#  - send_window_to_monitor_focus by arrows
+#  - send_window_to_monitor by arrows
+#--------------------------------------
+super + shift + {Left,Down,Up,Right} + {_,ctrl}
+    bspc node -m {west,south,north,east} {--follow,_}
+
+#--------------------------------------
+#  - switch_window_current_win by arrows
+#--------------------------------------
+super + ctrl + {Left,Down,Up,Right}
+    bspc node -s {west,south,north,east}.local --follow
+#======================================
+
+
+super + {_,shift} + F11
+    $HOME/.config/scripts/bspwm_toggle.sh {fullscreen_tiled,floating_tiled}
+
+
+
+
+#super + @space
+#	seleccionar todas las ventanas en un desktop.
+#	probar purgearlas, moverlas etc...
+
+
+#----------REVISAR ESTO----------
+#super + shift + {i,o,p}
+#    rofi -show {run,drun,window} -theme $HOME/rofi-collection/nord/nord.rasi
+#-------------basura------------------
+# Ver si esto hace desaparecer la hoja o simplementa la oculta.
+# alternate between the tiled and monocle layout
+#super + m
+#	bspc desktop -l next
+
+# send the newest marked node to the newest preselected node
+#super + y
+#	bspc node newest.marked.local -n newest.!automatic.local
+
+# Esto está copado, ver como funciona
+# swap the current node and the biggest window
+#super + g
+#	bspc node -s biggest.window
+# focus the node for the given path jump
+#super + {p,b,comma,period}
+#	bspc node -f @{parent,brother,first,second}
+
+# focus the next/previous window in the current desktop
+#super + {_,shift} + c
+#	bspc node -f {next,prev}.local.!hidden.window
+
+# focus the next/previous desktop in the current monitor
+#super + bracket{left,right}
+#	bspc desktop -f {prev,next}.local
+
+# focus the last node/desktop
+#super + {grave,Tab}
+#	bspc {node,desktop} -f last
+
+# focus the older or newer node in the focus history
+#super + {o,i}
+#	bspc wm -h off; \
+#	bspc node {older,newer} -f; \
+#	bspc wm -h on
+
+#
+# state/flags
+#
+
+
+# set the window state
+#super + {t,shift + t,s,f}
+#       bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+# set the node flags
+#super + ctrl + {m,x,y,z}
+#       bspc node -g {marked,locked,sticky,private}
+
+
+
+
+
+
+
+#
+# preselect
+#
+
+# preselect the direction
+#super + ctrl + {h,j,k,l}
+#	bspc node -p {west,south,north,east}
+
+# preselect the ratio
+#super + ctrl + {1-9}
+#	bspc node -o 0.{1-9}
+
+# cancel the preselection for the focused node
+#super + ctrl + space
+#	bspc node -p cancel
+
+# cancel the preselection for the focused desktop
+#super + ctrl + shift + space
+#	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel

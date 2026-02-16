@@ -1,0 +1,49 @@
+#!/bin/bash
+pgrep -x sxhkd >/dev/null || sxhkd &
+
+####################################################
+#                   Config BSPWM                   #
+####################################################
+#---------------------------------------------------
+#  - color window
+#---------------------------------------------------
+bspc config focused_border_color \#3F87A7
+bspc config active_border_color   \#1F4D62
+
+#---------------------------------------------------
+#  - window propertys
+#---------------------------------------------------
+bspc config border_width         2
+bspc config window_gap           0
+bspc config split_ratio          0.5
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+
+# Monitor -> desktops mapping (auto from active monitors)
+if [ -f "$HOME/.config/scripts/apply_monitors.py" ]; then
+    (
+        cd "$HOME/.config" && \
+        PYTHONPATH=. python3 ./scripts/apply_monitors.py
+    )
+fi
+
+# Launch polybar
+"$HOME/.config/polybar/launch.sh" &
+
+if [ -f "$HOME/.config/scripts/set_keyboard_layout.py" ]; then
+    (
+        cd "$HOME/.config" && \
+        PYTHONPATH=. python3 ./scripts/set_keyboard_layout.py --layout latam
+    )
+fi
+
+#----------picom----------
+if command -v picom >/dev/null 2>&1; then
+    pkill picom >/dev/null 2>&1 || true
+    picom --config "$HOME/.config/picom/picom.conf" &
+fi
+
+#----------Wallpaper Aleatorio----------
+if [ -x "$HOME/.config/_infra/commands/feh_random" ]; then
+    "$HOME/.config/_infra/commands/feh_random"
+fi
