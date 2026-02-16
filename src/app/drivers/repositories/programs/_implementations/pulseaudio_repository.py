@@ -7,5 +7,6 @@ class PulseaudioRepository(CorePulseaudioRepository):
     def default_config(self) -> ProgramConfig:
         return ProgramConfig(
             name="pulseaudio",
-            package_dependencies=Packages(pkg_specs=[PkgSpec(manager="pacman", names=["pulseaudio", "pulseaudio-alsa", "pamixer"])]),
+            # Keep only user-facing volume tooling; avoid pulseaudio<->pipewire-pulse conflicts.
+            package_dependencies=Packages(pkg_specs=[PkgSpec(manager="pacman", names=["pamixer"])]),
         )
