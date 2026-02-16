@@ -1,3 +1,5 @@
+from typing import Dict
+
 from src.core.entities.program_config import ProgramName
 from src.core.repositories.program_registry_repository import ProgramRegistryRepository as CoreProgramRegistryRepository
 from src.core.repositories.program_repository import CoreProgramRepository
@@ -17,7 +19,7 @@ from src.app.drivers.repositories.programs import (
     WmBaseRepository,
 )
 
-def _get_program_repos() -> dict[ProgramName, CoreProgramRepository]:
+def _get_program_repos() -> Dict[ProgramName, CoreProgramRepository]:
     # FIXME: Ponerle un name a cada repo y usar eso en vez de hardcodear el name acá.
     return {
         "bspwm": BspwmRepository(),
@@ -38,7 +40,7 @@ def _get_program_repos() -> dict[ProgramName, CoreProgramRepository]:
 
 class ProgramRegistryRepository(CoreProgramRegistryRepository):
     def __init__(self) -> None:
-        self._repos: dict[ProgramName, CoreProgramRepository] = _get_program_repos()
+        self._repos: Dict[ProgramName, CoreProgramRepository] = _get_program_repos()
 
     def get_program(self, program: ProgramName) -> CoreProgramRepository:
         repo = self._repos.get(program)
