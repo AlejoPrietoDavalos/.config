@@ -1,7 +1,7 @@
 import time
 
-from src.core.repositories.programs._implementations.bspc_repository import CoreBspcRepository
-from src.core.repositories.programs.xrandr_repository import CoreXrandrRepository
+from src.core.repositories.programs._implementations.bspwm_repository import CoreBspwmRepository
+from src.core.repositories.programs._implementations.xrandr_repository import CoreXrandrRepository
 
 
 DESKTOPS = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
@@ -20,10 +20,10 @@ def split_even(items: list[str], parts: int) -> list[list[str]]:
     return chunks
 
 
-class ApplyMonitorLayout:
-    def __init__(self, xrandr_repo: CoreXrandrRepository, bspc_repo: CoreBspcRepository) -> None:
+class ApplyMonitorLayoutService:
+    def __init__(self, xrandr_repo: CoreXrandrRepository, bspwm_repo: CoreBspwmRepository) -> None:
         self._xrandr_repo = xrandr_repo
-        self._bspc_repo = bspc_repo
+        self._bspwm_repo = bspwm_repo
 
     def run(self) -> None:
         self._ensure_connected_outputs_enabled()
@@ -34,7 +34,7 @@ class ApplyMonitorLayout:
         target_monitors = monitors[: len(DESKTOPS)]
         chunks = split_even(DESKTOPS, len(target_monitors))
         for monitor, desktops in zip(target_monitors, chunks):
-            self._bspc_repo.set_monitor_desktops(monitor, desktops)
+            self._bspwm_repo.set_monitor_desktops(monitor, desktops)
 
     def _ensure_connected_outputs_enabled(self) -> None:
         connected = self._xrandr_repo.list_connected_outputs()
@@ -46,7 +46,7 @@ class ApplyMonitorLayout:
             time.sleep(0.2)
 
     def _resolve_active_monitors(self) -> list[str]:
-        bspwm_monitors = self._bspc_repo.list_monitors()
+        bspwm_monitors = self._bspwm_repo.list_monitors()
         if not bspwm_monitors:
             return []
         xrandr_active = self._xrandr_repo.list_active_outputs()
@@ -54,3 +54,7 @@ class ApplyMonitorLayout:
             return bspwm_monitors
         ordered = [m for m in xrandr_active if m in bspwm_monitors]
         return ordered or bspwm_monitors
+
+
+# Backward compatibility while migrating call sites.
+ApplyMonitorLayout = ApplyMonitorLayoutService
