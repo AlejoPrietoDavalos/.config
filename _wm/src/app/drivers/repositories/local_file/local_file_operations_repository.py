@@ -4,8 +4,8 @@ from pathlib import Path
 
 from src.app.drivers.repositories.local_file.local_filesystem_repository import LocalFilesystemRepository
 from src.core.entities.program_config import FileMode
-from _wm.src.core.repositories.local_file.file_operations_repository import FileOperationsRepository
-from _wm.src.core.repositories.local_file.filesystem_repository import FilesystemRepository
+from src.core.repositories.local_file.file_operations_repository import FileOperationsRepository
+from src.core.repositories.local_file.filesystem_repository import FilesystemRepository
 
 
 class LocalFileOperationsRepository(FileOperationsRepository):

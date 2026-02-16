@@ -1,7 +1,7 @@
 from typing import Dict
 
 from src.core.entities.program_config import ProgramName
-from _wm.src.core.repositories.programs.program_factory_repository import CoreProgramFactoryRepository
+from src.core.repositories.programs.program_factory_repository import CoreProgramFactoryRepository
 from src.core.repositories.programs.program_repository import CoreProgramRepository
 from src.app.drivers.repositories.programs import (
     BspwmRepository,

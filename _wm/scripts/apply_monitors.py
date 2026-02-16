@@ -4,7 +4,7 @@
 from src.app.drivers.repositories.programs._implementations.bspc_repository import (
     BspcRepository,
 )
-from src.app.drivers.repositories.programs._implementations.command_repository import (
+from src.app.drivers.repositories.shell.command_repository import (
     CommandRepository,
 )
 from src.app.drivers.repositories.programs._implementations.xrandr_repository import (
