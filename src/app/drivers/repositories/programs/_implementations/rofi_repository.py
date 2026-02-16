@@ -10,5 +10,5 @@ class RofiRepository(CoreRofiRepository):
         return ProgramConfig(
             name="rofi",
             files=ProgramFiles(source_dir=program_root / "files", target_dir=path_dotfiles / "rofi"),
-            packages=Packages(pkg_specs=[PkgSpec(manager="pacman", names=["rofi"])]),
+            package_dependencies=Packages(pkg_specs=[PkgSpec(manager="pacman", names=["rofi"])]),
         )

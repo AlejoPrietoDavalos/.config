@@ -56,7 +56,7 @@ make install-all
 ```
 
 Programas disponibles:
-- `bspwm`, `sxhkd`, `polybar`, `kitty`, `ranger`, `picom`, `rofi`, `thunar`, `vscode`, `wm-base`, `pulseaudio`, `display-tools`, `nvidia`.
+- `bspwm`, `sxhkd`, `polybar`, `kitty`, `ranger`, `picom`, `rofi`, `thunar`, `vscode`, `pulseaudio`, `arandr`, `xorg`, `nvidia`.
 
 Ejemplos:
 ```bash

@@ -16,9 +16,9 @@ ProgramName = Literal[
     "rofi",
     "thunar",
     "vscode",
-    "wm-base",
     "pulseaudio",
-    "display-tools",
+    "arandr",
+    "xorg",
     "nvidia",
 ]
 PROGRAM_NAMES: tuple[ProgramName, ...] = get_args(ProgramName)
@@ -57,15 +57,15 @@ class ProgramFiles:
 @dataclass(frozen=True)
 class ProgramConfig:
     name: ProgramName
-    packages: Packages
+    package_dependencies: Packages
     files: ProgramFiles | None = None
-    dependencies: tuple[ProgramName, ...] = field(default_factory=tuple)
+    program_dependencies: tuple[ProgramName, ...] = field(default_factory=tuple)
     post_install_commands: tuple[str, ...] = field(default_factory=tuple)
 
     def __post_init__(self) -> None:
         if self.name not in PROGRAM_NAMES:
             raise ValueError(f"Invalid program '{self.name}'. Available: {PROGRAM_NAMES}")
-        for dep in self.dependencies:
+        for dep in self.program_dependencies:
             if dep not in PROGRAM_NAMES:
                 raise ValueError(
                     f"Invalid dependency '{dep}' in program '{self.name}'. "

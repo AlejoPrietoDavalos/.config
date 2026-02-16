@@ -1,5 +1,5 @@
+from src.core.repositories.programs._implementations.arandr_repository import CoreArandrRepository
 from src.core.repositories.programs._implementations.bspwm_repository import CoreBspwmRepository
-from src.core.repositories.programs._implementations.display_tools_repository import CoreDisplayToolsRepository
 from src.core.repositories.programs._implementations.hwclock_repository import CoreHwclockRepository
 from src.core.repositories.programs._implementations.kitty_repository import CoreKittyRepository
 from src.core.repositories.programs._implementations.nvidia_repository import CoreNvidiaRepository
@@ -12,8 +12,8 @@ from src.core.repositories.programs._implementations.setxkbmap_repository import
 from src.core.repositories.programs._implementations.sxhkd_repository import CoreSxhkdRepository
 from src.core.repositories.programs._implementations.thunar_repository import CoreThunarRepository
 from src.core.repositories.programs._implementations.vscode_repository import CoreVscodeRepository
-from src.core.repositories.programs._implementations.wm_base_repository import CoreWmBaseRepository
 from src.core.repositories.programs._implementations.xrandr_repository import CoreXrandrRepository
+from src.core.repositories.programs._implementations.xorg_repository import CoreXorgRepository
 from src.core.repositories.programs.program_repository import CoreProgramRepository
 from src.core.repositories.programs.program_factory_repository import CoreProgramFactoryRepository
 from src.core.repositories.programs.program_installer_repository import CoreProgramInstallerRepository

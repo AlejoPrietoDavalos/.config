@@ -10,6 +10,6 @@ class SxhkdRepository(CoreSxhkdRepository):
         return ProgramConfig(
             name="sxhkd",
             files=ProgramFiles(source_dir=program_root / "files", target_dir=path_dotfiles / "sxhkd"),
-            packages=Packages(pkg_specs=[PkgSpec(manager="pacman", names=["sxhkd", "playerctl", "scrot", "xclip"])]),
+            package_dependencies=Packages(pkg_specs=[PkgSpec(manager="pacman", names=["sxhkd", "playerctl", "scrot", "xclip"])]),
             post_install_commands=(str(path_wm_scripts / "generate_sxhkd.sh"),),
         )

@@ -26,10 +26,10 @@ class ProgramInstallerRepository(CoreProgramInstallerRepository):
         self._command_repo = command_repo or CommandRepository()
 
     def install_requirement(self, cfg: ProgramConfig) -> None:
-        self._package_repo.install(cfg.packages)
+        self._package_repo.install(cfg.package_dependencies)
 
     def uninstall_requirement(self, cfg: ProgramConfig) -> None:
-        self._package_repo.uninstall(cfg.packages)
+        self._package_repo.uninstall(cfg.package_dependencies)
 
     def install_files(self, cfg: ProgramConfig) -> None:
         if cfg.files is not None:

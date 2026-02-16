@@ -15,8 +15,10 @@ class BspwmRepository(CoreBspwmRepository):
         return ProgramConfig(
             name="bspwm",
             files=ProgramFiles(source_dir=program_root / "files", target_dir=path_dotfiles / "bspwm"),
-            packages=Packages(pkg_specs=[PkgSpec(manager="pacman", names=["bspwm", "xorg-setxkbmap"])]),
-            dependencies=("wm-base", "display-tools"),
+            package_dependencies=Packages(
+                pkg_specs=[PkgSpec(manager="pacman", names=["bspwm", "xorg-setxkbmap", "feh"])]
+            ),
+            program_dependencies=("arandr",),
         )
 
     def list_monitors(self) -> list[str]:

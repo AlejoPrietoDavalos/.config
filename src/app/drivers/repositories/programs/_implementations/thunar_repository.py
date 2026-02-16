@@ -10,5 +10,5 @@ class ThunarRepository(CoreThunarRepository):
         return ProgramConfig(
             name="thunar",
             files=ProgramFiles(source_dir=program_root / "files", target_dir=path_dotfiles / "Thunar"),
-            packages=Packages(pkg_specs=[PkgSpec(manager="pacman", names=["thunar"])]),
+            package_dependencies=Packages(pkg_specs=[PkgSpec(manager="pacman", names=["thunar"])]),
         )

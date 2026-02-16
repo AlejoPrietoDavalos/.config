@@ -7,5 +7,5 @@ class PulseaudioRepository(CorePulseaudioRepository):
     def default_config(self) -> ProgramConfig:
         return ProgramConfig(
             name="pulseaudio",
-            packages=Packages(pkg_specs=[PkgSpec(manager="pacman", names=["pulseaudio", "pulseaudio-alsa", "pamixer"])]),
+            package_dependencies=Packages(pkg_specs=[PkgSpec(manager="pacman", names=["pulseaudio", "pulseaudio-alsa", "pamixer"])]),
         )

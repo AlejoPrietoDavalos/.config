@@ -10,6 +10,6 @@ class PolybarRepository(CorePolybarRepository):
         return ProgramConfig(
             name="polybar",
             files=ProgramFiles(source_dir=program_root / "files", target_dir=path_dotfiles / "polybar"),
-            packages=Packages(pkg_specs=[PkgSpec(manager="pacman", names=["polybar"])]),
-            dependencies=("pulseaudio",),
+            package_dependencies=Packages(pkg_specs=[PkgSpec(manager="pacman", names=["polybar"])]),
+            program_dependencies=("pulseaudio",),
         )

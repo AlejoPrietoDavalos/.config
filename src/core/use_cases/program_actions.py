@@ -1,5 +1,3 @@
-from typing import cast
-
 from src.core.entities.program_config import ProgramName
 from src.core.repositories.programs import CoreProgramFactoryRepository, CoreProgramInstallerRepository
 
@@ -61,7 +59,7 @@ class ProgramActions:
         # FIXME
         for program in self._program_factory_repo.list_programs():
             print(f"[dirty_install_all_packages] Installing: {program}")
-            program_repo = self._program_factory_repo.get_program_repo(cast(ProgramName, program))
+            program_repo = self._program_factory_repo.get_program_repo(program)
             program_cfg = program_repo.default_config()
             self._program_installer_repo.install_requirement(program_cfg)
             self._program_installer_repo.install_files(program_cfg)
@@ -78,7 +76,7 @@ class ProgramActions:
                 raise ValueError(f"Cyclic dependency detected at program: {name}")
             in_stack.add(name)
             cfg = self._program_factory_repo.get_program_repo(name).default_config()
-            for dep in cfg.dependencies:
+            for dep in cfg.program_dependencies:
                 visit(dep)
             in_stack.remove(name)
             visited.add(name)

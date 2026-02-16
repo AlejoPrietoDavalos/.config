@@ -10,5 +10,5 @@ class RangerRepository(CoreRangerRepository):
         return ProgramConfig(
             name="ranger",
             files=ProgramFiles(source_dir=program_root / "files", target_dir=path_dotfiles / "ranger"),
-            packages=Packages(pkg_specs=[PkgSpec(manager="pacman", names=["ranger"])]),
+            package_dependencies=Packages(pkg_specs=[PkgSpec(manager="pacman", names=["ranger"])]),
         )

@@ -2,7 +2,7 @@ SHELL := /bin/bash
 RUN := PYTHONPATH=. python3 ./main.py
 PROGRAM ?=
 
-PROGRAMS := bspwm sxhkd polybar kitty ranger picom rofi thunar vscode wm-base pulseaudio display-tools nvidia
+PROGRAMS := bspwm sxhkd polybar kitty ranger picom rofi thunar vscode pulseaudio arandr xorg nvidia
 
 # Usage: make <target> PROGRAM=<program>
 define require_program
@@ -59,9 +59,8 @@ remove-core-purge:
 	@WM_REMOVE_PACKAGES=1 $(MAKE) remove-core
 
 wm-requirements-install:
-	@$(MAKE) install-requirement PROGRAM=wm-base
 	@$(MAKE) install-requirement PROGRAM=pulseaudio
-	@$(MAKE) install-requirement PROGRAM=display-tools
+	@$(MAKE) install-requirement PROGRAM=arandr
 	@$(MAKE) install-requirement PROGRAM=nvidia
 
 sddm-install:

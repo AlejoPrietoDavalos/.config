@@ -10,5 +10,5 @@ class CoreProgramFactoryRepository(ABC):
         ...
 
     @abstractmethod
-    def list_programs(self) -> list[str]:
+    def list_programs(self) -> list[ProgramName]:
         ...

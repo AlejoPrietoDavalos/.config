@@ -10,5 +10,5 @@ class KittyRepository(CoreKittyRepository):
         return ProgramConfig(
             name="kitty",
             files=ProgramFiles(source_dir=program_root / "files", target_dir=path_dotfiles / "kitty"),
-            packages=Packages(pkg_specs=[PkgSpec(manager="pacman", names=["kitty"])]),
+            package_dependencies=Packages(pkg_specs=[PkgSpec(manager="pacman", names=["kitty"])]),
         )

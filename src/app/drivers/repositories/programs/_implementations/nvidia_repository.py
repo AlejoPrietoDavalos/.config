@@ -14,7 +14,7 @@ class NvidiaRepository(CoreNvidiaRepository):
     def default_config(self) -> ProgramConfig:
         return ProgramConfig(
             name="nvidia",
-            packages=Packages(
+            package_dependencies=Packages(
                 pkg_specs=[
                     PkgSpec(
                         manager="pacman",
