@@ -76,7 +76,7 @@ XF86Audio{Mute,Lower,Raise}{_,Volume,Volume}
 #  - play_pause/next_sound>>/previous_sound<<
 #---------------------------------------
 XF86Audio{Prev,Next,Play,Stop}
-    $HOME/.config/scripts/music.sh {previous,next,play_pause,stop}
+    $HOME/.config/scripts/music.py {previous,next,play_pause,stop}
 
 #--------------------------------------
 #  - screenshot
