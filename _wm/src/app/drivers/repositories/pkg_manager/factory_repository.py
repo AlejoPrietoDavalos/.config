@@ -1,6 +1,6 @@
 from src.app.drivers.repositories.pkg_manager import PacmanPkgRepository, YayPkgRepository
 from src.core.entities.program_config import PkgManager, Packages
-from src.core.repositories.pkg_repository import CorePkgRepository
+from src.core.repositories.pkg_manager.pkg_repository import CorePkgRepository
 from src.core.repositories.pkg_manager.factory_repository import CorePkgManagerFactoryRepository
 
 

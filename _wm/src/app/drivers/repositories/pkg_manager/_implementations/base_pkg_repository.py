@@ -5,7 +5,7 @@ from typing import Sequence
 
 from src.app.drivers.repositories.programs._implementations.command_repository import CommandRepository
 from src.core.repositories.command_repository import CoreCommandRepository
-from src.core.repositories.pkg_repository import CorePkgRepository
+from src.core.repositories.pkg_manager.pkg_repository import CorePkgRepository
 
 
 class BasePkgRepository(CorePkgRepository, ABC):
