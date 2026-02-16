@@ -43,9 +43,7 @@ class ProgramRegistryRepository(CoreProgramRegistryRepository):
         self._repos: Dict[ProgramName, CoreProgramRepository] = _get_program_repos()
 
     def get_program(self, program: ProgramName) -> CoreProgramRepository:
-        repo = self._repos.get(program)
-        if repo is None:
-            raise ValueError(f"Program not found: {program}")
+        repo = self._repos[program]
 
         cfg = repo.default_config()
         if cfg.files is not None and not cfg.files.source_dir.is_dir():
