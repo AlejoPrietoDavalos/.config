@@ -66,7 +66,8 @@ make uninstall PROGRAM=polybar
 ```
 
 Notas:
-- `make install-files PROGRAM=sxhkd` regenera automaticamente `~/.config/sxhkd/sxhkdrc`.
+- `make install-files PROGRAM=sxhkd` copia `resources/config_files/sxhkd/sxhkdrc` a `~/.config/sxhkd/sxhkdrc`.
+- `make sxhkd-reload` recarga `sxhkd` enviando `USR1` al proceso.
 - `vscode` usa copia de `settings.json` (no symlink).
 - `make install-all` usa la accion dirty para instalar paquetes+files de todos los repos del registry.
 
@@ -81,7 +82,7 @@ make bspwm-bootstrap
 make bspwm-install-session
 make bspwm-check-display
 make bspwm-restart
-make sxhkd-generate
+make sxhkd-reload
 make scripts-chmod
 make clock-set
 make keyboard-set-latam

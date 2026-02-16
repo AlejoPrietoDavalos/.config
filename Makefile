@@ -3,17 +3,30 @@ RUN := PYTHONPATH=. python3 ./main.py
 PROGRAM ?=
 
 PROGRAMS := bspwm sxhkd polybar kitty ranger picom rofi thunar vscode pulseaudio arandr xorg nvidia
+PROGRAM_REQUIRED_TARGETS := install uninstall install-requirement uninstall-requirement install-files uninstall-files
 
-# Usage: make <target> PROGRAM=<program>
+# Allow `make <target> <program>` as shorthand for `make <target> PROGRAM=<program>`.
+ifneq ($(strip $(filter $(PROGRAM_REQUIRED_TARGETS),$(firstword $(MAKECMDGOALS)))),)
+ifeq ($(strip $(PROGRAM)),)
+PROGRAM := $(word 2,$(MAKECMDGOALS))
+endif
+endif
+
+# Usage: make <target> PROGRAM=<program> | make <target> <program>
 define require_program
-$(if $(strip $(PROGRAM)),,$(error Missing PROGRAM. Use: make <target> PROGRAM=<program>. Available: $(PROGRAMS)))
+$(if $(strip $(PROGRAM)),,$(error Missing PROGRAM. Use: make <target> PROGRAM=<program> or make <target> <program>. Available: $(PROGRAMS)))
+$(if $(filter $(PROGRAM),$(PROGRAMS)),,$(error Invalid PROGRAM '$(PROGRAM)'. Available: $(PROGRAMS)))
 endef
 
 .PHONY: \
 	install uninstall install-requirement uninstall-requirement install-files uninstall-files \
 	install-all install-core remove-core remove-core-purge wm-requirements-install \
 	sddm-install sddm-enable sddm-start bspwm-bootstrap bspwm-install-session bspwm-check-display bspwm-restart \
-	sxhkd-generate clock-set keyboard-set-latam scripts-chmod
+	sxhkd-reload clock-set keyboard-set-latam scripts-chmod \
+	$(PROGRAMS)
+
+$(PROGRAMS):
+	@:
 
 install:
 	$(call require_program)
@@ -34,7 +47,6 @@ uninstall-requirement:
 install-files:
 	$(call require_program)
 	@$(RUN) --action install-files --program $(PROGRAM)
-	@if [ "$(PROGRAM)" = "sxhkd" ]; then ./scripts/generate_sxhkd.sh; fi
 
 uninstall-files:
 	$(call require_program)
@@ -89,8 +101,8 @@ bspwm-restart:
 		exit 1; \
 	fi
 
-sxhkd-generate:
-	@./scripts/generate_sxhkd.sh
+sxhkd-reload:
+	@PYTHONPATH=. python3 -c "from src.app.drivers.repositories.programs._implementations.sxhkd_repository import SxhkdRepository; SxhkdRepository().reload_sxhkd()"
 
 clock-set:
 	@PYTHONPATH=. python3 ./scripts/set_clock.py
