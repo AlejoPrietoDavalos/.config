@@ -70,19 +70,19 @@ super + {d,Tab}
 #  - mute_unmute/audio--/audio++/
 #---------------------------------------
 XF86Audio{Mute,Lower,Raise}{_,Volume,Volume}
-    {{commands}}/volume.sh {mute,decrease,increase} {_,_,_}
+    $HOME/.config/scripts/volume.sh {mute,decrease,increase} {_,_,_}
 
 #---------------------------------------
 #  - play_pause/next_sound>>/previous_sound<<
 #---------------------------------------
 XF86Audio{Prev,Next,Play,Stop}
-    {{commands}}/music.sh {previous,next,play_pause,stop}
+    $HOME/.config/scripts/music.sh {previous,next,play_pause,stop}
 
 #--------------------------------------
 #  - screenshot
 #--------------------------------------
 Print + {_,super,super+shift} + {_,ctrl}
-    python3 {{commands}}/screenshot.py {bbox,focused,full_screen} {0,1}
+    $HOME/.config/scripts/screenshot.py {bbox,focused,full_screen} {0,1}
 
 #######################################
 #            Shortcuts Apps           #
@@ -125,7 +125,7 @@ super + {_,ctrl + shift} + w
 #  - resize_window/move_floating_window
 #--------------------------------------
 super + alt + {Left,Right,Up,Down}
-    {{cmd_bspwm}}/bspc_resize {left,right,up,down}
+    $HOME/.config/scripts/bspc_resize {left,right,up,down}
 
 #======================================
 #--------------------------------------
@@ -177,7 +177,7 @@ super + ctrl + {Left,Down,Up,Right}
 
 
 super + {_,shift} + F11
-    {{cmd_bspwm}}/bspc_toggle {fullscreen_tiled,floating_tiled}
+    $HOME/.config/scripts/bspc_toggle {fullscreen_tiled,floating_tiled}
 
 
 

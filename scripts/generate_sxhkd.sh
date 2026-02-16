@@ -1,3 +1,3 @@
 #!/bin/bash
 set -euo pipefail
-python3 "$HOME/.config/programs/sxhkd/generate_sxhkdrc.py"
+python3 "$HOME/.config/scripts/generate_sxhkdrc.py"
