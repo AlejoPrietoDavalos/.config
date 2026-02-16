@@ -10,6 +10,15 @@ class BspwmRepository(CoreBspwmRepository):
     def __init__(self, command_repo: CoreCommandRepository | None = None) -> None:
         self._command_repo = command_repo or CommandRepository()
 
+    def default_config(self) -> ProgramConfig:
+        program_root = path_wm_programs / "bspwm"
+        return ProgramConfig(
+            name="bspwm",
+            files=ProgramFiles(source_dir=program_root / "files", target_dir=path_dotfiles / "bspwm"),
+            packages=Packages(pkg_specs=[PkgSpec(manager="pacman", names=["bspwm", "xorg-setxkbmap"])]),
+            dependencies=("wm-base", "display-tools"),
+        )
+
     def list_monitors(self) -> list[str]:
         try:
             out = self._command_repo.run_capture("bspc query -M --names")
@@ -22,12 +31,3 @@ class BspwmRepository(CoreBspwmRepository):
             return
         quoted = " ".join(f"'{d}'" for d in desktops)
         self._command_repo.run(f"bspc monitor '{monitor}' -d {quoted}")
-
-    def default_config(self) -> ProgramConfig:
-        program_root = path_wm_programs / "bspwm"
-        return ProgramConfig(
-            name="bspwm",
-            files=ProgramFiles(source_dir=program_root / "files", target_dir=path_dotfiles / "bspwm"),
-            packages=Packages(pkg_specs=[PkgSpec(manager="pacman", names=["bspwm", "xorg-setxkbmap"])]),
-            dependencies=("wm-base", "display-tools"),
-        )
