@@ -2,8 +2,8 @@ import argparse
 from typing import cast
 
 from src.app.drivers.repositories.programs import (
+    ProgramFactoryRepository,
     ProgramInstallerRepository,
-    ProgramRegistryRepository,
 )
 from src.core.entities.program_config import PROGRAM_NAMES, ProgramName
 from src.core.use_cases.program_actions import ProgramActions
@@ -21,16 +21,20 @@ def main() -> None:
             "uninstall-requirement",
             "install-files",
             "uninstall-files",
+            "dirty_install_all_packages",
         ],
     )
-    parser.add_argument("--program", required=True, choices=PROGRAM_NAMES)
+    parser.add_argument("--program", choices=PROGRAM_NAMES)
     args = parser.parse_args()
 
+    if args.action != "dirty_install_all_packages" and args.program is None:
+        parser.error("--program is required for this action")
+
     actions = ProgramActions(
-        program_factory_repo=ProgramRegistryRepository(),
+        program_factory_repo=ProgramFactoryRepository(),
         program_installer_repo=ProgramInstallerRepository(),
     )
-    actions.run(action=args.action, program=cast(ProgramName, args.program))
+    actions.run(action=args.action, program=cast(ProgramName, args.program) if args.program else None)
 
 
 if __name__ == "__main__":
