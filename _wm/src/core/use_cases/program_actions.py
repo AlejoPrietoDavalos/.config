@@ -1,9 +1,9 @@
 from src.core.entities.program_config import ProgramName
-from src.core.repositories.program_registry_repository import ProgramRegistryRepository
+from src.core.repositories.program_registry_repository import CoreProgramRegistryRepository
 
 
 class ProgramActions:
-    def __init__(self, program_registry_repo: ProgramRegistryRepository) -> None:
+    def __init__(self, program_registry_repo: CoreProgramRegistryRepository) -> None:
         self._program_registry_repo = program_registry_repo
 
     def run(self, action: str, program: ProgramName) -> None:
