@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-src="$HOME/.config/programs/bspwm/files/bspwm.desktop"
+src="$HOME/.config/resources/config_files/bspwm/bspwm.desktop"
 dst="/usr/share/xsessions/bspwm.desktop"
 
 sudo install -Dm644 "$src" "$dst"

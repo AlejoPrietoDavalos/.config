@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Literal, get_args
+from typing import Callable, Literal, get_args
 
 PkgManager = Literal["pacman", "yay"]
 FileMode = Literal["link", "copy"]
@@ -45,8 +45,8 @@ class Packages:
 
 @dataclass(frozen=True)
 class ProgramFiles:
-    source_dir: Path
-    target_dir: Path
+    path_folder_config_files_input: Path
+    path_folder_program_dotfile: Path
     mode: FileMode = "copy"
 
     def __post_init__(self) -> None:
@@ -60,7 +60,8 @@ class ProgramConfig:
     package_dependencies: Packages
     files: ProgramFiles | None = None
     program_dependencies: tuple[ProgramName, ...] = field(default_factory=tuple)
-    post_install_commands: tuple[str, ...] = field(default_factory=tuple)
+    post_install_actions: tuple[Callable[[], None], ...] = field(default_factory=tuple)
+    post_uninstall_actions: tuple[Callable[[], None], ...] = field(default_factory=tuple)
 
     def __post_init__(self) -> None:
         if self.name not in PROGRAM_NAMES:

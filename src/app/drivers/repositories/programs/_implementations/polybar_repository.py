@@ -1,4 +1,4 @@
-from src.core.constants import path_dotfiles, path_wm_programs
+from src.core.constants import path_config, path_config_files
 from src.core.entities.program_config import PkgSpec, Packages
 from src.core.entities.program_config import ProgramConfig, ProgramFiles
 from src.core.repositories.programs._implementations.polybar_repository import CorePolybarRepository
@@ -6,10 +6,12 @@ from src.core.repositories.programs._implementations.polybar_repository import C
 
 class PolybarRepository(CorePolybarRepository):
     def default_config(self) -> ProgramConfig:
-        program_root = path_wm_programs / "polybar"
         return ProgramConfig(
             name="polybar",
-            files=ProgramFiles(source_dir=program_root / "files", target_dir=path_dotfiles / "polybar"),
+            files=ProgramFiles(
+                path_folder_config_files_input=path_config_files / "polybar",
+                path_folder_program_dotfile=path_config / "polybar",
+            ),
             package_dependencies=Packages(pkg_specs=[PkgSpec(manager="pacman", names=["polybar"])]),
             program_dependencies=("pulseaudio",),
         )

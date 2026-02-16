@@ -1,4 +1,4 @@
-from src.core.constants import path_dotfiles, path_wm_programs
+from src.core.constants import path_config, path_config_files
 from src.core.entities.program_config import PkgSpec, Packages
 from src.core.entities.program_config import ProgramConfig, ProgramFiles
 from src.core.repositories.programs._implementations.ranger_repository import CoreRangerRepository
@@ -6,9 +6,11 @@ from src.core.repositories.programs._implementations.ranger_repository import Co
 
 class RangerRepository(CoreRangerRepository):
     def default_config(self) -> ProgramConfig:
-        program_root = path_wm_programs / "ranger"
         return ProgramConfig(
             name="ranger",
-            files=ProgramFiles(source_dir=program_root / "files", target_dir=path_dotfiles / "ranger"),
+            files=ProgramFiles(
+                path_folder_config_files_input=path_config_files / "ranger",
+                path_folder_program_dotfile=path_config / "ranger",
+            ),
             package_dependencies=Packages(pkg_specs=[PkgSpec(manager="pacman", names=["ranger"])]),
         )

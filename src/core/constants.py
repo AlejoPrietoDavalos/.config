@@ -1,7 +1,7 @@
 from pathlib import Path
 
 path_home = Path.home()
-path_dotfiles = path_home / ".config"
-path_wm = path_dotfiles
-path_wm_programs = path_wm / "programs"
-path_wm_scripts = path_wm / "scripts"
+path_config = path_home / ".config"
+path_resources = path_config / "resources"
+path_config_files = path_resources / "config_files"
+path_scripts = path_config / "scripts"

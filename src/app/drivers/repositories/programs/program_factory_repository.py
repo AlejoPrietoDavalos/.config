@@ -16,8 +16,8 @@ class ProgramFactoryRepository(CoreProgramFactoryRepository):
         repo = self._repos[program]
 
         cfg = repo.default_config()
-        if cfg.files is not None and not cfg.files.source_dir.is_dir():
-            raise ValueError(f"Missing files dir: {cfg.files.source_dir}")
+        if cfg.files is not None and not cfg.files.path_folder_config_files_input.is_dir():
+            raise ValueError(f"Missing files dir: {cfg.files.path_folder_config_files_input}")
         return repo
 
     def list_programs(self) -> list[ProgramName]:
