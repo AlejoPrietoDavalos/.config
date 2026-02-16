@@ -7,11 +7,11 @@ class ProgramActions:
         self._program_registry_repo = program_registry_repo
 
     def run(self, action: str, program: ProgramName) -> None:
-        program_repo = self._program_registry_repo.get_program(program)
+        program_repo = self._program_registry_repo.get_program_repo(program)
 
         if action == "install-requirement":
             for dep in self._resolve_dependency_order(program):
-                self._program_registry_repo.get_program(dep).install_requirement()
+                self._program_registry_repo.get_program_repo(dep).install_requirement()
             return
 
         if action == "uninstall-requirement":
@@ -28,7 +28,7 @@ class ProgramActions:
 
         if action == "install":
             for dep in self._resolve_dependency_order(program):
-                self._program_registry_repo.get_program(dep).install_requirement()
+                self._program_registry_repo.get_program_repo(dep).install_requirement()
             program_repo.install_files()
             return
 
@@ -50,7 +50,7 @@ class ProgramActions:
             if name in in_stack:
                 raise ValueError(f"Cyclic dependency detected at program: {name}")
             in_stack.add(name)
-            cfg = self._program_registry_repo.get_program(name).default_config()
+            cfg = self._program_registry_repo.get_program_repo(name).default_config()
             for dep in cfg.dependencies:
                 visit(dep)
             in_stack.remove(name)

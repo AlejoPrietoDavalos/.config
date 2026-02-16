@@ -42,7 +42,7 @@ class ProgramRegistryRepository(CoreProgramRegistryRepository):
     def __init__(self) -> None:
         self._repos: Dict[ProgramName, CoreProgramRepository] = _get_program_repos()
 
-    def get_program(self, program: ProgramName) -> CoreProgramRepository:
+    def get_program_repo(self, program: ProgramName) -> CoreProgramRepository:
         repo = self._repos[program]
 
         cfg = repo.default_config()
