@@ -6,6 +6,9 @@ from src.app.drivers.repositories.programs._implementations.arandr_repository im
 from src.app.drivers.repositories.programs._implementations.bspwm_repository import (
     BspwmRepository,
 )
+from src.app.drivers.repositories.programs._implementations.docker_repository import (
+    DockerRepository,
+)
 from src.app.drivers.repositories.programs._implementations.kitty_repository import (
     KittyRepository,
 )
@@ -57,6 +60,7 @@ def get_program_repositories() -> Dict[ProgramName, CoreProgramRepository]:
     return {
         "arandr": ArandrRepository(),
         "bspwm": BspwmRepository(),
+        "docker": DockerRepository(),
         "kitty": KittyRepository(),
         "nvidia": NvidiaRepository(),
         "picom": PicomRepository(),

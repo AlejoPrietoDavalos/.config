@@ -23,6 +23,7 @@ ProgramName = Literal[
     "arandr",
     "xorg",
     "nvidia",
+    "docker",
 ]
 PROGRAM_NAMES: tuple[ProgramName, ...] = get_args(ProgramName)
 PKG_MANAGERS: tuple[PkgManager, ...] = get_args(PkgManager)
