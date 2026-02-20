@@ -2,7 +2,7 @@ SHELL := /bin/bash
 RUN := PYTHONPATH=. python3 ./main.py
 PROGRAM ?=
 
-PROGRAMS := bspwm sxhkd polybar kitty ranger picom rofi playerctl scrot thunar vscode xclip pulseaudio arandr xorg nvidia docker
+PROGRAMS := fonts bspwm sxhkd polybar kitty ranger picom rofi playerctl scrot thunar vscode xclip pulseaudio arandr xorg nvidia docker
 PROGRAM_REQUIRED_TARGETS := install uninstall install-requirement uninstall-requirement install-files uninstall-files
 
 # Allow `make <target> <program>` as shorthand for `make <target> PROGRAM=<program>`.

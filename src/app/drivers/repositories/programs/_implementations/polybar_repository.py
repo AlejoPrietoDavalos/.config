@@ -12,6 +12,13 @@ class PolybarRepository(CorePolybarRepository):
                 path_folder_config_files_input=path_config_files / "polybar",
                 path_folder_program_dotfile=path_config / "polybar",
             ),
-            package_dependencies=Packages(pkg_specs=[PkgSpec(manager="pacman", names=["polybar"])]),
+            package_dependencies=Packages(
+                pkg_specs=[
+                    PkgSpec(
+                        manager="pacman",
+                        names=["polybar", "networkmanager", "libnotify"],
+                    )
+                ]
+            ),
             program_dependencies=("pulseaudio",),
         )
