@@ -7,6 +7,7 @@ from typing import Callable, Literal, get_args
 PkgManager = Literal["pacman", "yay"]
 FileMode = Literal["link", "copy"]
 ProgramName = Literal[
+    "fonts",
     "bspwm",
     "sxhkd",
     "polybar",

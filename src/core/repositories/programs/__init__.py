@@ -1,6 +1,7 @@
 from src.core.repositories.programs._implementations.arandr_repository import CoreArandrRepository
 from src.core.repositories.programs._implementations.bspwm_repository import CoreBspwmRepository
 from src.core.repositories.programs._implementations.docker_repository import CoreDockerRepository
+from src.core.repositories.programs._implementations.fonts_repository import CoreFontsRepository
 from src.core.repositories.programs._implementations.hwclock_repository import CoreHwclockRepository
 from src.core.repositories.programs._implementations.kitty_repository import CoreKittyRepository
 from src.core.repositories.programs._implementations.nvidia_repository import CoreNvidiaRepository
