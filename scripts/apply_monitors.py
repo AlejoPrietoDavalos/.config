@@ -10,6 +10,8 @@ from src.app.drivers.repositories.programs._implementations.xrandr_repository im
 )
 from src.core.use_cases.apply_monitor_layout import ApplyMonitorLayoutService
 
+REVERSE_MONITOR_LAYOUT = False
+
 
 def main() -> int:
     configure_logging_repo = ConfigureLoggingRepository()
@@ -17,6 +19,7 @@ def main() -> int:
     use_case = ApplyMonitorLayoutService(
         xrandr_repo=XrandrRepository(),
         bspwm_repo=BspwmRepository(),
+        reverse_monitor_layout=REVERSE_MONITOR_LAYOUT,
     )
     use_case.run()
     return 0
