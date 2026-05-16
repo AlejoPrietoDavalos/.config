@@ -30,6 +30,11 @@ class ProgramInstallerRepository(CoreProgramInstallerRepository):
         self._package_repo.uninstall(cfg.package_dependencies, program_name=cfg.name)
 
     def install_files(self, cfg: ProgramConfig) -> None:
+        for action in cfg.pre_install_actions:
+            action_name = getattr(action, "__name__", action.__class__.__name__)
+            logger.info("[%s] [pre install] run action=%s", cfg.name, action_name)
+            action()
+            logger.info("[%s] [pre install] done action=%s", cfg.name, action_name)
         if cfg.files is not None:
             self._file_repo.install(
                 cfg.files.path_folder_config_files_input,

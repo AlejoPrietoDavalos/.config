@@ -65,6 +65,7 @@ class ProgramConfig:
     package_dependencies: Packages
     files: ProgramFiles | None = None
     program_dependencies: tuple[ProgramName, ...] = field(default_factory=tuple)
+    pre_install_actions: tuple[Callable[[], None], ...] = field(default_factory=tuple)
     post_install_actions: tuple[Callable[[], None], ...] = field(default_factory=tuple)
     post_uninstall_actions: tuple[Callable[[], None], ...] = field(default_factory=tuple)
 

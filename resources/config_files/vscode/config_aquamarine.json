@@ -1,0 +1,43 @@
+{
+    "_comment": "Aquamarine palette. Edit hex values to retheme VSCode UI. Generated into settings.json by VscodeRepository.",
+
+    "ui": {
+        "bg": {
+            "0": "#001720",
+            "1": "#00212B",
+            "2": "#002B36",
+            "3": "#003847",
+            "4": "#004052",
+            "5": "#005A6F"
+        },
+        "fg": {
+            "0": "#839496",
+            "1": "#93A1A1",
+            "2": "#d6dbdb"
+        },
+        "accent": "#2AA198",
+        "border": "#2b2b4a"
+    },
+
+    "state": {
+        "error":    "#AB395B",
+        "warning":  "#5B7E7A",
+        "success":  "#369432",
+        "error_fg": "#ffeaea"
+    },
+
+    "syntax": {
+        "bracket": ["#cdcdcd", "#b58900", "#d33682"]
+    },
+
+    "special": {
+        "cursor":         "#7badb8",
+        "highlight":      "#1ebcc5",
+        "badge":          "#047aa6",
+        "peek_bg":        "#10192c",
+        "peek_match":     "#7744AA40",
+        "line_highlight": "#073642",
+        "text_selection": "#274642",
+        "indent_active":  "#C3E1E1"
+    }
+}
