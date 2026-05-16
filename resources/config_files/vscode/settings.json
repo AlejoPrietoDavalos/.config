@@ -117,7 +117,7 @@
 
 		// Side Bar
 		"sideBar.background": "#00212B",
-		// "sideBar.foreground": "",
+		// "sideBar.foreground": "", 	// ---> NOTA: Color del texto del exporador de archivos en la sidebar
 		// "sideBar.border": "",
 		// "sideBar.dropBackground": "",
 		"sideBarTitle.foreground": "#93A1A1",
