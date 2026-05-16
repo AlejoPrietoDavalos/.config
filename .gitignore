@@ -1,6 +1,7 @@
 *
 !Makefile
 !README.md
+!docker-arch.md
 !LICENSE
 !_infra/
 !_infra/**

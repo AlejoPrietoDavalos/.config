@@ -7,6 +7,7 @@ from typing import Callable, Literal, get_args
 PkgManager = Literal["pacman", "yay"]
 FileMode = Literal["link", "copy"]
 ProgramName = Literal[
+    "fonts",
     "bspwm",
     "sxhkd",
     "polybar",
@@ -23,6 +24,7 @@ ProgramName = Literal[
     "arandr",
     "xorg",
     "nvidia",
+    "docker",
 ]
 PROGRAM_NAMES: tuple[ProgramName, ...] = get_args(ProgramName)
 PKG_MANAGERS: tuple[PkgManager, ...] = get_args(PkgManager)
@@ -63,6 +65,7 @@ class ProgramConfig:
     package_dependencies: Packages
     files: ProgramFiles | None = None
     program_dependencies: tuple[ProgramName, ...] = field(default_factory=tuple)
+    pre_install_actions: tuple[Callable[[], None], ...] = field(default_factory=tuple)
     post_install_actions: tuple[Callable[[], None], ...] = field(default_factory=tuple)
     post_uninstall_actions: tuple[Callable[[], None], ...] = field(default_factory=tuple)
 

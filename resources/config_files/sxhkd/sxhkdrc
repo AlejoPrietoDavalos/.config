@@ -88,10 +88,10 @@ Print + {_,super,super+shift} + {_,ctrl}
 #            Shortcuts Apps           #
 #######################################
 #--------------------------------------
-#  - brave
+#  - firefox
 #--------------------------------------
 super + ctrl + {_,shift,shift+alt} + {Return,KP_Enter}
-    brave {_,--incognito,--incognito https://translate.google.com/?hl=es&sl=en&tl=es&op=translate}{_,_}
+    firefox {_,--private-window,--private-window https://translate.google.com/?hl=es&sl=en&tl=es&op=translate}{_,_}
 
 #--------------------------------------
 #  - vscode

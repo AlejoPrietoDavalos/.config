@@ -56,7 +56,7 @@ make install-all
 ```
 
 Programas disponibles:
-- `bspwm`, `sxhkd`, `polybar`, `kitty`, `ranger`, `picom`, `rofi`, `playerctl`, `scrot`, `thunar`, `vscode`, `xclip`, `pulseaudio`, `arandr`, `xorg`, `nvidia`.
+- `bspwm`, `sxhkd`, `polybar`, `kitty`, `ranger`, `picom`, `rofi`, `playerctl`, `scrot`, `thunar`, `vscode`, `xclip`, `pulseaudio`, `arandr`, `xorg`, `nvidia`, `docker`.
 
 Ejemplos:
 ```bash
@@ -69,6 +69,8 @@ Notas:
 - `make install-files PROGRAM=sxhkd` copia `resources/config_files/sxhkd/sxhkdrc` a `~/.config/sxhkd/sxhkdrc`.
 - `make sxhkd-reload` recarga `sxhkd` enviando `USR1` al proceso.
 - `vscode` usa copia de `settings.json` (no symlink).
+- `make install PROGRAM=docker` instala `docker` + `docker-compose`, ejecuta `sudo systemctl enable --now docker.service`, y agrega tu usuario al grupo `docker` si hace falta.
+- Luego de agregar usuario al grupo `docker`, hay que cerrar sesion/abrir sesion (o reiniciar) para que aplique.
 - `make install-all` usa la accion dirty para instalar paquetes+files de todos los repos del registry.
 
 ## Comandos auxiliares

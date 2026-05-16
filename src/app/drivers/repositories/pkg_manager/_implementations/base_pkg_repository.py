@@ -29,10 +29,10 @@ class BasePkgRepository(CoreBasePkgRepository, ABC):
         return self._manager_name
 
     def _exists(self) -> bool:
-        return self._command_repo.command_exists(self._manager_name)
+        return self._command_repo.command_exists(self.manager_name)
 
     def _is_installed(self, pkg_name: str) -> bool:
-        return self._command_repo.run_argv_quiet([self._manager_name, "-Q", pkg_name]) == 0
+        return self._command_repo.run_argv_quiet([self.manager_name, "-Q", pkg_name]) == 0
 
     def _run_install(self, pkg_names: list[str]) -> None:
         self._command_repo.run_argv([*self._install_cmd_prefix, *pkg_names])
@@ -43,7 +43,7 @@ class BasePkgRepository(CoreBasePkgRepository, ABC):
     def install(self, pkg_names: list[str], program_name: str | None = None) -> None:
         program_tag = program_name or "unknown_program"
         if not self._exists():
-            logger.warning("[%s] [requirements skip] manager '%s' not found", program_tag, self._manager_name)
+            logger.warning("[%s] [requirements skip] manager '%s' not found", program_tag, self.manager_name)
             return
         if not pkg_names:
             logger.info("[%s] [requirements skip] empty package list", program_tag)
@@ -56,7 +56,7 @@ class BasePkgRepository(CoreBasePkgRepository, ABC):
                     "[%s] [requirements skip] already installed: %s (%s)",
                     program_tag,
                     pkg,
-                    self._manager_name,
+                    self.manager_name,
                 )
             else:
                 missing.append(pkg)
@@ -67,7 +67,7 @@ class BasePkgRepository(CoreBasePkgRepository, ABC):
         logger.info(
             "[%s] [requirements install] manager=%s packages=%s",
             program_tag,
-            self._manager_name,
+            self.manager_name,
             ",".join(missing),
         )
         self._run_install(missing)
@@ -75,7 +75,7 @@ class BasePkgRepository(CoreBasePkgRepository, ABC):
     def uninstall(self, pkg_names: list[str], program_name: str | None = None) -> None:
         program_tag = program_name or "unknown_program"
         if not self._exists():
-            logger.warning("[%s] [requirements uninstall skip] manager '%s' not found", program_tag, self._manager_name)
+            logger.warning("[%s] [requirements uninstall skip] manager '%s' not found", program_tag, self.manager_name)
             return
         if not pkg_names:
             logger.info("[%s] [requirements uninstall skip] empty package list", program_tag)
@@ -90,7 +90,7 @@ class BasePkgRepository(CoreBasePkgRepository, ABC):
                     "[%s] [requirements uninstall skip] not installed: %s (%s)",
                     program_tag,
                     pkg,
-                    self._manager_name,
+                    self.manager_name,
                 )
 
         if not installed:
@@ -99,7 +99,7 @@ class BasePkgRepository(CoreBasePkgRepository, ABC):
         logger.info(
             "[%s] [requirements uninstall] manager=%s packages=%s",
             program_tag,
-            self._manager_name,
+            self.manager_name,
             ",".join(installed),
         )
         self._run_uninstall(installed)

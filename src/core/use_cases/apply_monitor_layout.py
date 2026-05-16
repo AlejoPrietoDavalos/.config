@@ -21,9 +21,15 @@ def split_even(items: list[str], parts: int) -> list[list[str]]:
 
 
 class ApplyMonitorLayoutService:
-    def __init__(self, xrandr_repo: CoreXrandrRepository, bspwm_repo: CoreBspwmRepository) -> None:
+    def __init__(
+        self,
+        xrandr_repo: CoreXrandrRepository,
+        bspwm_repo: CoreBspwmRepository,
+        reverse_monitor_layout: bool = True,
+    ) -> None:
         self._xrandr_repo = xrandr_repo
         self._bspwm_repo = bspwm_repo
+        self._reverse_monitor_layout = reverse_monitor_layout
 
     def run(self) -> None:
         self._ensure_connected_outputs_enabled()
@@ -40,10 +46,15 @@ class ApplyMonitorLayoutService:
         connected = self._xrandr_repo.list_connected_outputs()
         if not connected:
             return
+        target_layout = list(reversed(connected)) if self._reverse_monitor_layout else connected
         active = set(self._xrandr_repo.list_active_outputs())
         if any(output not in active for output in connected):
-            self._xrandr_repo.enable_outputs_auto(connected)
+            self._xrandr_repo.enable_outputs_auto(target_layout)
             time.sleep(0.2)
+            return
+
+        self._xrandr_repo.enable_outputs_auto(target_layout)
+        time.sleep(0.2)
 
     def _resolve_active_monitors(self) -> list[str]:
         bspwm_monitors = self._bspwm_repo.list_monitors()
@@ -51,9 +62,10 @@ class ApplyMonitorLayoutService:
             return []
         xrandr_active = self._xrandr_repo.list_active_outputs()
         if not xrandr_active:
-            return bspwm_monitors
+            return list(reversed(bspwm_monitors)) if self._reverse_monitor_layout else bspwm_monitors
         ordered = [m for m in xrandr_active if m in bspwm_monitors]
-        return ordered or bspwm_monitors
+        base = ordered or bspwm_monitors
+        return list(reversed(base)) if self._reverse_monitor_layout else base
 
 
 # Backward compatibility while migrating call sites.
