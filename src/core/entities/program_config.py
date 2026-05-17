@@ -54,6 +54,9 @@ class ProgramFiles:
     path_folder_program_dotfile: Path
     mode: FileMode = "copy"
 
+    """Tokens específicos del programa para reemplazar en sus archivos de configuración. Formato: {"{{NOMBRE}}": "valor"}."""
+    extra_tokens: dict[str, str] = field(default_factory=dict)
+
     def __post_init__(self) -> None:
         if self.mode not in FILE_MODES:
             raise ValueError(f"Invalid files mode '{self.mode}'. Available: {FILE_MODES}")

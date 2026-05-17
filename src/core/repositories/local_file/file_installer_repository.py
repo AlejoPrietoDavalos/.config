@@ -4,7 +4,7 @@ from pathlib import Path
 
 class CoreFileInstallerRepository(ABC):
     @abstractmethod
-    def install(self, files_dir: Path, target_dir: Path) -> None:
+    def install(self, files_dir: Path, target_dir: Path, extra_tokens: dict[str, str] | None = None) -> None:
         ...
 
     @abstractmethod

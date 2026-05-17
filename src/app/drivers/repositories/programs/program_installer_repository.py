@@ -39,6 +39,7 @@ class ProgramInstallerRepository(CoreProgramInstallerRepository):
             self._file_repo.install(
                 cfg.files.path_folder_config_files_input,
                 cfg.files.path_folder_program_dotfile,
+                extra_tokens=cfg.files.extra_tokens,
             )
         else:
             logger.info("[%s] [files skip] no files configured", cfg.name)

@@ -1,4 +1,4 @@
-from src.core.constants import path_config, path_config_files
+from src.core.constants import path_config_files, path_dotfiles
 from src.core.entities.program_config import PkgSpec, Packages
 from src.core.entities.program_config import ProgramConfig, ProgramFiles
 from src.core.repositories.programs._implementations.picom_repository import CorePicomRepository
@@ -10,7 +10,7 @@ class PicomRepository(CorePicomRepository):
             name="picom",
             files=ProgramFiles(
                 path_folder_config_files_input=path_config_files / "picom",
-                path_folder_program_dotfile=path_config / "picom",
+                path_folder_program_dotfile=path_dotfiles / "picom",
             ),
             package_dependencies=Packages(pkg_specs=[PkgSpec(manager="pacman", names=["picom"])]),
         )

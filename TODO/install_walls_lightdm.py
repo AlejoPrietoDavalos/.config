@@ -6,9 +6,9 @@ from pathlib import Path
 import os
 
 def main() -> None:
-    path_walls = Path(__file__).resolve().parent / "resources" / "wallpapers"
+    path_walls = Path(__file__).resolve().parent.parent / "resources" / "wallpapers"
     if not path_walls.exists():
-        raise Exception("No se encontro _infra/resources/wallpapers")
+        raise Exception("No se encontro resources/wallpapers")
 
     path_walls_out = "/usr/share/wallpapers/"
     os.system(f"sudo mkdir -p {path_walls_out}")
