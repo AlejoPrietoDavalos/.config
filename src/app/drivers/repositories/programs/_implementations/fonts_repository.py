@@ -2,7 +2,7 @@ import shutil
 import subprocess
 from pathlib import Path
 
-from src.core.constants import path_config, path_config_files
+from src.core.constants import path_config_files, path_dotfiles
 from src.core.entities.program_config import PkgSpec, Packages
 from src.core.entities.program_config import ProgramConfig, ProgramFiles
 from src.core.repositories.programs._implementations.fonts_repository import CoreFontsRepository
@@ -14,7 +14,7 @@ class FontsRepository(CoreFontsRepository):
             name="fonts",
             files=ProgramFiles(
                 path_folder_config_files_input=path_config_files / "fonts",
-                path_folder_program_dotfile=path_config / "fonts",
+                path_folder_program_dotfile=path_dotfiles / "fonts",
             ),
             package_dependencies=Packages(
                 pkg_specs=[PkgSpec(manager="pacman", names=["ttf-hack-nerd"])]
@@ -23,7 +23,7 @@ class FontsRepository(CoreFontsRepository):
         )
 
     def install_local_fonts(self) -> None:
-        source_dir = path_config / "fonts"
+        source_dir = path_dotfiles / "fonts"
         destination_dir = Path.home() / ".local" / "share" / "fonts"
 
         font_files = self._list_font_files(source_dir)

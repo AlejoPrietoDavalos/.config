@@ -1,4 +1,4 @@
-from src.core.constants import path_config, path_config_files
+from src.core.constants import path_config_files, path_dotfiles
 from src.core.entities.program_config import PkgSpec, Packages
 from src.core.entities.program_config import ProgramConfig, ProgramFiles
 from src.app.drivers.repositories.shell.command_repository import CommandRepository
@@ -15,7 +15,7 @@ class BspwmRepository(CoreBspwmRepository):
             name="bspwm",
             files=ProgramFiles(
                 path_folder_config_files_input=path_config_files / "bspwm",
-                path_folder_program_dotfile=path_config / "bspwm",
+                path_folder_program_dotfile=path_dotfiles / "bspwm",
             ),
             package_dependencies=Packages(
                 pkg_specs=[PkgSpec(manager="pacman", names=["bspwm", "xorg-setxkbmap", "feh"])]
