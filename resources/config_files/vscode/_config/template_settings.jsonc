@@ -23,7 +23,6 @@
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,
 	"explorer.autoReveal": false,
-    "workbench.colorTheme": "Dark+ Python",
     "editor.fontFamily": "Hack Nerd Font",
     "editor.fontSize": 14,
 	"terminal.integrated.fontFamily": "Hack Nerd Font",
