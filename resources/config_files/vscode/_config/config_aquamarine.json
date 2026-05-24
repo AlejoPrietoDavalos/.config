@@ -27,7 +27,15 @@
     },
 
     "syntax": {
-        "bracket": ["#cdcdcd", "#b58900", "#d33682"]
+        "bracket": ["#ffd700", "#ffb90f", "#ffa500"],
+        "comments": "#858585",
+        "strings": "#ce9178",
+        "numbers": "#b5cea8",
+        "keywords": "#569cd6",
+        "functions": "#dcdcaa",
+        "types": "#4ec9b0",
+        "variables": "#f0f",
+        "operators": "#f0f"
     },
 
     "special": {

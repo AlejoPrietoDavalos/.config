@@ -345,6 +345,72 @@
 		// "gitDecoration.ignoredResourceForeground": "",
 		// "gitDecoration.conflictingResourceForeground": ""
 	},
+	"editor.tokenColorCustomizations": {
+		"comments": "{{syntax.comments}}",
+		"strings": "{{syntax.strings}}",
+		"numbers": "{{syntax.numbers}}",
+		"keywords": "{{syntax.keywords}}",
+		"functions": "{{syntax.functions}}",
+		"types": "{{syntax.types}}",
+		"variables": "{{syntax.variables}}",
+		"operators": "{{syntax.operators}}",
+		"textMateRules": [
+			{
+				"scope": "variable",
+				"settings": {
+					"foreground": "{{syntax.variables}}"
+				}
+			},
+			{
+				"scope": "variable.parameter",
+				"settings": {
+					"foreground": "{{syntax.variables}}"
+				}
+			},
+			{
+				"scope": "variable.language",
+				"settings": {
+					"foreground": "{{syntax.variables}}"
+				}
+			},
+			{
+				"scope": "variable.language.special.self.python",
+				"settings": {
+					"foreground": "{{syntax.variables}}"
+				}
+			},
+			{
+				"scope": "variable.other",
+				"settings": {
+					"foreground": "{{syntax.variables}}"
+				}
+			},
+			{
+				"scope": "variable.other.readwrite",
+				"settings": {
+					"foreground": "{{syntax.variables}}"
+				}
+			},
+			{
+				"scope": "variable.other.property",
+				"settings": {
+					"foreground": "{{syntax.variables}}"
+				}
+			},
+			{
+				"scope": "variable.other.object",
+				"settings": {
+					"foreground": "{{syntax.variables}}"
+				}
+			},
+			{
+				"scope": "support.other.variable",
+				"settings": {
+					"foreground": "{{syntax.variables}}"
+				}
+			}
+		]
+	},
 	"git.confirmSync": false,
 	"workbench.editor.empty.hint": "hidden",
 	"workbench.tree.indent": 20,
