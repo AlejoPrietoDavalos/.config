@@ -5,3 +5,6 @@ venv/
 
 # Repo-local runtime artifacts
 logs/
+
+# Genero este archivo con un script de python.
+resources/config_files/vscode/settings.json
